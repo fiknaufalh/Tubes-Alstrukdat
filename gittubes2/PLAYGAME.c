@@ -4,7 +4,7 @@
 #include <math.h>
 #include <time.h>
 #include "PLAYGAME.h"
-
+//Q2 HARUS URUT GABOLEH ACAK [RNG,DINER,CREATESHIT]
 void PLAYGAME(Queue q, Queue q2){
     time_t t;
     int input;
@@ -21,22 +21,29 @@ void PLAYGAME(Queue q, Queue q2){
             printf("masukkan salah, silahkan ulangi kembali\n");
         }
         else{
-            for (int i=0; i<length(q2);i++){
-                if ((q.buffer[input-1]==q2.buffer[i]) && q2.buffer[i]=="RNG" ){
-                    printf("Loading %s ...\n", q.buffer[input-1]);
-                    //RNG() 
-                    status = false;
+            int i =0;
+            while(i<length(q2) && status){
+                if ((q.buffer[input-1]==q2.buffer[i])){
+                    if (i>1){
+                        printf("Loading %s ...\n", q.buffer[input-1]);
+                        printf("%d\n", rand());
+                        status = false;
+                        break;
+                    }
+                    else if (i==1){
+                        printf("Loading %s ...\n", q.buffer[input-1]);
+                        printf("diner");
+                        status = false;
+                        break;
+                    }
+                    else if (i==0 ){
+                        printf("Loading %s ...\n", q.buffer[input-1]);
+                        printf("rng");
+                        status = false;
+                        break;
+                    }
                 }
-                else if ((q.buffer[input-1]==q2.buffer[i]) && q2.buffer[i]=="Diner Dash" ){
-                    printf("Loading %s ...\n", q.buffer[input-1]);
-                    //DinerDash
-                    status = false;
-                }
-                else if (q.buffer[input-1]==q2.buffer[i]){
-                    printf("Loading %s ...\n", q.buffer[input-1]);
-                    printf("%d\n", rand());
-                    status = false;
-                }
+                i++;
             }
             if (status){
                 printf("Game %s masih dalam maintenance, belum dapat dimainkan. Silahkan pilih game lain.\n", q.buffer[input-1]);
