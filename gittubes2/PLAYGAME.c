@@ -11,7 +11,9 @@ void PLAYGAME(Queue q, Queue q2){
     boolean status = true;
     srand((unsigned) time(&t));
     printf("Berikut adalah daftar Game-mu\n");
-    displayQueue(q);
+    for(int j = 0;j<length(q);j++){
+        printf("%d. %s\n",(j+1),q.buffer[j]);
+    }
     while (status){
         printf("ENTER GAME:");
         scanf("%d", &input);
