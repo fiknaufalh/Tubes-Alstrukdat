@@ -13,13 +13,13 @@ boolean EndWord;
 // }
 
 void IgnoreBlanks(){
-    while (GetCC() == BLANK){
+    while (GetCC() == BLANK || GetCC() == ENTER){
         ADV();
     }
 }
 
-void STARTWORD(){
-    START();
+void STARTWORD(char *filename){
+    START(filename);
     IgnoreBlanks();
     if (GetCC() == MARK){
         EndWord = true;
@@ -42,7 +42,7 @@ void ADVWORD(){
 void CopyWord(){
     int i = 0;
     currentChar = GetCC();
-    while (currentChar != MARK && currentChar != BLANK){
+    while (currentChar != MARK && currentChar != BLANK && currentChar != ENTER){
         currentWord.TabWord[i] = currentChar;
         ADV();
         currentChar = GetCC();
