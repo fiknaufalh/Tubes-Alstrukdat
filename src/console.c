@@ -15,7 +15,7 @@ boolean compareString(char *str1, char *str2)
     return true;
 }
 
-void START(ArrayDin* GamesList){}
+void STARTBNMO(ArrayDin* GamesList){}
 
 // Q2 HARUS URUT GABOLEH ACAK [RNG,DINER,CREATESHIT]
 void PLAYGAME(Queue q, Queue q2)

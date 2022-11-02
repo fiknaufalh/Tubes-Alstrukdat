@@ -8,7 +8,7 @@
 
 boolean compareString(char* str1, char* str2);
 
-void START(ArrayDin* GamesList);
+void STARTBNMO(ArrayDin* GamesList);
 
 void PLAYGAME(Queue q, Queue q2);
 

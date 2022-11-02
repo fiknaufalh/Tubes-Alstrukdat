@@ -1,4 +1,5 @@
 #include "console.h"
+#include "stdio.h"
 
 int main(){
 
@@ -11,13 +12,14 @@ int main(){
     boolean EndProgram = false;
     char* command;
 
-    printf("===============  SELAMAT DATANG DI BNMO! ===============\n");
+    printf("====================  SELAMAT DATANG DI BNMO! ====================\n");
     printf("Masukkan command LOAD <filename> untuk memuat konfigurasi games\n");
-    printf("Kemudian, masukkan command START untuk memulai permainan!");
+    printf("Kemudian, masukkan command START untuk memulai permainan!\n");
     
     while (!EndProgram)
     {
-        scanf("\nENTER COMMAND: %s", command);
+        printf("\nENTER COMMAND: ");
+        scanf("%s", command);
         if (IsEmpty(GamesList))
         {
             if (compareString(command, "START"))

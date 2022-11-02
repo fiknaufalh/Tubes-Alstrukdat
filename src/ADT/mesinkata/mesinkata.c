@@ -4,13 +4,13 @@
 Word currentWord;
 boolean EndWord;
 
-char GetCC(){
-    return currentChar;
-}
+// char GetCC(){
+//     return currentChar;
+// }
 
-boolean IsEOP(){
-    return currentChar == MARK;
-}
+// boolean IsEOP(){
+//     return currentChar == MARK;
+// }
 
 void IgnoreBlanks(){
     while (GetCC() == BLANK){
