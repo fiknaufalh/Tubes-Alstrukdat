@@ -18,4 +18,8 @@ int WordToInt(Word CWord);
 
 char *WordToString(Word CWord);
 
+void HELP();
+
+void QUIT();
+
 #endif
