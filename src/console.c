@@ -15,7 +15,61 @@ boolean compareString(char *str1, char *str2)
     return true;
 }
 
-void STARTBNMO(ArrayDin* GamesList){}
+int WordToInt(Word CWord)
+{
+    int result = 0;
+    for(int i = 0; i < CWord.Length;i++)
+    {
+        result = result*10 + (CWord.TabWord[i] - '0');
+    }  
+    return result;
+}
+
+char *WordToString(Word CWord)
+{
+    CopyWord();
+    char *string = NULL;
+
+    string = malloc(CWord.Length * sizeof(char));
+    int i = 0;
+    while (i < CWord.Length)
+    {
+        *(string+ i) = CWord.TabWord[i];
+        i++;
+    }
+    return string;
+}
+
+void STARTBNMO(ArrayDin* GamesList)
+{
+    printf("%d\n",IsEmpty(*GamesList));
+    STARTWORD("../data/config.txt");
+    printf("%d\n",IsEmpty(*GamesList));
+    Word FirstWord = currentWord;
+    // for(int i = 0;i < FirstWord.Length;i++)
+    // {
+    //     printf("%c",FirstWord.TabWord[i]);
+    // }
+
+    int TotalGame = WordToInt(FirstWord);
+    printf("%d",TotalGame);
+    char *Game;
+
+    for(int i = 0; i < TotalGame; i++)
+    {
+        ADVWORD();
+        Game = WordToString(currentWord);
+        InsertLast(GamesList,Game);
+    }
+    if(!IsEmpty(*GamesList))
+    {
+        printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.");
+    }
+    else
+    {
+        printf("tes");
+    }
+}
 
 // Q2 HARUS URUT GABOLEH ACAK [RNG,DINER,CREATESHIT]
 void PLAYGAME(Queue q, Queue q2)

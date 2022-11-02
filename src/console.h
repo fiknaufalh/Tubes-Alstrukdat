@@ -14,4 +14,8 @@ void PLAYGAME(Queue q, Queue q2);
 
 void SKIPGAME(Queue q, Queue q2, int input);
 
+int WordToInt(Word CWord);
+
+char *WordToString(Word CWord);
+
 #endif
