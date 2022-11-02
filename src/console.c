@@ -181,3 +181,24 @@ void SKIPGAME(Queue q, Queue q2, int input)
         }
     }
 }
+
+void HELP(){
+    printf("----------------------------HELP-------------------------");
+    printf("\n");
+    printf("Start : Command yang membaca file konfigurasi untuk menjalankan BNMO.\n");
+    printf("LOAD <filename> : Command yang membaca save file <filename> yang berisi list game yang dapat dimainkan, histori, dan scoreboard game.\n");
+    printf("SAVE <filename> : Command yang digunakan untuk menyimpan state game pemain saat ini ke dalam suatu file.\n");
+    printf("CREATEGAME : Command yang digunakan untuk menambahkan game baru pada daftar game.\n");
+    printf("LISTGAME : Command yang digunakan untuk menampilkan daftar game yang disediakan oleh sistem.\n");
+    printf("DELETEGAME : Command yang digunakan untuk menghapus sebuah game dari daftar game.\n");
+    printf("QUEUEGAME : Command yang digunakan untuk mendaftarkan permainan ke dalam list.\n");
+    printf("PLAYGAME : COmmand yang digunakan untuk memainkan sebuah permainan.\n");
+    printf("SKIPGAME <n> : Command yang digunakan untuk melewatkan permainan sebanyak n.\n");
+    printf("QUIT : Command untuk keluar dari program.\n");
+    printf("HELP : Bantuan command command yang ada.\n");
+}
+
+void QUIT(){
+    printf("Anda keluar dari game BNMO.\n");
+    printf("Bye bye ...");
+}
