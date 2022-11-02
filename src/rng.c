@@ -8,7 +8,7 @@ Fungsi yang mengenerate angka acak dan mengembalikan angka tersebut
 */
     int angka;
     srand(time(NULL));
-    angka = rand();    
+    angka = rand()%100;    
     return angka;
 }
 
