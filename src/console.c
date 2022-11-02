@@ -43,7 +43,7 @@ char *WordToString(Word CWord)
 void STARTBNMO(ArrayDin* GamesList)
 {
     printf("%d\n",IsEmpty(*GamesList));
-    STARTWORD("../data/config.txt");
+    STARTWORD("./data/config.txt");
     printf("%d\n",IsEmpty(*GamesList));
     Word FirstWord = currentWord;
     // for(int i = 0;i < FirstWord.Length;i++)

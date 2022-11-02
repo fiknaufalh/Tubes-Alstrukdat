@@ -19,14 +19,13 @@ int main(){
     while (!EndProgram)
     {
         printf("\nENTER COMMAND: ");
-        scanf("%[^\n]s", command);
+        scanf(" %[^\n]s", command);
         if (IsEmpty(GamesList))
         {
             if (compareString(command, "START"))
             {
-                START(&GamesList);
+                STARTBNMO(&GamesList);
             }
-
             else if (compareString(command, "LOAD"))
             {
                 // Take directory argument
