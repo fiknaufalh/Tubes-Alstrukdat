@@ -8,16 +8,29 @@
 * 18221086	Esther Regina
 
 ## Daftar Isi
-WIP.
+* [Deskripsi Singkat Program](#deskripsi-singkat-program)
+* [Cara Kompilasi Program](#cara-kompilasi-program)
+* [Cara Menjalankan Program](#cara-menjalankan-program)
+* [Struktur Program](#struktur-program)
 
 ## Deskripsi Singkat Program
-WIP.
+Program merupakan permainan berbasis CLI *(command-line interface)* yang dibuat menggunakan struktur data yang sudah dipelajari di mata kuliah IF2111 Algoritma dan Struktur Data STI bernama BNMO. BNMO merupakan suatu robot game console yang dapat menjalankan permainan. BNMO memiliki beberapa fitur utama, yaitu:
+* Memainkan game
+* Menambahkan game
+* Menghapus game
+* Mengurutkan game yang akan dimainkan
+
 
 ## Cara Kompilasi Program
-WIP.
+1. Pastikan gcc compiler versi terbaru sudah terpasang pada mesin eksekusi (Anda dapat mengecek versi gcc compiler dengan menjalankan command `gcc --version` pada command prompt).
+2. Install tools bernama *make* (jika belum) dengan mengikuti tutorial pada laman berikut https://www.technewstoday.com/install-and-use-make-in-windows/.
+3. Jalankan command `make all` pada command prompt untuk melakukan kompilasi pada program.
+4. Jika berhasil dikompilasi, maka akan terdapat `main.exe` pada directory program.
 
 ## Cara Menjalankan Program
-WIP.
+1. Pastikan Anda telah melakukan kompilasi pada program.
+2. Jalankan command `./main` atau `main.exe` untuk run program.
+3. Jika berhasil run, maka Anda akan tiba pada Main Menu program.
 
 ## Struktur Program
 WIP.
