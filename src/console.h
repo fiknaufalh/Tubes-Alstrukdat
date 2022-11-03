@@ -16,6 +16,8 @@ int stringLength(char* string);
 
 void stringConcat(char *s1,char *s2,char *sout);
 
+void CREATEGAME(ArrayDin* GamesList);
+
 void PLAYGAME(Queue q, Queue q2);
 
 void SKIPGAME(Queue q, Queue q2, int input);

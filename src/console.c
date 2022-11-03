@@ -123,6 +123,15 @@ void LOADBNMO(ArrayDin* GamesList, char* filename)
     }
 }
 
+void CREATEGAME(ArrayDin* GamesList)
+{
+    printf("Masukkan nama game yang akan ditambahkan: ");
+    STARTCOMMAND();
+    char* gameName = WordToString(currentCMD);
+    InsertLast(GamesList,gameName);
+    PrintArrayDin(*GamesList);
+}
+
 // Q2 HARUS URUT GABOLEH ACAK [RNG,DINER,CREATESHIT]
 void PLAYGAME(Queue q, Queue q2)
 {
