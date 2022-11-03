@@ -132,6 +132,77 @@ void CREATEGAME(ArrayDin* GamesList)
     // PrintArrayDin(*GamesList);
 }
 
+void listGame (ArrayDin GameList) {
+    IdxType i;
+    printf("Berikut adalah daftar game yang tersedia\n");
+    for (i=0; i<Length(GameList); i++) {
+        printf("%d. %s\n",(i+1), GameList.A[i]);
+    }
+    printf("\n");
+}
+
+void deleteGame (ArrayDin *GameList, Queue Q) {
+    listGame(*GameList);
+    printf("Masukkan nomor game yang akan dihapus: ");
+    STARTCOMMAND();
+    printf("\n");
+    int input;
+    input = WordToInt(currentCMD);
+    if (input<1 || input==1 || input==2 || input==3 || input==4 || input==5 || input>(*GameList).Neff) {
+        printf("Game gagal dihapus\n");
+    } else {
+        boolean found;
+        found = false;
+        int j;
+        j = 0;
+        while (j<length(Q)) {
+            if (Q.buffer[j]==(*GameList).A[input-1]) {
+                found = true;
+                break;
+            } j++;
+        }
+        if (found) {
+            printf("Game gagal dihapus\n");
+        } else {
+            int i;
+            i = input-1;
+            while (i<(*GameList).Neff) {
+                (*GameList).A[i] = (*GameList).A[i+1];
+                i++;  
+            } 
+            (*GameList).Neff--;
+            printf("Game berhasil dihapus\n");
+        }
+    }
+    printf("\n");
+}
+
+void queueGame (Queue Q, ArrayDin GameList) {
+    printf("Berikut adalah daftar antrian game-mu\n");
+    if (isEmpty(Q)) {
+        printf("Daftar antrian game-mu kosong, silahkan tambahkan game ke antrian.\n");
+    } else {
+        int i;
+        for (i=0; i<length(Q); i++) {
+            printf("%d. %s\n", (i+1), Q.buffer[i]);
+        }
+    }
+    printf("\n");
+    listGame(GameList);
+    int input;
+    printf("Nomor Game yang mau ditambahkan ke antrian: ");
+    STARTCOMMAND();
+    input = WordToInt(currentCMD);
+    printf("\n");
+    if (input>0 && input<=Length(GameList)) {
+        enqueue(&Q, GameList.A[input-1]);
+        printf("Game berhasil ditambahkan ke dalam daftar antrian.\n");
+    } else {
+        printf("Nomor permainan tidak valid, silahkan masukkan nomor game pada list.\n");
+    }
+    printf("\n");
+}
+
 // Q2 HARUS URUT GABOLEH ACAK [RNG,DINER,CREATESHIT]
 void PLAYGAME(Queue q, Queue q2)
 {
