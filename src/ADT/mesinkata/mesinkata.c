@@ -89,7 +89,7 @@ void CopyLine(){
 /* *** Membaca command dari terminal *** */
 void IgnoreBlanksCMD(){
     while (GetCC() == BLANK){
-        ADV();
+        ADVC();
     }
 }
 
@@ -100,7 +100,7 @@ void STARTCOMMAND(){
         EndWord = true;
     } else {
         EndWord = false;
-        ADVCOMMAND();
+        CopyCommand();
     }
 }
 
