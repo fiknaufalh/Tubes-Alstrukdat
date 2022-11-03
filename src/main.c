@@ -40,7 +40,18 @@ int main(){
                 printf("Belum ada konfigurasi games yang dimuat\n");
                 printf("Muat konfigurasi games terlebih dahulu dengan command LOAD <filename>\n");
             }
-        } 
+        }
+        else /* Games sudah terkonfigurasi */
+        {
+            if (compareString(command,"CREATE"))
+            {
+                ADVCOMMAND();
+                command = WordToString(currentCMD);
+                if (!compareString(command,"GAME")) continue;
+
+                CREATEGAME(&GamesList);
+            }
+        }
     }
 
 
