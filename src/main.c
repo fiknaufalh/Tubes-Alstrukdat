@@ -20,14 +20,8 @@ int main(){
     {
         printf("\nENTER COMMAND: ");
         STARTCOMMAND();
-        // printf("\n");
 
         command = WordToString(currentCMD);
-        printf("%s\n",command);
-
-        ADVCOMMAND();
-        command = WordToString(currentCMD);
-        printf("%s\n",command);
 
         if (IsEmpty(GamesList))
         {
@@ -41,8 +35,8 @@ int main(){
                 char* filename = WordToString(currentCMD);
                 LOADBNMO(&GamesList,filename);
             } 
-
-            else {
+            else 
+            {
                 printf("Belum ada konfigurasi games yang dimuat\n");
                 printf("Muat konfigurasi games terlebih dahulu dengan command LOAD <filename>\n");
             }
