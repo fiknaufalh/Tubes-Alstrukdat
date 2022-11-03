@@ -40,19 +40,50 @@ char *WordToString(Word CWord)
     return string;
 }
 
+int stringLength(char* string)
+{
+    int length = 0;
+    while (*string != '\0')
+    {
+        length++;
+        string++;
+    }
+    return length;
+}
+
+void stringConcat(char *s1,char *s2,char *sout)
+{
+    int len,i;
+
+    len=stringLength(s1);
+    for(i = 0; i < len;i++)
+    {
+        sout[i] = s1[i];
+    }
+    for(i = 0; i < stringLength(s2); i++)
+    {
+        sout[len+i]=s2[i];
+    }
+    sout[len+i]='\0';
+}
+
 void STARTBNMO(ArrayDin *GamesList)
 {
     STARTWORD("./data/config.txt");
+    
     int TotalGame = WordToInt(currentWord);
     int i = 1;
     // printf("%d\n",TotalGame);
+    
     ADVLine();
     while(i <= TotalGame)
     {
+        printf("%s\n",currentWord);
         char *line;
         line = WordToString(currentWord);
+        printf("%s\n",line);
         InsertLast(GamesList,line);
-        // PrintArrayDin(*GamesList);
+        PrintArrayDin(*GamesList);
         ADVLine();
         // printf("%s\n",line);
         i++;
@@ -60,6 +91,34 @@ void STARTBNMO(ArrayDin *GamesList)
     if(!IsEmpty(*GamesList))
     {
         printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
+    }
+}
+
+void LOADBNMO(ArrayDin* GamesList, char* filename)
+{
+    char path[50];
+    stringConcat("./data/",filename,path);
+    printf("%s",path);
+    STARTWORD(path);
+    int TotalGame = WordToInt(currentWord);
+    int i = 1;
+    // printf("%d\n",TotalGame);
+    ADVLine();
+    while(i <= TotalGame)
+    {
+        printf("%s\n",currentWord);
+        char *line;
+        line = WordToString(currentWord);
+        printf("%s\n",line);
+        InsertLast(GamesList,line);
+        PrintArrayDin(*GamesList);
+        ADVLine();
+        // printf("%s\n",line);
+        i++;
+    }
+    if(!IsEmpty(*GamesList))
+    {
+        printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
     }
 }
 
