@@ -93,3 +93,8 @@ void CopyLine(){
     }
 }
 
+void PrintWord(Word K){
+    for (int i = 0; i < K.Length; i ++) {
+        printf("%c", K.TabWord[i]);
+    }
+}
