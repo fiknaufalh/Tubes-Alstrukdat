@@ -19,7 +19,11 @@ int main(){
     while (!EndProgram)
     {
         printf("\nENTER COMMAND: ");
-        scanf(" %[^\n]s", command);
+        STARTCOMMAND();
+        printf("\n");
+
+        command = WordToString(currentCMD);
+
         if (IsEmpty(GamesList))
         {
             if (compareString(command, "START"))
@@ -43,7 +47,6 @@ int main(){
             else {
                 printf("Belum ada konfigurasi games yang dimuat\n");
                 printf("Muat konfigurasi games terlebih dahulu dengan command LOAD <filename>\n");
-                printf("%s\n",command);
             }
         }
     }

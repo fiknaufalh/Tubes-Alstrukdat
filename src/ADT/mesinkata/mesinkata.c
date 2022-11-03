@@ -3,15 +3,9 @@
 
 Word currentWord;
 boolean EndWord;
+Word currentCMD;
 
-// char GetCC(){
-//     return currentChar;
-// }
-
-// boolean IsEOP(){
-//     return currentChar == MARK;
-// }
-
+/* *** Membaca dari file *** */
 void IgnoreBlanks(){
     while (GetCC() == BLANK || GetCC() == ENTER){
         ADV();
@@ -19,8 +13,7 @@ void IgnoreBlanks(){
 }
 
 void IgnoreEnter(){
-    while (GetCC() == ENTER)
-    {
+    while (GetCC() == ENTER){
         ADV();
     }
 }
@@ -46,15 +39,6 @@ void ADVWORD(){
     IgnoreBlanks();
 }
 
-void ADVLine(){
-    IgnoreEnter();
-    if (GetCC() == ENTER){
-        EndWord = true;
-    } else {
-        CopyLine();
-    }
-}
-
 void CopyWord(){
     int i = 0;
     currentChar = GetCC();
@@ -67,10 +51,22 @@ void CopyWord(){
     
     currentWord.Length = i;
 
-    if (i >= NMax){
-        currentWord.Length = NMax;
+    if (i >= NMax) currentWord.Length = NMax;
+    else currentWord.Length = i;
+}
+
+void PrintWord(Word K){
+    for (int i = 0; i < K.Length; i ++) {
+        printf("%c", K.TabWord[i]);
+    }
+}
+
+void ADVLine(){
+    IgnoreEnter();
+    if (GetCC() == ENTER){
+        EndWord = true;
     } else {
-        currentWord.Length = i;
+        CopyLine();
     }
 }
 
@@ -86,10 +82,45 @@ void CopyLine(){
     
     currentWord.Length = i;
 
-    if (i >= NMax){
-        currentWord.Length = NMax;
-    } else {
-        currentWord.Length = i;
+    if (i >= NMax) currentWord.Length = NMax;
+    else currentWord.Length = i;
+}
+
+/* *** Membaca command dari terminal *** */
+void IgnoreBlanksCMD(){
+    while (GetCC() == BLANK){
+        ADV();
     }
 }
 
+void STARTCOMMAND(){
+    COMMAND();
+    IgnoreBlanksCMD();
+    if (currentChar == ENTER){
+        EndWord = true;
+    } else {
+        EndWord = false;
+        ADVCOMMAND();
+    }
+}
+
+void ADVCOMMAND(){
+    IgnoreBlanksCMD();
+    if (currentChar == ENTER && !EndWord){
+        EndWord = true;
+    } else{
+        CopyCommand();
+        IgnoreBlanksCMD();
+    }
+}
+
+void CopyCommand(){
+    int i = 0;
+    while ((currentChar != BLANK) && (currentChar != ENTER) && i != NMax) {
+        currentCMD.TabWord[i] = currentChar;
+        ADVC();
+        i++;
+    }
+    if (i >= NMax) currentCMD.Length = NMax;
+    else currentCMD.Length = i;
+}
