@@ -7,12 +7,13 @@
 
 boolean compareString(char *str1, char *str2)
 {
-    while (*str1 != '\0' && *str2 != '\0')
+    boolean IsSame = (*str1 == *str2);
+    while ((*str1 != '\0' && *str2 != '\0') && IsSame)
     {
-        if (*str1 != *str2) return false;
         str1++; str2++;
+        IsSame = (*str1 == *str2);
     }
-    return true;
+    return IsSame;
 }
 
 int WordToInt(Word CWord)
