@@ -20,7 +20,7 @@ int main(){
     {
         printf("\nENTER COMMAND: ");
         STARTCOMMAND();
-        printf("\n");
+        // printf("\n");
 
         command = WordToString(currentCMD);
 
@@ -32,16 +32,18 @@ int main(){
             }
             else if (compareString(command, "LOAD"))
             {
-                // Take directory argument
-                char directory[100];
-                int i = 0;
-                while (command[i+5] != '\0')
-                {
-                    directory[i] = command[i+5];
-                    i++;
-                }
-
-                // LOAD
+                // // Take directory argument
+                // char directory[100];
+                // int i = 0;
+                // while (command[i+5] != '\0')
+                // {
+                //     directory[i] = command[i+5];
+                //     i++;
+                // }
+                printf("ENTER FILENAME: ");
+                STARTCOMMAND();
+                char* filename = WordToString(currentCMD);
+                LOADBNMO(&GamesList,filename);
             } 
 
             else {
