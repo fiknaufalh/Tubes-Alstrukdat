@@ -3,13 +3,14 @@
 
 #ifndef __MESIN_KAR_H__
 #define __MESIN_KAR_H__
-
+#include <stdio.h>
 #include "../../boolean.h"
 
 #define MARK '.'
 /* State Mesin */
 extern char currentChar;
 extern boolean EOP;
+extern FILE *pita;
 
 void START(char *directory);
     /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.

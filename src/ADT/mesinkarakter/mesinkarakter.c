@@ -3,7 +3,7 @@
 
 char currentChar;
 boolean EOP;
-static FILE *pita;
+FILE *pita;
 static int retval;
 
 void START(char *directory) {

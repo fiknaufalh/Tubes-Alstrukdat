@@ -45,7 +45,7 @@ void STARTBNMO(ArrayDin *GamesList)
     STARTWORD("./data/config.txt");
     int TotalGame = WordToInt(currentWord);
     char *temp;
-    int i = 0;
+    int i = 1;
     // printf("%d\n",TotalGame);
     while(i <= TotalGame)
     {
@@ -53,27 +53,22 @@ void STARTBNMO(ArrayDin *GamesList)
         IgnoreBlanks();
         int length = 0;
         char *line = (char*) malloc (50 * sizeof(char));
-        while(currentChar != '\n' && currentChar != MARK)
+        while(currentChar != '\n' && !feof(pita))
         {
-            if(currentChar == '\n')
-            {
-                printf("newline\n");
-            }
-            else
-            {
-                // printf("%c\n",currentChar);
-                line[length] = currentChar;
-            } 
+            // printf("%c\n",currentChar);
+            line[length] = currentChar;
             ADV();
-            length++;  
+            length++; 
         }
-        // printf("%d\n",length);
-        // printf("%s\n",line);
         if(!EOP)
         {
+            line = realloc(line,length-2);
             InsertLast(GamesList,line);
-            PrintArrayDin(*GamesList);
+            PrintArrayDin(*GamesList); 
         }
+        
+        // printf("%d\n",length);
+        // printf("%s\n",line);
         i++;
     }
     if(!IsEmpty(*GamesList))
