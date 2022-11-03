@@ -27,47 +27,58 @@ int WordToInt(Word CWord)
 
 char *WordToString(Word CWord)
 {
-    CopyWord();
-    char *string = NULL;
+    char *string;
 
     string = malloc(CWord.Length * sizeof(char));
     int i = 0;
-    while (i < CWord.Length)
+    while (i < CWord.TabWord[i])
     {
-        *(string+ i) = CWord.TabWord[i];
+        *(string + i) = CWord.TabWord[i];
         i++;
     }
+    string[i] = '\0';
     return string;
 }
 
-void STARTBNMO(ArrayDin* GamesList)
+void STARTBNMO(ArrayDin *GamesList)
 {
-    printf("%d\n",IsEmpty(*GamesList));
     STARTWORD("./data/config.txt");
-    printf("%d\n",IsEmpty(*GamesList));
-    Word FirstWord = currentWord;
-    // for(int i = 0;i < FirstWord.Length;i++)
-    // {
-    //     printf("%c",FirstWord.TabWord[i]);
-    // }
-
-    int TotalGame = WordToInt(FirstWord);
-    printf("%d",TotalGame);
-    char *Game;
-
-    for(int i = 0; i < TotalGame; i++)
+    int TotalGame = WordToInt(currentWord);
+    char *temp;
+    int i = 0;
+    // printf("%d\n",TotalGame);
+    while(i <= TotalGame)
     {
-        ADVWORD();
-        Game = WordToString(currentWord);
-        InsertLast(GamesList,Game);
+        // printf("%d\n",i);
+        IgnoreBlanks();
+        int length = 0;
+        char *line = (char*) malloc (50 * sizeof(char));
+        while(currentChar != '\n' && currentChar != MARK)
+        {
+            if(currentChar == '\n')
+            {
+                printf("newline\n");
+            }
+            else
+            {
+                // printf("%c\n",currentChar);
+                line[length] = currentChar;
+            } 
+            ADV();
+            length++;  
+        }
+        // printf("%d\n",length);
+        // printf("%s\n",line);
+        if(!EOP)
+        {
+            InsertLast(GamesList,line);
+            PrintArrayDin(*GamesList);
+        }
+        i++;
     }
     if(!IsEmpty(*GamesList))
     {
         printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.");
-    }
-    else
-    {
-        printf("tes");
     }
 }
 
