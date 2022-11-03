@@ -23,6 +23,11 @@ int main(){
         // printf("\n");
 
         command = WordToString(currentCMD);
+        printf("%s\n",command);
+
+        ADVCOMMAND();
+        command = WordToString(currentCMD);
+        printf("%s\n",command);
 
         if (IsEmpty(GamesList))
         {
@@ -32,16 +37,7 @@ int main(){
             }
             else if (compareString(command, "LOAD"))
             {
-                // // Take directory argument
-                // char directory[100];
-                // int i = 0;
-                // while (command[i+5] != '\0')
-                // {
-                //     directory[i] = command[i+5];
-                //     i++;
-                // }
-                printf("ENTER FILENAME: ");
-                STARTCOMMAND();
+                ADVCOMMAND();
                 char* filename = WordToString(currentCMD);
                 LOADBNMO(&GamesList,filename);
             } 
@@ -50,7 +46,7 @@ int main(){
                 printf("Belum ada konfigurasi games yang dimuat\n");
                 printf("Muat konfigurasi games terlebih dahulu dengan command LOAD <filename>\n");
             }
-        }
+        } 
     }
 
 
