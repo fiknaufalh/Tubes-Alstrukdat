@@ -213,3 +213,45 @@ void QUIT(){
     printf("Anda keluar dari game BNMO.\n");
     printf("Bye bye ...");
 }
+
+/* ini kayanya entar langsung di main aja dehh
+void commandlain(char *command){
+    if (strcmp(command, "START") == 0){
+        START();
+    }
+    else if (strcmp(command,"LOAD") == (strcmp(command,"LOAD") - strcmp("LOAD","LOAD"))){
+        LOAD();
+
+    }
+    else if (strcmp(command,"SAVE") == (strcmp(command,"SAVE") - strcmp("SAVE","SAVE"))){
+        SAVE();
+    }
+    else if (strcmp(command,"CREATE GAME") == 0){
+        CREATEGAME();
+    }
+    else if (strcmp(command,"LISTGAME") == 0){
+        LISTGAME();
+    }
+    else if (strcmp(command,"DELETE GAME") == 0){
+        DELETEGAME();
+    }
+    else if (strcmp(command,"QUEUE GAME") == 0){
+        QUEUEGAME();
+    }
+    else if (strcmp(command, "PLAY GAME") == 0){
+        PLAYGAME();
+    }
+    else if (strcmp(command, "SKIPGAME") == (strcmp(command,"SKIPGAME") - strcmp("SKIPGAME", "SKIPGAME"))){
+        SKIPGAME();
+    }
+    else if (strcmp(command, "QUIT") == 0){
+        QUIT();
+    }
+    else {
+        printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
+        printf("ENTER COMMAND:");
+        scanf("%s", &command);
+    }
+}
+
+*/
