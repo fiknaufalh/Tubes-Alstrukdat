@@ -3,9 +3,12 @@
 
 char currentChar;
 boolean EOP;
+
 FILE *pita;
+static FILE *command;
 static int retval;
 
+/* *** Membaca dari file *** */
 void START(char *directory) {
     /* Mesin siap dioperasikan. Pita disiapkan ... */
     pita = fopen(directory, "r");
@@ -29,4 +32,19 @@ char GetCC() {
 boolean IsEOP() {
     /* Mengirimkan true jika currentChar = MARK */
     return EOP;
+}
+
+/* *** Membaca dari terminal *** */
+void COMMAND() {
+    /* Mesin siap dioperasikan. Pita command disiapkan ... */
+    command = stdin;
+    ADVC();
+}
+
+void ADVC()
+// Pita dimajukan satu karakter.
+{
+    retval = fscanf(command,"%c",&currentChar);
+    // EOP = (currentChar == ENTER);
+    // Pita command tidak diclose agar dapat terus terbaca oleh mesin
 }
