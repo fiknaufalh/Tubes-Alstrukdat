@@ -78,7 +78,7 @@ void STARTBNMO(ArrayDin *GamesList)
     }
     if(!IsEmpty(*GamesList))
     {
-        printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.");
+        printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
     }
 }
 
