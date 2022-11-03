@@ -12,6 +12,12 @@ void IgnoreBlanks(){
     }
 }
 
+void IgnoreEnter(){
+    while (GetCC() == ENTER){
+        ADV();
+    }
+}
+
 void STARTWORD(char *filename){
     START(filename);
     IgnoreBlanks();
@@ -52,6 +58,15 @@ void CopyWord(){
 void PrintWord(Word K){
     for (int i = 0; i < K.Length; i ++) {
         printf("%c", K.TabWord[i]);
+    }
+}
+
+void ADVLine(){
+    IgnoreEnter();
+    if (GetCC() == ENTER){
+        EndWord = true;
+    } else {
+        CopyLine();
     }
 }
 
