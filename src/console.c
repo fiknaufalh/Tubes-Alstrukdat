@@ -31,7 +31,7 @@ char *WordToString(Word CWord)
 
     string = malloc(CWord.Length * sizeof(char));
     int i = 0;
-    while (i < CWord.TabWord[i])
+    while (i < CWord.Length)
     {
         *(string + i) = CWord.TabWord[i];
         i++;
@@ -44,30 +44,16 @@ void STARTBNMO(ArrayDin *GamesList)
 {
     STARTWORD("./data/config.txt");
     int TotalGame = WordToInt(currentWord);
-    char *temp;
     int i = 1;
     // printf("%d\n",TotalGame);
+    ADVLine();
     while(i <= TotalGame)
     {
-        // printf("%d\n",i);
-        IgnoreBlanks();
-        int length = 0;
-        char *line = (char*) malloc (50 * sizeof(char));
-        while(currentChar != '\n' && !feof(pita))
-        {
-            // printf("%c\n",currentChar);
-            line[length] = currentChar;
-            ADV();
-            length++; 
-        }
-        if(!EOP)
-        {
-            line = realloc(line,length-2);
-            InsertLast(GamesList,line);
-            PrintArrayDin(*GamesList); 
-        }
-        
-        // printf("%d\n",length);
+        char *line;
+        line = WordToString(currentWord);
+        InsertLast(GamesList,line);
+        // PrintArrayDin(*GamesList);
+        ADVLine();
         // printf("%s\n",line);
         i++;
     }
