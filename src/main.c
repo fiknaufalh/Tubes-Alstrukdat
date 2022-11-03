@@ -12,9 +12,9 @@ int main(){
     boolean EndProgram = false;
     char* command;
 
-    printf("====================  SELAMAT DATANG DI BNMO! ====================\n");
-    printf("Masukkan command LOAD <filename> untuk memuat konfigurasi games\n");
-    printf("Kemudian, masukkan command START untuk memulai permainan!\n");
+    printf("==================================  SELAMAT DATANG DI BNMO! ==================================\n");
+    printf("Masukkan command START atau LOAD <filename> untuk memulai permainan!\n");
+    printf("Note: START untuk konfigurasi default dan LOAD <filename> untuk konfigurasi sesuai filename.\n");
     
     while (!EndProgram)
     {
@@ -43,6 +43,7 @@ int main(){
         }
         else /* Games sudah terkonfigurasi */
         {
+            /* *** CREATE GAME *** */
             if (compareString(command,"CREATE"))
             {
                 ADVCOMMAND();
@@ -51,9 +52,23 @@ int main(){
 
                 CREATEGAME(&GamesList);
             }
+
+            else if (compareString(command,"HELP"))
+            {
+                HELP();
+            }
+
+            else if (compareString(command,"QUIT"))
+            {
+                QUIT();
+                EndProgram = true;
+            }
+            else
+            {
+                printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
+            }
         }
     }
-
 
     return 0;
 }

@@ -129,7 +129,7 @@ void CREATEGAME(ArrayDin* GamesList)
     STARTCOMMAND();
     char* gameName = WordToString(currentCMD);
     InsertLast(GamesList,gameName);
-    PrintArrayDin(*GamesList);
+    // PrintArrayDin(*GamesList);
 }
 
 // Q2 HARUS URUT GABOLEH ACAK [RNG,DINER,CREATESHIT]
@@ -244,64 +244,22 @@ void SKIPGAME(Queue q, Queue q2, int input)
 }
 
 void HELP(){
-    printf("----------------------------HELP-------------------------");
+    printf("--------------------------------------------HELP--------------------------------------------");
     printf("\n");
-    printf("Start : Command yang membaca file konfigurasi untuk menjalankan BNMO.\n");
-    printf("LOAD <filename> : Command yang membaca save file <filename> yang berisi list game yang dapat dimainkan, histori, dan scoreboard game.\n");
-    printf("SAVE <filename> : Command yang digunakan untuk menyimpan state game pemain saat ini ke dalam suatu file.\n");
-    printf("CREATEGAME : Command yang digunakan untuk menambahkan game baru pada daftar game.\n");
-    printf("LISTGAME : Command yang digunakan untuk menampilkan daftar game yang disediakan oleh sistem.\n");
-    printf("DELETEGAME : Command yang digunakan untuk menghapus sebuah game dari daftar game.\n");
-    printf("QUEUEGAME : Command yang digunakan untuk mendaftarkan permainan ke dalam list.\n");
-    printf("PLAYGAME : COmmand yang digunakan untuk memainkan sebuah permainan.\n");
-    printf("SKIPGAME <n> : Command yang digunakan untuk melewatkan permainan sebanyak n.\n");
-    printf("QUIT : Command untuk keluar dari program.\n");
-    printf("HELP : Bantuan command command yang ada.\n");
+    printf("Start \t\t\t: Command yang membaca file konfigurasi untuk menjalankan BNMO.\n");
+    printf("LOAD <filename> \t: Command yang membaca save file <filename> yang berisi list game yang dapat dimainkan, histori, dan scoreboard game.\n");
+    printf("SAVE <filename> \t: Command yang digunakan untuk menyimpan state game pemain saat ini ke dalam suatu file.\n");
+    printf("CREATE GAME \t\t: Command yang digunakan untuk menambahkan game baru pada daftar game.\n");
+    printf("LIST GAME \t\t: Command yang digunakan untuk menampilkan daftar game yang disediakan oleh sistem.\n");
+    printf("DELETE GAME \t\t: Command yang digunakan untuk menghapus sebuah game dari daftar game.\n");
+    printf("QUEUE GAME \t\t: Command yang digunakan untuk mendaftarkan permainan ke dalam list.\n");
+    printf("PLAY GAME \t\t: COmmand yang digunakan untuk memainkan sebuah permainan.\n");
+    printf("SKIPGAME <n> \t\t: Command yang digunakan untuk melewatkan permainan sebanyak n.\n");
+    printf("HELP \t\t\t: Bantuan command command yang ada.\n");
+    printf("QUIT \t\t\t: Command untuk keluar dari program.\n");
 }
 
 void QUIT(){
     printf("Anda keluar dari game BNMO.\n");
-    printf("Bye bye ...");
+    printf("Bye bye ...\n");
 }
-
-/* ini kayanya entar langsung di main aja dehh
-void commandlain(char *command){
-    if (strcmp(command, "START") == 0){
-        START();
-    }
-    else if (strcmp(command,"LOAD") == (strcmp(command,"LOAD") - strcmp("LOAD","LOAD"))){
-        LOAD();
-
-    }
-    else if (strcmp(command,"SAVE") == (strcmp(command,"SAVE") - strcmp("SAVE","SAVE"))){
-        SAVE();
-    }
-    else if (strcmp(command,"CREATE GAME") == 0){
-        CREATEGAME();
-    }
-    else if (strcmp(command,"LISTGAME") == 0){
-        LISTGAME();
-    }
-    else if (strcmp(command,"DELETE GAME") == 0){
-        DELETEGAME();
-    }
-    else if (strcmp(command,"QUEUE GAME") == 0){
-        QUEUEGAME();
-    }
-    else if (strcmp(command, "PLAY GAME") == 0){
-        PLAYGAME();
-    }
-    else if (strcmp(command, "SKIPGAME") == (strcmp(command,"SKIPGAME") - strcmp("SKIPGAME", "SKIPGAME"))){
-        SKIPGAME();
-    }
-    else if (strcmp(command, "QUIT") == 0){
-        QUIT();
-    }
-    else {
-        printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
-        printf("ENTER COMMAND:");
-        scanf("%s", &command);
-    }
-}
-
-*/
