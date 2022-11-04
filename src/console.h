@@ -12,6 +12,8 @@ void STARTBNMO(ArrayDin* GamesList);
 
 void LOADBNMO(ArrayDin* GamesList, char* filename);
 
+void SAVEBNMO(ArrayDin* GamesList, char* filename);
+
 int stringLength(char* string);
 
 void stringConcat(char *s1,char *s2,char *sout);

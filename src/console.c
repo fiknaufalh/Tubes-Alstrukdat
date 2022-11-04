@@ -123,10 +123,33 @@ void LOADBNMO(ArrayDin* GamesList, char* filename)
     }
 }
 
+void SAVEBNMO(ArrayDin* GamesList, char* filename)
+{
+    FILE * fp;
+    char path[50];
+
+    stringConcat("./data/",filename,path);
+    fp = fopen (path,"w+");
+    fprintf(fp,"%d",Length(*GamesList));
+    for(int i = 0; i < Length(*GamesList);i++)
+    {
+        fprintf(fp,"\n%s",(*GamesList).A[i]);
+    }
+    fclose(fp);
+
+    fp = fopen(path, "r");
+    if (fp != NULL)
+    {
+        printf("Save file berhasil disimpan.");
+        fclose(fp);
+    }
+}
+
 void CREATEGAME(ArrayDin* GamesList)
 {
     printf("Masukkan nama game yang akan ditambahkan: ");
-    STARTCOMMAND();
+    STARTCOMMANDGAME();
+    printf("%s",currentCMD);
     char* gameName = WordToString(currentCMD);
     InsertLast(GamesList,gameName);
     // PrintArrayDin(*GamesList);
