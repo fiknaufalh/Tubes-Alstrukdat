@@ -46,11 +46,4 @@ void PLAYGAME(Queue q, Queue q2, Queue history){
     ElType val;
     dequeue(&q,&val);
     enqueue(&history,val);
-    printf("Berikut adalah daftar Game-mu\n");
-        j =0;
-        a = length(q);
-        for(a;a>0;a--){
-            printf("%d. %s\n",(j+1),q.buffer[a-1]);
-            j++;
-        }
 }
