@@ -104,6 +104,17 @@ void STARTCOMMAND(){
     }
 }
 
+void STARTCOMMANDGAME(){
+    COMMAND();
+    IgnoreBlanksCMD();
+    if(currentChar == ENTER){
+        EndWord = true;
+    } else {
+        EndWord = false;
+        CopyCommandGame();
+    }
+}
+
 void ADVCOMMAND(){
     IgnoreBlanksCMD();
     if (currentChar == ENTER && !EndWord){
@@ -117,6 +128,17 @@ void ADVCOMMAND(){
 void CopyCommand(){
     int i = 0;
     while ((currentChar != BLANK) && (currentChar != ENTER) && i != NMax) {
+        currentCMD.TabWord[i] = currentChar;
+        ADVC();
+        i++;
+    }
+    if (i >= NMax) currentCMD.Length = NMax;
+    else currentCMD.Length = i;
+}
+
+void CopyCommandGame(){
+    int i = 0;
+    while ((currentChar != ENTER) && i != NMax) {
         currentCMD.TabWord[i] = currentChar;
         ADVC();
         i++;
