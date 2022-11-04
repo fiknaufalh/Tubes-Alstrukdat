@@ -330,7 +330,11 @@ void HELP(){
     printf("QUIT \t\t\t: Command untuk keluar dari program.\n");
 }
 
-void QUIT(){
+void QUIT(Queue Q){
+    while (!isEmpty(Q)){
+        ElType val;
+        dequeue(&Q,&val);
+    }
     printf("Anda keluar dari game BNMO.\n");
-    printf("Bye bye ...\n");
+    printf("Bye bye ...");
 }
