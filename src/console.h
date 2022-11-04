@@ -36,7 +36,7 @@ F.S Jika input valid (input tidak bernilai 1-5, tidak melebihi banyaknya nomor u
     tidak ada dalam antrian game), game berhasil dihapus dan memberikan pesan berhasil.
     Jika input tidak valid, game gagal dihapus dan memberikan pesan error. */
 
-void queueGame (Queue Q, ArrayDin GameList);
+void queueGame (Queue *Q, ArrayDin GameList);
 /* Prosedur yang menambahkan sebuah game yang terdefinisi dalam daftar game ke daftar antrian game.
 Input merupakan nomor urutan game di daftar game yang ingin ditambahkan ke antrian game.
 GameList merupakan daftar game yang tersedia.

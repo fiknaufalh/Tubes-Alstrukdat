@@ -140,7 +140,7 @@ void SAVEBNMO(ArrayDin* GamesList, char* filename)
     fp = fopen(path, "r");
     if (fp != NULL)
     {
-        printf("Save file berhasil disimpan.");
+        printf("Save file berhasil disimpan.\n");
         fclose(fp);
     }
 }
@@ -149,7 +149,7 @@ void CREATEGAME(ArrayDin* GamesList)
 {
     printf("Masukkan nama game yang akan ditambahkan: ");
     STARTCOMMANDGAME();
-    printf("%s",currentCMD);
+    // printf("%s",currentCMD);
     char* gameName = WordToString(currentCMD);
     InsertLast(GamesList,gameName);
     // PrintArrayDin(*GamesList);
@@ -158,21 +158,23 @@ void CREATEGAME(ArrayDin* GamesList)
 void listGame (ArrayDin GameList) {
     IdxType i;
     printf("Berikut adalah daftar game yang tersedia\n");
-    for (i=0; i<Length(GameList); i++) {
-        printf("%d. %s\n",(i+1), GameList.A[i]);
+    printf("%d. %s",1, GameList.A[0]);
+    for (i=1; i<Length(GameList); i++) {
+        printf("\n%d. %s",(i+1), GameList.A[i]);
     }
     printf("\n");
 }
 
 void deleteGame (ArrayDin *GameList, Queue Q) {
     listGame(*GameList);
+    printf("\n");
     printf("Masukkan nomor game yang akan dihapus: ");
     STARTCOMMAND();
     printf("\n");
     int input;
     input = WordToInt(currentCMD);
     if (input<1 || input==1 || input==2 || input==3 || input==4 || input==5 || input>(*GameList).Neff) {
-        printf("Game gagal dihapus\n");
+        printf("Game gagal dihapus");
     } else {
         boolean found;
         found = false;
@@ -185,7 +187,7 @@ void deleteGame (ArrayDin *GameList, Queue Q) {
             } j++;
         }
         if (found) {
-            printf("Game gagal dihapus\n");
+            printf("Game gagal dihapus");
         } else {
             int i;
             i = input-1;
@@ -194,20 +196,21 @@ void deleteGame (ArrayDin *GameList, Queue Q) {
                 i++;  
             } 
             (*GameList).Neff--;
-            printf("Game berhasil dihapus\n");
+            printf("Game berhasil dihapus");
         }
     }
     printf("\n");
 }
 
-void queueGame (Queue Q, ArrayDin GameList) {
+void queueGame (Queue *Q, ArrayDin GameList) {
+    // displayQueue(*Q);
     printf("Berikut adalah daftar antrian game-mu\n");
-    if (isEmpty(Q)) {
+    if (isEmpty(*Q)) {
         printf("Daftar antrian game-mu kosong, silahkan tambahkan game ke antrian.\n");
     } else {
         int i;
-        for (i=0; i<length(Q); i++) {
-            printf("%d. %s\n", (i+1), Q.buffer[i]);
+        for (i=0; i<length(*Q); i++) {
+            printf("%d. %s\n", (i+1), (*Q).buffer[i]);
         }
     }
     printf("\n");
@@ -218,12 +221,12 @@ void queueGame (Queue Q, ArrayDin GameList) {
     input = WordToInt(currentCMD);
     printf("\n");
     if (input>0 && input<=Length(GameList)) {
-        enqueue(&Q, GameList.A[input-1]);
+        enqueue(Q, GameList.A[input-1]);
         printf("Game berhasil ditambahkan ke dalam daftar antrian.\n");
+        // displayQueue(*Q);
     } else {
         printf("Nomor permainan tidak valid, silahkan masukkan nomor game pada list.\n");
     }
-    printf("\n");
 }
 
 // Q2 HARUS URUT GABOLEH ACAK [RNG,DINER,CREATESHIT]
