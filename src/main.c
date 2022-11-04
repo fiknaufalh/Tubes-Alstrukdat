@@ -98,7 +98,7 @@ int main(){
             }
             else if (compareString(command,"QUIT"))
             {
-                QUIT();
+                QUIT(&GamesQueue);
                 EndProgram = true;
             }
             else
