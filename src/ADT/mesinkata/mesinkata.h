@@ -55,8 +55,24 @@ void PrintWord(Word K);
    F.S. : Kata K tercetak pada layar */
 
 void CopyLine();
+/* Mengakuisisi baris, menyimpan dalam currentWord
+   I.S. : currentChar adalah karakter pertama dari kata
+   F.S. : currentWord berisi baris yang sudah diakuisisi;
+          currentChar = ENTER atau currentChar = MARK atau feof(pita) = true;
+          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+
 void ADVLine();
+/* I.S. : currentChar adalah karakter pertama baris yang akan diakuisisi
+   F.S. : currentWord adalah baris terakhir yang sudah diakuisisi,
+          currentChar adalah karakter pertama dari baris berikutnya, mungkin ENTER
+          Jika currentChar = ENTER, EndWord = true.
+   Proses : Akuisisi kata menggunakan procedure CopyLine */
+
 void IgnoreEnter();
+/* Mengabaikan satu atau beberapa ENTER
+   I.S. : currentChar sembarang
+   F.S. : currentChar ≠ ENTER atau currentChar = MARK */
 
 /* *** Membaca command dari terminal *** */
 void IgnoreBlanksCMD();
@@ -81,11 +97,22 @@ void CopyCommand();
 /* Mengakuisisi kata, menyimpan dalam currentCMD
    I.S. : currentChar adalah karakter pertama dari kata
    F.S. : currentCMD berisi kata yang sudah diakuisisi; 
-          currentChar = BLANK atau currentChar = ENTER; 
-          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
-          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+         currentChar = BLANK atau currentChar = ENTER; 
+         currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+         Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
 void CopyCommandGame();
+/* Mengakuisisi baris, menyimpan dalam currentCMD
+   I.S. : currentChar adalah karakter pertama dari baris
+   F.S. : currentCMD berisi baris command yang sudah diakuisisi; 
+         currentChar = ENTER; 
+         currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+         Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
 void STARTCOMMANDGAME();
+/* I.S. : currentChar sembarang 
+   F.S. : EndKata = true, dan currentChar = ENTER; 
+          currentCMD adalah kata yang sudah diakuisisi,
+          currentChar karakter pertama sesudah karakter terakhir kata */
+
 #endif

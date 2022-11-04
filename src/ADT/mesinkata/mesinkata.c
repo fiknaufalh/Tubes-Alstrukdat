@@ -7,7 +7,7 @@ Word currentCMD;
 
 /* *** Membaca dari file *** */
 void IgnoreBlanks(){
-    while (GetCC() == BLANK || GetCC() == ENTER){
+    while (GetCC() == BLANK){
         ADV();
     }
 }
