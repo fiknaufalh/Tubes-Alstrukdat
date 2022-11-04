@@ -57,53 +57,75 @@ int main(){
             {
                 ADVCOMMAND();
                 command = WordToString(currentCMD);
-                if (!compareString(command,"GAME")) continue;
+                if (!compareString(command,"GAME")) {
+                    OTHERCMD(); continue;
+                }
 
                 CREATEGAME(&GamesList);
             }
+
+            /* *** LIST GAME *** */
             else if (compareString(command,"LIST"))
             {
                 ADVCOMMAND();
                 command = WordToString(currentCMD);
-                if (!compareString(command,"GAME")) continue;
+                if (!compareString(command,"GAME")) {
+                    OTHERCMD(); continue;
+                }
 
                 listGame(GamesList);
             }
+
+            /* *** DELETE GAME *** */
             else if (compareString(command,"DELETE"))
             {
                 ADVCOMMAND();
                 command = WordToString(currentCMD);
-                if (!compareString(command,"GAME")) continue;
+                if (!compareString(command,"GAME")) {
+                    OTHERCMD(); continue;
+                }
 
                 deleteGame(&GamesList,GamesQueue);
             }
+
+            /* *** QUEUE GAME *** */
             else if (compareString(command,"QUEUE"))
             {
                 ADVCOMMAND();
                 command = WordToString(currentCMD);
-                if (!compareString(command,"GAME")) continue;
+                if (!compareString(command,"GAME")) {
+                    OTHERCMD(); continue;
+                }
 
                 queueGame(&GamesQueue,GamesList);
                 // displayQueue(GamesQueue);
             }
+
+            /* *** HELP *** */
             else if (compareString(command,"HELP"))
             {
                 HELP();
             }
+
+            /* *** SAVE *** */
             else if (compareString(command, "SAVE"))
             {
                 ADVCOMMAND();
                 char* filename = WordToString(currentCMD);
                 SAVEBNMO(&GamesList,filename);
             }
+
+            /* *** QUIT *** */
             else if (compareString(command,"QUIT"))
             {
                 QUIT(&GamesQueue);
                 EndProgram = true;
             }
+
+            /* *** OTHER COMMAND *** */
             else
             {
-                printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
+                OTHERCMD();
             }
         }
     }

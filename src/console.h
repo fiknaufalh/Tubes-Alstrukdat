@@ -59,4 +59,6 @@ void HELP();
 
 void QUIT(Queue *Q);
 
+void OTHERCMD();
+
 #endif

@@ -359,8 +359,12 @@ void HELP(){
 void QUIT(Queue *Q){
     while (!isEmpty(*Q)){
         ElType val;
-        dequeue(&Q,&val);
+        dequeue(Q,&val);
     }
     printf("Anda keluar dari game BNMO.\n");
     printf("Bye bye ...");
+}
+
+void OTHERCMD(){
+    printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
 }
