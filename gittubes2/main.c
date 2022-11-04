@@ -1,9 +1,10 @@
 #include "SKIPGAME.h"
 #include "PLAYGAME.h"
 int main(){
-    Queue Q, Q2;
+    Queue Q, Q2, history;
     CreateQueue(&Q);
     CreateQueue(&Q2);
+    CreateQueue(&history);
     char *val = "RNG";
     char *val2 = "Diner Dash";
     char *val3 = "extra1";
@@ -18,7 +19,7 @@ int main(){
     enqueue(&Q, val2);
     enqueue(&Q2,val5);
     enqueue(&Q, val5);
-    //PLAYGAME(Q,Q2);
-    SKIPGAME(Q,Q2,4);
+    //PLAYGAME(Q,Q2,history);
+    SKIPGAME(Q,Q2,history,4);
     return 0;
 }
