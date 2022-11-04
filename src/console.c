@@ -356,8 +356,8 @@ void HELP(){
     printf("QUIT \t\t\t: Command untuk keluar dari program.\n");
 }
 
-void QUIT(Queue Q){
-    while (!isEmpty(Q)){
+void QUIT(Queue *Q){
+    while (!isEmpty(*Q)){
         ElType val;
         dequeue(&Q,&val);
     }
