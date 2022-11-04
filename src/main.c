@@ -57,7 +57,12 @@ int main(){
             {
                 HELP();
             }
-
+            else if (compareString(command, "SAVE"))
+            {
+                ADVCOMMAND();
+                char* filename = WordToString(currentCMD);
+                SAVEBNMO(&GamesList,filename);
+            }
             else if (compareString(command,"QUIT"))
             {
                 QUIT();
