@@ -21,6 +21,7 @@ int RNG (){
     int ketebak;
     angka = randomnumber();
     ketebak = 0;
+    printf("RNG telah dimulai. Uji keberuntungan Anda dengan menebak X.\n");
     while (ketebak == 0 && score > 0){
         printf("Tebakan: ");
         scanf("%d",&tebakan);
