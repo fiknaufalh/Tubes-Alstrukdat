@@ -42,6 +42,7 @@ int main(){
                 {
                     printf("File tidak exist\n");
                 }
+                fclose(fp);
             } 
             else 
             {
