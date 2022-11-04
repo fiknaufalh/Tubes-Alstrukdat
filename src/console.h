@@ -57,6 +57,6 @@ char *WordToString(Word CWord);
 
 void HELP();
 
-void QUIT();
+void QUIT(Queue *Q);
 
 #endif
