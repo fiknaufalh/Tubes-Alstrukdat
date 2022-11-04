@@ -52,7 +52,31 @@ int main(){
 
                 CREATEGAME(&GamesList);
             }
+            else if (compareString(command,"LIST"))
+            {
+                ADVCOMMAND();
+                command = WordToString(currentCMD);
+                if (!compareString(command,"GAME")) continue;
 
+                listGame(GamesList);
+            }
+            else if (compareString(command,"DELETE"))
+            {
+                ADVCOMMAND();
+                command = WordToString(currentCMD);
+                if (!compareString(command,"GAME")) continue;
+
+                deleteGame(&GamesList,GamesQueue);
+            }
+            else if (compareString(command,"QUEUE"))
+            {
+                ADVCOMMAND();
+                command = WordToString(currentCMD);
+                if (!compareString(command,"GAME")) continue;
+
+                queueGame(&GamesQueue,GamesList);
+                // displayQueue(GamesQueue);
+            }
             else if (compareString(command,"HELP"))
             {
                 HELP();
