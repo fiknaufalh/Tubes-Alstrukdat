@@ -20,13 +20,13 @@ void stringConcat(char *s1,char *s2,char *sout);
 
 void CREATEGAME(ArrayDin* GamesList);
 
-void listGame (ArrayDin GameList);
+void LISTGAME (ArrayDin GameList);
 /* Prosedur untuk menampilkan daftar game yang disediakan oleh sistem. 
 
 I.S GameList terdefinisi, GameList tidak kosong, dan GameList mungkin penuh. 
 F.S Output berupa daftar game yang tersedia. */
 
-void deleteGame (ArrayDin *GameList, Queue Q);
+void DELETEGAME (ArrayDin *GameList, Queue Q);
 /* Prosedur yang menghapus game dari daftar game. 
 GameList merupakan daftar game dan Q merupakan antrian game.
 
@@ -36,7 +36,7 @@ F.S Jika input valid (input tidak bernilai 1-5, tidak melebihi banyaknya nomor u
     tidak ada dalam antrian game), game berhasil dihapus dan memberikan pesan berhasil.
     Jika input tidak valid, game gagal dihapus dan memberikan pesan error. */
 
-void queueGame (Queue *Q, ArrayDin GameList);
+void QUEUEGAME (Queue *Q, ArrayDin GameList);
 /* Prosedur yang menambahkan sebuah game yang terdefinisi dalam daftar game ke daftar antrian game.
 Input merupakan nomor urutan game di daftar game yang ingin ditambahkan ke antrian game.
 GameList merupakan daftar game yang tersedia.

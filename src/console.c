@@ -155,7 +155,7 @@ void CREATEGAME(ArrayDin* GamesList)
     // PrintArrayDin(*GamesList);
 }
 
-void listGame (ArrayDin GameList) {
+void LISTGAME (ArrayDin GameList) {
     IdxType i;
     printf("Berikut adalah daftar game yang tersedia\n");
     printf("%d. %s",1, GameList.A[0]);
@@ -165,8 +165,8 @@ void listGame (ArrayDin GameList) {
     printf("\n");
 }
 
-void deleteGame (ArrayDin *GameList, Queue Q) {
-    listGame(*GameList);
+void DELETEGAME (ArrayDin *GameList, Queue Q) {
+    LISTGAME(*GameList);
     printf("\n");
     printf("Masukkan nomor game yang akan dihapus: ");
     STARTCOMMAND();
@@ -202,7 +202,7 @@ void deleteGame (ArrayDin *GameList, Queue Q) {
     printf("\n");
 }
 
-void queueGame (Queue *Q, ArrayDin GameList) {
+void QUEUEGAME (Queue *Q, ArrayDin GameList) {
     // displayQueue(*Q);
     printf("Berikut adalah daftar antrian game-mu\n");
     if (isEmpty(*Q)) {
@@ -214,7 +214,7 @@ void queueGame (Queue *Q, ArrayDin GameList) {
         }
     }
     printf("\n");
-    listGame(GameList);
+    LISTGAME(GameList);
     int input;
     printf("Nomor Game yang mau ditambahkan ke antrian: ");
     STARTCOMMAND();
@@ -343,14 +343,14 @@ void SKIPGAME(Queue q, Queue q2, int input)
 void HELP(){
     printf("--------------------------------------------HELP--------------------------------------------");
     printf("\n");
-    printf("Start \t\t\t: Command yang membaca file konfigurasi untuk menjalankan BNMO.\n");
+    printf("STARTBNMO \t\t\t: Command yang membaca file konfigurasi untuk menjalankan BNMO.\n");
     printf("LOAD <filename> \t: Command yang membaca save file <filename> yang berisi list game yang dapat dimainkan, histori, dan scoreboard game.\n");
     printf("SAVE <filename> \t: Command yang digunakan untuk menyimpan state game pemain saat ini ke dalam suatu file.\n");
-    printf("CREATE GAME \t\t: Command yang digunakan untuk menambahkan game baru pada daftar game.\n");
-    printf("LIST GAME \t\t: Command yang digunakan untuk menampilkan daftar game yang disediakan oleh sistem.\n");
-    printf("DELETE GAME \t\t: Command yang digunakan untuk menghapus sebuah game dari daftar game.\n");
-    printf("QUEUE GAME \t\t: Command yang digunakan untuk mendaftarkan permainan ke dalam list.\n");
-    printf("PLAY GAME \t\t: COmmand yang digunakan untuk memainkan sebuah permainan.\n");
+    printf("CREATEGAME \t\t: Command yang digunakan untuk menambahkan game baru pada daftar game.\n");
+    printf("LISTGAME \t\t: Command yang digunakan untuk menampilkan daftar game yang disediakan oleh sistem.\n");
+    printf("DELETEGAME \t\t: Command yang digunakan untuk menghapus sebuah game dari daftar game.\n");
+    printf("QUEUEGAME \t\t: Command yang digunakan untuk mendaftarkan permainan ke dalam list.\n");
+    printf("PLAYGAME \t\t: COmmand yang digunakan untuk memainkan sebuah permainan.\n");
     printf("SKIPGAME <n> \t\t: Command yang digunakan untuk melewatkan permainan sebanyak n.\n");
     printf("HELP \t\t\t: Bantuan command command yang ada.\n");
     printf("QUIT \t\t\t: Command untuk keluar dari program.\n");
