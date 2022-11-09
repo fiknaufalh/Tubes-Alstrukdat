@@ -44,7 +44,6 @@ void RNG (){
             ketebak = 1;
             printf("\n");
             printf("Ya, X adalah %d.\n", tebakan);
-            break;
         }
     }
     //jika tidak berhasil menebak dalam 10 kesempatan
