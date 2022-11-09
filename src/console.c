@@ -93,21 +93,31 @@ void LOADBNMO(ArrayDin* GamesList, char* filename)
 {
     char path[50];
     stringConcat("./data/",filename,path);
-    STARTWORD(path);
-    int TotalGame = WordToInt(currentWord);
-    int i = 1;
-    ADVLine();
-    while(i <= TotalGame)
+    FILE *fp = fopen(path,"r");
+    if(fp !=NULL)
     {
-        char *line;
-        line = WordToString(currentWord);
-        InsertLast(GamesList,line);
+        fclose(fp);
+        STARTWORD(path);
+        int TotalGame = WordToInt(currentWord);
+        int i = 1;
         ADVLine();
-        i++;
+        while(i <= TotalGame)
+        {
+            char *line;
+            line = WordToString(currentWord);
+            InsertLast(GamesList,line);
+            ADVLine();
+            i++;
+        }
+        if(!IsEmpty(*GamesList))
+        {
+            printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
+        }
     }
-    if(!IsEmpty(*GamesList))
+    else
     {
-        printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
+        fclose(fp);
+        printf("File tidak exist\n");
     }
 }
 

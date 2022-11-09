@@ -33,16 +33,7 @@ int main(){
             {
                 ADVCOMMAND();
                 char* filename = WordToString(currentCMD);
-                FILE* fp = fopen (filename,"r");
-                if(fp != NULL)
-                {
-                    LOADBNMO(&GamesList,filename);
-                }
-                else
-                {
-                    printf("File tidak exist\n");
-                }
-                fclose(fp);
+                LOADBNMO(&GamesList,filename);
             } 
             else 
             {
