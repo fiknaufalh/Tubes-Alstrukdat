@@ -19,7 +19,7 @@ int main(){
     enqueue(&Q, val2);
     enqueue(&Q2,val5);
     enqueue(&Q, val5);
-    //PLAYGAME(Q,Q2,history);
-    SKIPGAME(Q,Q2,history,4);
+    //PLAYGAME(&Q,Q2,&history);
+    SKIPGAME(&Q,Q2,&history,4);
     return 0;
 }
