@@ -28,7 +28,9 @@ void RNG (){
     printf("RNG telah dimulai. Uji keberuntungan Anda dengan menebak X.\n");
     while (ketebak == 0 && kesempatan > 0){
         printf("Tebakan: ");
-        scanf("%d",&tebakan);
+        STARTCOMMAND();
+        tebakan = WordToInt(currentCMD);
+        printf("\n");
 
         if (tebakan < angka){
             printf("Lebih besar\n"); 
