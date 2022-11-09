@@ -47,9 +47,9 @@ F.S Jika input valid (input tidak melebihi banyaknya nomor urutan game),
     game akan ditambahkan ke Q dan memberikan pesan berhasil.
     Jika input tidak valid, game tidak dapat ditambahkan dan memberikan pesan error. */
 
-void PLAYGAME(Queue q, Queue q2);
+void PLAYGAME(Queue q, Queue q2, Queue history);
 
-void SKIPGAME(Queue q, Queue q2, int input);
+void SKIPGAME(Queue q, Queue q2, Queue history, int input);
 
 int WordToInt(Word CWord);
 

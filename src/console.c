@@ -74,19 +74,13 @@ void STARTBNMO(ArrayDin *GamesList)
     
     int TotalGame = WordToInt(currentWord);
     int i = 1;
-    // printf("%d\n",TotalGame);
-    
     ADVLine();
     while(i <= TotalGame)
     {
-        // printf("%s\n",currentWord);
         char *line;
         line = WordToString(currentWord);
-        // printf("%s\n",line);
         InsertLast(GamesList,line);
-        // PrintArrayDin(*GamesList);
         ADVLine();
-        // printf("%s\n",line);
         i++;
     }
     if(!IsEmpty(*GamesList))
@@ -99,22 +93,16 @@ void LOADBNMO(ArrayDin* GamesList, char* filename)
 {
     char path[50];
     stringConcat("./data/",filename,path);
-    // printf("%s",path);
     STARTWORD(path);
     int TotalGame = WordToInt(currentWord);
     int i = 1;
-    // printf("%d\n",TotalGame);
     ADVLine();
     while(i <= TotalGame)
     {
-        // printf("%s\n",currentWord);
         char *line;
         line = WordToString(currentWord);
-        // printf("%s\n",line);
         InsertLast(GamesList,line);
-        // PrintArrayDin(*GamesList);
         ADVLine();
-        // printf("%s\n",line);
         i++;
     }
     if(!IsEmpty(*GamesList))
