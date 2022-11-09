@@ -73,7 +73,7 @@ int main(){
                     OTHERCMD(); continue;
                 }
 
-                listGame(GamesList);
+                LISTGAME(GamesList);
             }
 
             /* *** DELETE GAME *** */
@@ -85,7 +85,7 @@ int main(){
                     OTHERCMD(); continue;
                 }
 
-                deleteGame(&GamesList,GamesQueue);
+                DELETEGAME(&GamesList,GamesQueue);
             }
 
             /* *** QUEUE GAME *** */
@@ -97,7 +97,7 @@ int main(){
                     OTHERCMD(); continue;
                 }
 
-                queueGame(&GamesQueue,GamesList);
+                QUEUEGAME(&GamesQueue,GamesList);
                 // displayQueue(GamesQueue);
             }
 
