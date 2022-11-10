@@ -3,6 +3,7 @@
 
 int main()
 {
+    /* *** Membaca File *** */
     // START Mesin Karakter
     START("pitakar.txt");
 
@@ -29,6 +30,7 @@ int main()
     // Check if EOP is true
     printf("%d\n", IsEOP());    // 1 (true)
 
+    /* *** Membaca Command *** */
     // START Command
     printf("ENTER COMMAND : ");
     COMMAND();     
