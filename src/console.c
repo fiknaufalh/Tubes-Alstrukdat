@@ -4,6 +4,8 @@
 #include <math.h>
 #include <time.h>
 #include "console.h"
+#include "Games/DinerDash/DinerDash.h"
+#include "Games/RNG/RNG.h"
 
 boolean compareString(char *str1, char *str2)
 {
@@ -227,84 +229,39 @@ void QUEUEGAME (Queue *Q, ArrayDin GameList) {
     }
 }
 
-// Q2 HARUS URUT GABOLEH ACAK [RNG,DINER,CREATESHIT]
-
-void PLAYGAME(Queue q, Queue q2, Queue history){
-    time_t t;
-    boolean status = true;
-    srand((unsigned) time(&t));
-    printf("Berikut adalah daftar Game-mu\n");
-    int j =0;
-    int a = length(q);
-    for(a;a>0;a--){
-        printf("%d. %s\n",(j+1),q.buffer[a-1]);
-        j++;
-    }
-    int i =0;
-    while(i<length(q2) && status){
-        if ((TAIL(q)==q2.buffer[i])){
-            if (i>1){
-                printf("Loading %s ...\n", TAIL(q));
-                printf("%d\n", rand());
-                status = false;
-                break;
-            }
-            else if (i==1){
-                printf("Loading %s ...\n", TAIL(q));
-                printf("diner");
-                status = false;
-                break;
-            }
-            else if (i==0 ){
-                printf("Loading %s ...\n", TAIL(q));
-                printf("rng");
-                status = false;
-                break;
-            }
+void PLAYGAME(Queue *q, ArrayDin GameList, Queue *history){
+    if(!isEmpty(*q)){
+        time_t t;
+        boolean status = true;
+        srand((unsigned) time(&t));
+        
+        // Menampilkan daftar game
+        printf("Berikut adalah daftar Game-mu\n");
+        int j =0;
+        int a = length(*q);
+        for(int i=0; i<a; i++){
+            printf("%d. %s\n",(j+1),(*q).buffer[i]);
+            j++;
         }
-        i++;
-    }
-    if (status){
-            printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n", TAIL(q));
-    }
-    ElType val;
-    dequeue(&q,&val);
-    enqueue(&history,val);
-}
-
-void SKIPGAME(Queue q, Queue q2, Queue history, int input){    
-    time_t t;
-    boolean status = true;
-    srand((unsigned) time(&t));
-    printf("Berikut adalah daftar Game-mu\n");
-    int j =0;
-    int a = length(q);
-    for(a;a>0;a--){
-        printf("%d. %s\n",(j+1),q.buffer[a-1]);
-        j++;
-    }
-    if (input+1 <= 0 || input+1>length(q)){
-            printf("Tidak ada permainan lagi dalam daftar game-mu atau input < 0.\n");
-    }
-    else{
-        int i =0;
-        while(i<length(q2) && status){
-            if ((q.buffer[input]==q2.buffer[i])){
+        
+        int i = 0;
+        while(i < Length(GameList) && status){
+            if ((HEAD(*q) == GameList.A[i])){
                 if (i>1){
-                    printf("Loading %s ...\n", q.buffer[length(q) - input-1]);
+                    printf("Loading %s ...\n", HEAD(*q));
                     printf("%d\n", rand());
                     status = false;
                     break;
                 }
                 else if (i==1){
-                    printf("Loading %s ...\n", q.buffer[length(q) - input-1]);
-                    printf("diner");
+                    printf("Loading %s ...\n", HEAD(*q));
+                    DinerDash();
                     status = false;
                     break;
                 }
                 else if (i==0 ){
-                    printf("Loading %s ...\n", q.buffer[length(q) - input-1]);
-                    printf("rng");
+                    printf("Loading %s ...\n", HEAD(*q));
+                    RNG();
                     status = false;
                     break;
                 }
@@ -312,16 +269,84 @@ void SKIPGAME(Queue q, Queue q2, Queue history, int input){
             i++;
         }
         if (status){
-            printf("Game %s masih dalam maintenance, belum dapat dimainkan. Silahkan pilih game lain.\n", q.buffer[ length(q) - input-1]);
+            printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n", HEAD(*q));
         }
         ElType val;
-        i=0;
-        while (i<input+1){
-            dequeue(&q,&val);
-            enqueue(&history, val);
-            i++;
+        dequeue(q,&val);
+        enqueue(history,val);
+    }
+    else{
+        printf("Anda belum men-queue game apapun!\n");
+    } 
+}
+
+void SKIPGAME(Queue *q, ArrayDin GameList, Queue *history, int input){    
+    if (!isEmpty(*q)){
+        time_t t;
+        boolean status = true;
+        srand((unsigned) time(&t));
+        printf("Berikut adalah daftar Game-mu\n");
+        displayQueue(*q);
+        int a = length(*q);
+        int j =0;
+        a = length(*q);
+        for(int i=0;i<a;i++){
+            printf("%d. %s\n",(j+1),(*q).buffer[i]);
+            j++;
         }
-        
+        if (input+1 <= 0 || input+1>length(*q)){
+                printf("Tidak ada permainan lagi dalam daftar game-mu atau input < 0.\n");
+        }
+        else{
+            int i =0;
+            while(i<Length(GameList) && status){
+                if (((*q).buffer[input]==GameList.A[i])){
+                    if (i>1){
+                        printf("Loading %s ...\n", (*q).buffer[input]);
+                        printf("%d\n", rand());
+                        status = false;
+                        break;
+                    }
+                    else if (i==1){
+                        printf("Loading %s ...\n", (*q).buffer[input]);
+                        printf("diner\n"); //MANGGIL DINER
+                        status = false;
+                        break;
+                    }
+                    else if (i==0 ){
+                        printf("Loading %s ...\n", (*q).buffer[input]);
+                        printf("rng\n"); //MANGGIL RNG
+                        status = false;
+                        break;
+                    }
+                }
+                i++;
+            }
+            if (status){
+                printf("Game %s masih dalam maintenance, belum dapat dimainkan. Silahkan pilih game lain.\n", (*q).buffer[ input]);
+            }
+            
+        }
+        ElType val;
+        int i=0;
+        if (input+1<length(*q) && input>=0){
+            while (i<input+1){
+                dequeue(q,&val);
+                enqueue(history, val);
+                i++;
+            }
+        }
+        else if (input+1>length(*q)){
+            int panjang = length(*q);
+            while (i<panjang){
+                dequeue(q,&val);
+                enqueue(history, val);
+                i++;
+            }
+        }
+    }
+    else{
+        printf("Anda belum men-queue game apapun!\n");
     }
 }
 

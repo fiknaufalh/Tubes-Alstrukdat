@@ -5,9 +5,11 @@ int main(){
 
     ArrayDin GamesList;
     Queue GamesQueue;
+    Queue GamesHistory;
 
     GamesList = MakeArrayDin();
     CreateQueue(&GamesQueue);
+    CreateQueue(&GamesHistory);
 
     boolean EndProgram = false;
     char* command;
@@ -90,6 +92,33 @@ int main(){
 
                 QUEUEGAME(&GamesQueue,GamesList);
                 // displayQueue(GamesQueue);
+            }
+            
+            /* *** PLAY GAME *** */
+            else if (compareString(command,"PLAY"))
+            {
+                ADVCOMMAND();
+                command = WordToString(currentCMD);
+                if (!compareString(command,"GAME")) {
+                    OTHERCMD(); continue;
+                }
+
+                PLAYGAME(&GamesQueue,GamesList,&GamesHistory);
+            }
+            
+            /* *** SKIP GAME *** */
+            else if (compareString(command,"SKIP"))
+            {
+                ADVCOMMAND();
+                command = WordToString(currentCMD);
+                if (!compareString(command,"GAME")) {
+                    OTHERCMD(); continue;
+                }
+
+                ADVCOMMAND();
+                int nSkip = WordToInt(currentCMD);
+
+                SKIPGAME(&GamesQueue,GamesList,&GamesHistory,nSkip);
             }
 
             /* *** HELP *** */
