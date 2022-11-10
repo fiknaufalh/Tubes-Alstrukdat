@@ -60,10 +60,10 @@ void displayQueueInt(QueueInt q){
     int panjang = lengthQInt(q);
 
     if (panjang > 0) {
-        printf("%s",HEAD(q));
+        printf("%d",HEAD(q));
         dequeueQInt(&q,&temp);
         for (int i = 1;i<panjang;i++) {
-            printf(",%s",HEAD(q));
+            printf(",%d",HEAD(q));
             dequeueQInt(&q,&temp);
         }
     }
