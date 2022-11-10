@@ -146,10 +146,9 @@ void CREATEGAME(ArrayDin* GamesList)
 {
     printf("Masukkan nama game yang akan ditambahkan: ");
     STARTCOMMANDGAME();
-    // printf("%s",currentCMD);
     char* gameName = WordToString(currentCMD);
     InsertLast(GamesList,gameName);
-    // PrintArrayDin(*GamesList);
+    printf("Game berhasil ditambahkan\n");
 }
 
 void LISTGAME (ArrayDin GameList) {
@@ -234,116 +233,72 @@ void PLAYGAME(Queue *q, ArrayDin GameList, Queue *history){
         
         // Menampilkan daftar game
         printf("Berikut adalah daftar Game-mu\n");
-        int j =0;
-        int a = length(*q);
-        for(int i=0; i<a; i++){
-            printf("%d. %s\n",(j+1),(*q).buffer[i]);
-            j++;
+        int i;
+        for(i = 0; i < length(*q); i++){
+            printf("%d. %s\n",(i+1),(*q).buffer[(i+(q->idxHead))%CAPACITY]);
         }
         
-        int i = 0;
+        i = 0;
         while(i < Length(GameList) && status){
             if ((HEAD(*q) == GameList.A[i])){
-                if (i>1){
-                    printf("Loading %s ...\n", HEAD(*q));
+                if (i > 4){
+                    printf("\nLoading %s ...\n", HEAD(*q));
+                    printf("Game over! \nFinal Score : ");
                     printf("%d\n", rand());
                     status = false;
-                    break;
+                    // break;
                 }
-                else if (i==1){
-                    printf("Loading %s ...\n", HEAD(*q));
+                else if (i == 1){
+                    printf("\nLoading %s ...\n", HEAD(*q));
                     DinerDash();
                     status = false;
-                    break;
+                    // break;
                 }
-                else if (i==0 ){
-                    printf("Loading %s ...\n", HEAD(*q));
+                else if (i == 0){
+                    printf("\nLoading %s ...\n", HEAD(*q));
                     RNG();
                     status = false;
-                    break;
-                }
+                    // break;
+                } 
+                else {
+                    printf("\nGame %s masih dalam maintenance, belum dapat dimainkan.\n", HEAD(*q));
+                    status = false;
+                } 
             }
             i++;
         }
-        if (status){
-            printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n", HEAD(*q));
-        }
+
         ElType val;
         dequeue(q,&val);
         enqueue(history,val);
     }
     else{
-        printf("Anda belum men-queue game apapun!\n");
+        printf("Tidak ada game dalam antrian permainan Anda!\n");
     } 
 }
 
 void SKIPGAME(Queue *q, ArrayDin GameList, Queue *history, int input){    
     if (!isEmpty(*q)){
-        time_t t;
-        boolean status = true;
-        srand((unsigned) time(&t));
-        printf("Berikut adalah daftar Game-mu\n");
-        displayQueue(*q);
-        int a = length(*q);
-        int j =0;
-        a = length(*q);
-        for(int i=0;i<a;i++){
-            printf("%d. %s\n",(j+1),(*q).buffer[i]);
-            j++;
-        }
-        if (input+1 <= 0 || input+1>length(*q)){
-                printf("Tidak ada permainan lagi dalam daftar game-mu atau input < 0.\n");
-        }
-        else{
-            int i =0;
-            while(i<Length(GameList) && status){
-                if (((*q).buffer[input]==GameList.A[i])){
-                    if (i>1){
-                        printf("Loading %s ...\n", (*q).buffer[input]);
-                        printf("%d\n", rand());
-                        status = false;
-                        break;
-                    }
-                    else if (i==1){
-                        printf("Loading %s ...\n", (*q).buffer[input]);
-                        printf("diner\n"); //MANGGIL DINER
-                        status = false;
-                        break;
-                    }
-                    else if (i==0 ){
-                        printf("Loading %s ...\n", (*q).buffer[input]);
-                        printf("rng\n"); //MANGGIL RNG
-                        status = false;
-                        break;
-                    }
-                }
-                i++;
-            }
-            if (status){
-                printf("Game %s masih dalam maintenance, belum dapat dimainkan. Silahkan pilih game lain.\n", (*q).buffer[ input]);
-            }
-            
-        }
         ElType val;
-        int i=0;
-        if (input+1<length(*q) && input>=0){
-            while (i<input+1){
+        int i = 0;
+        if (input < length(*q) && input >= 0){
+            while (i < input){
                 dequeue(q,&val);
                 enqueue(history, val);
                 i++;
             }
         }
-        else if (input+1>length(*q)){
+        else if (input > length(*q)){
             int panjang = length(*q);
-            while (i<panjang){
+            while (i < panjang){
                 dequeue(q,&val);
                 enqueue(history, val);
                 i++;
             }
         }
-    }
-    else{
-        printf("Anda belum men-queue game apapun!\n");
+        PLAYGAME(q,GameList,history);
+    } else {
+        printf("Tidak ada game dalam antrian permainan Anda!\n");
     }
 }
 
