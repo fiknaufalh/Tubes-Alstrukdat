@@ -14,6 +14,15 @@ int main(){
     boolean EndProgram = false;
     char* command;
 
+    printf("                          '########::'##::: ##:'##::::'##::'#######::\n");
+    printf("                           ##.... ##: ###:: ##: ###::'###:'##.... ##:\n");
+    printf("                           ##:::: ##: ####: ##: ####'####: ##:::: ##:\n");
+    printf("                           ########:: ## ## ##: ## ### ##: ##:::: ##:\n");
+    printf("                           ##.... ##: ##. ####: ##. #: ##: ##:::: ##:\n");
+    printf("                           ##:::: ##: ##:. ###: ##:.:: ##: ##:::: ##:\n");
+    printf("                           ########:: ##::. ##: ##:::: ##:. #######::\n");
+    printf("                          ........:::..::::..::..:::::..:::.......:::\n");
+
     printf("==================================  SELAMAT DATANG DI BNMO! ==================================\n");
     printf("Masukkan command START atau LOAD <filename> untuk memulai permainan!\n");
     printf("Note: START untuk konfigurasi default dan LOAD <filename> untuk konfigurasi sesuai filename.\n");
