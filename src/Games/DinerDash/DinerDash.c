@@ -6,13 +6,19 @@
 void DinerDash(){
     time_t t;
     srand((unsigned) time(&t));
-    QueueInt makan, durasi, tahan, harga, makan2,durasi2,tahan2,harga2, makan3,durasi3, tahan3,harga3,skor;
+    QueueInt makan, durasi, tahan, harga; 
+    QueueInt makan2,durasi2,tahan2,harga2;
+    QueueInt makan3,durasi3, tahan3,harga3;
+    QueueInt skor;
+    
     int makanan, memasak, ketahanan, price;
-    int n;
+    int n; // pesanan ke-n (indeks pesanan)
+    
     makanan = 0;
-    memasak = rand()%5 + 1;
-    ketahanan = rand()%5 + 1;
-    price = rand()% (50000-10000 + 1) + 10000;
+    memasak = rand() % 5 + 1;
+    ketahanan = rand() % 5 + 1;
+    price = rand() % (50000-10000 + 1) + 10000;
+
     CreateQueueInt(&makan);
     CreateQueueInt(&durasi);
     CreateQueueInt(&tahan);
@@ -26,60 +32,53 @@ void DinerDash(){
     CreateQueueInt(&tahan3);
     CreateQueueInt(&harga3);
     CreateQueueInt(&skor);
-    for (int i = 0; i <3; i++){
+
+    for (int i = 0; i < 3; i++){
         enqueueQInt(&makan, makanan);
         makanan++;
         enqueueQInt(&durasi, memasak);
-        memasak = rand()%5 + 1;
+        memasak = rand() % 5 + 1;
         enqueueQInt(&tahan, ketahanan);
-        ketahanan = rand()%5 + 1;
+        ketahanan = rand() % 5 + 1;
         enqueueQInt(&harga, price);
-        price = rand()%(50000-10000+1)+10000;
+        price = rand() % (50000-10000+1) + 10000;
     }
     makanan--;
     printf("Selamat Datang di Diner Dash!\n");
-    printall( makan,  durasi,  tahan,  harga,  makan2,  durasi2,  makan3,  tahan3,skor);
+    printall(makan, durasi, tahan, harga, makan2, durasi2, makan3, tahan3, skor);
     char* command;
-    //Word currentCMD;
+
     while (!endgame(skor,harga)){
-        int i =0;
-        n=0;
+        int i = 0;
+        n = 0;
         printf("Masukkan Command: ");
         STARTCOMMAND();
         command = WordToString(currentCMD);
-        boolean check = false;
+        boolean check = true;
         ADVCOMMAND();
+        Word param2 = currentCMD;
         if(!EndWord){
-            i = 1;
-            while(i<currentCMD.Length){
-                if(currentCMD.TabWord[i] >= '0' && currentCMD.TabWord[i] <= '9'){
-                    n *= 10;
-                    n += (int)(currentCMD.TabWord[i]-48);
+            if (param2.TabWord[0] == 'M')
+            {
+                check = false;
+                i = 1;
+                while(i<currentCMD.Length){
+                    if(currentCMD.TabWord[i] >= '0' && currentCMD.TabWord[i] <= '9'){
+                        n *= 10;
+                        n += (int)(currentCMD.TabWord[i]-48);
+                    }
+                    else{
+                        check = true;
+                    }
+                    i++;
                 }
-                else{
-                    check = true;
-                }
-                i++;
+                ADVCOMMAND();
             }
-            ADVCOMMAND();
         }
-        if(EndWord && (!check)){
-            if((command[0] == 'C' ) && (command[1] == 'O') && (command[2] == 'O') && (command[3] == 'K')){
+        if((EndWord && (!check) && (param2.Length > 1)) || (compareString(command,"SKIP") && EndWord)){
+            if(compareString(command,"COOK")){
                 if (bisacook(harga,makan2,makan, makan3,  tahan3, durasi2, n)){
-                cook(&makan2,&durasi2,&tahan2, &harga2,  makan,  durasi,  tahan, harga,n);
-                adddaftar(&makan,&durasi,&tahan,&harga,makanan);
-                makanan++;
-                decrementcook(&makan2,&durasi2,&tahan2,&harga2,&makan3, &durasi3, &tahan3, &harga3);
-                decrementserve(&makan3,&tahan3);
-                printall( makan,  durasi,  tahan,  harga,  makan2,  durasi2,  makan3,  tahan3,skor);
-                }
-                else{
-                    printf("Tidak ada pesanan M%d atau pesanan M%d sedang diproses\n",n,n);
-                }
-            }
-            else if((command[0] == 'S') && (command[1] == 'E') && (command[2] == 'R') && (command[3] == 'V') && (command[4] == 'E')){
-                if (bisaserve( makan3, tahan3)){
-                    serve(makan3, &tahan3, harga3, &skor, makan, &harga);
+                    cook(&makan2,&durasi2,&tahan2, &harga2,  makan,  durasi,  tahan, harga,n);
                     adddaftar(&makan,&durasi,&tahan,&harga,makanan);
                     makanan++;
                     decrementcook(&makan2,&durasi2,&tahan2,&harga2,&makan3, &durasi3, &tahan3, &harga3);
@@ -87,10 +86,26 @@ void DinerDash(){
                     printall( makan,  durasi,  tahan,  harga,  makan2,  durasi2,  makan3,  tahan3,skor);
                 }
                 else{
-                    printf("Tidak ada makanan yang dapat disajikan\n");
+                    printf("Tidak ada pesanan M%d dalam Daftar Pesanan\n\n",n,n);
                 }
             }
-            else if ((command[0] == 'S') && (command[1] == 'K') && (command[2] == 'I') && (command[3] == 'P')){
+            else if(compareString(command,"SERVE")){
+                if (bisaserve(makan3, tahan3, n)){
+                    serve(makan3, &tahan3, harga3, &skor, makan, &harga);
+                    adddaftar(&makan,&durasi,&tahan,&harga,makanan);
+                    makanan++;
+                    decrementcook(&makan2,&durasi2,&tahan2,&harga2,&makan3, &durasi3, &tahan3, &harga3);
+                    decrementserve(&makan3,&tahan3);
+                    printall( makan,  durasi,  tahan,  harga,  makan2,  durasi2,  makan3,  tahan3,skor);
+                }
+                else if (isEmptyQInt(makan3)){
+                    printf("Tidak ada makanan yang dapat disajikan\n");
+                }
+                else {
+                    printf("M%d belum dapat disajikan karena M%d belum selesai\n", n, HEAD(makan));
+                }
+            }
+            else if (compareString(command,"SKIP")){
                 adddaftar(&makan,&durasi,&tahan,&harga,makanan);
                 makanan++;
                 decrementcook(&makan2,&durasi2,&tahan2,&harga2,&makan3, &durasi3, &tahan3, &harga3);
@@ -98,11 +113,11 @@ void DinerDash(){
                 printall( makan,  durasi,  tahan,  harga,  makan2,  durasi2,  makan3,  tahan3,skor);
             }
             else{
-                printf("INVALID COMMAND\n");
+                printf("INVALID COMMAND\n\n");
             }
         }
         else{
-            printf("INVALID COMMAND\n");
+            printf("INVALID COMMAND\n\n");
         }
 
     }
@@ -170,24 +185,27 @@ void cook(QueueInt *makan2,QueueInt *durasi2,QueueInt* tahan2, QueueInt *harga2,
 
 boolean bisacook(QueueInt harga,QueueInt makan2,QueueInt makan,QueueInt makan3, QueueInt tahan3,QueueInt durasi2,int n){
     boolean found = false;
-    boolean found2 = false;
     int panjang=0;
-    for (int i = 0; i <lengthQInt(makan2); i++){
-        if (makan.buffer[n]==(makan2).buffer[i] && (durasi2).buffer[i]>0){
-            found = true;
-        }
+
+    // // Pengecekan apakah pesanan ke-n terdapat dalam daftar makanan yang dapat disajikan
+    // for (int i = 0; i <lengthQInt(makan3); i++){
+    //     if (makan.buffer[n]==(makan3).buffer[i] && (tahan3).buffer[i]>0){
+    //         found = true;
+    //     }
+    // }
+
+    int i = 0;
+    while (i < lengthQInt(makan) && !found) {
+        if (makan.buffer[i] == n) found = true;
+        i++;
     }
-    for (int i = 0; i <lengthQInt(makan3); i++){
-        if (makan.buffer[n]==(makan3).buffer[i] && (tahan3).buffer[i]>0){
-            found2 = true;
-        }
-    }
+
     for(int i = 0; i <lengthQInt(makan2); i++){
         if((durasi2).buffer[i]>0){
             panjang++;
         }
     }
-    return !found2 && !found && n>=0 && harga.buffer[n] != 0 && panjang<=5;
+    return found && n>=0 && harga.buffer[n] != 0 && panjang<=5;
 }
 
 void printall(QueueInt makan, QueueInt durasi, QueueInt tahan, QueueInt harga, QueueInt makan2, QueueInt durasi2, QueueInt makan3, QueueInt tahan3, QueueInt skor){
@@ -260,7 +278,16 @@ void serve(QueueInt makan3, QueueInt * tahan3, QueueInt  harga3, QueueInt * skor
     }
 }
 
-boolean bisaserve(QueueInt makan3,QueueInt tahan3){
+boolean bisaserve(QueueInt makan3,QueueInt tahan3, int n){
+    // boolean found = true;
+    // boolean status = false;
+    // int i = 0;
+    // while (i < lengthQInt(makan3) && !status) {
+    //     if (tahan3.buffer[i] <= 0) {
+    //         found = true;
+    //         i++;
+    //     }
+    // }
     boolean found=false;
     for (int i =0; i<lengthQInt(makan3);i++){
         if((tahan3).buffer[i]>0){

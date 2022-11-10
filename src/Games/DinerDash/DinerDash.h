@@ -14,7 +14,7 @@ void adddaftar(QueueInt *makan, QueueInt *durasi, QueueInt *tahan, QueueInt *har
 void decrementcook(QueueInt*makan2,QueueInt *durasi2,QueueInt *tahan2,QueueInt *harga2,QueueInt *makan3, QueueInt *durasi3, QueueInt * tahan3, QueueInt * harga3);
 void decrementserve(QueueInt * makan3, QueueInt * tahan3);
 void serve(QueueInt makan3, QueueInt * tahan3, QueueInt  harga3, QueueInt * skor, QueueInt makan, QueueInt * harga);
-boolean bisaserve(QueueInt makan3,QueueInt tahan3);
+boolean bisaserve(QueueInt makan3,QueueInt tahan3, int n);
 void totalskor(QueueInt skor);
 boolean endgame(QueueInt skor, QueueInt harga);
 boolean compareString(char* str1, char* str2);
