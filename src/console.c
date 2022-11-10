@@ -135,9 +135,6 @@ void SAVEBNMO(ArrayDin* GamesList, char* filename)
     {
         fprintf(fp,"\n%s",(*GamesList).A[i]);
     }
-    fclose(fp);
-
-    fp = fopen(path, "r");
     if (fp != NULL)
     {
         printf("Save file berhasil disimpan.\n");
