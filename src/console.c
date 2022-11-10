@@ -328,15 +328,15 @@ void SKIPGAME(Queue q, Queue q2, Queue history, int input){
 void HELP(){
     printf("--------------------------------------------HELP--------------------------------------------");
     printf("\n");
-    printf("STARTBNMO \t\t\t: Command yang membaca file konfigurasi untuk menjalankan BNMO.\n");
+    printf("START \t\t\t: Command yang membaca file konfigurasi untuk menjalankan BNMO.\n");
     printf("LOAD <filename> \t: Command yang membaca save file <filename> yang berisi list game yang dapat dimainkan, histori, dan scoreboard game.\n");
     printf("SAVE <filename> \t: Command yang digunakan untuk menyimpan state game pemain saat ini ke dalam suatu file.\n");
-    printf("CREATEGAME \t\t: Command yang digunakan untuk menambahkan game baru pada daftar game.\n");
-    printf("LISTGAME \t\t: Command yang digunakan untuk menampilkan daftar game yang disediakan oleh sistem.\n");
-    printf("DELETEGAME \t\t: Command yang digunakan untuk menghapus sebuah game dari daftar game.\n");
-    printf("QUEUEGAME \t\t: Command yang digunakan untuk mendaftarkan permainan ke dalam list.\n");
-    printf("PLAYGAME \t\t: COmmand yang digunakan untuk memainkan sebuah permainan.\n");
-    printf("SKIPGAME <n> \t\t: Command yang digunakan untuk melewatkan permainan sebanyak n.\n");
+    printf("CREATE GAME \t\t: Command yang digunakan untuk menambahkan game baru pada daftar game.\n");
+    printf("LIST GAME \t\t: Command yang digunakan untuk menampilkan daftar game yang disediakan oleh sistem.\n");
+    printf("DELETE GAME \t\t: Command yang digunakan untuk menghapus sebuah game dari daftar game.\n");
+    printf("QUEUE GAME \t\t: Command yang digunakan untuk mendaftarkan permainan ke dalam list.\n");
+    printf("PLAY GAME \t\t: COmmand yang digunakan untuk memainkan sebuah permainan.\n");
+    printf("SKIP GAME <n> \t\t: Command yang digunakan untuk melewatkan permainan sebanyak n.\n");
     printf("HELP \t\t\t: Bantuan command command yang ada.\n");
     printf("QUIT \t\t\t: Command untuk keluar dari program.\n");
 }
