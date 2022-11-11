@@ -234,6 +234,7 @@ void PLAYGAME(Queue *q, ArrayDin GameList, Queue *history){
         // Menampilkan daftar game
         printf("Berikut adalah daftar Game-mu\n");
         int i;
+        int a = length(*q);
         for(i = 0; i < length(*q); i++){
             printf("%d. %s\n",(i+1),(*q).buffer[a-i-1]);
         }
