@@ -81,9 +81,9 @@ int main()
     PrintArrayDin(Arr); // Print Array
 
     // Search elemen
-    printf("Search Tugas...\nin index : ")
+    printf("Search Tugas...\nin index : ");
     printf("%d\n",SearchArrayDin(Arr, "Tugas")); // Search Tugas
-    printf("Search Tucil...\nin index : ")
+    printf("Search Tucil...\nin index : ");
     printf("%d\n",SearchArrayDin(Arr, "Tucil")); // Search Tucil
     
     // Dealokasi array
