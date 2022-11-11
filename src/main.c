@@ -39,7 +39,15 @@ int main(){
             /* *** START *** */
             if (compareString(command, "START"))
             {
-                STARTBNMO(&GamesList);
+                ADVCOMMAND();
+                if (EndWord == true) 
+                {
+                    STARTBNMO(&GamesList);
+                }
+                else
+                {
+                    OTHERCMD(); 
+                }
             }
 
             /* *** LOAD *** */
@@ -47,7 +55,16 @@ int main(){
             {
                 ADVCOMMAND();
                 char* filename = WordToString(currentCMD);
-                LOADBNMO(&GamesList,filename);
+
+                ADVCOMMAND();
+                if (EndWord == true) 
+                {
+                    LOADBNMO(&GamesList,filename);
+                }
+                else
+                {
+                    OTHERCMD(); 
+                }   
             } 
             else 
             {
@@ -72,7 +89,15 @@ int main(){
                     OTHERCMD(); continue;
                 }
 
-                CREATEGAME(&GamesList);
+                ADVCOMMAND();
+                if (EndWord == true) 
+                {
+                    CREATEGAME(&GamesList);
+                }
+                else
+                {
+                    OTHERCMD();
+                }
             }
 
             /* *** LIST GAME *** */
@@ -84,7 +109,15 @@ int main(){
                     OTHERCMD(); continue;
                 }
 
-                LISTGAME(GamesList);
+                ADVCOMMAND();
+                if (EndWord == true) 
+                {
+                    LISTGAME(GamesList);
+                }
+                else
+                {
+                    OTHERCMD(); 
+                }
             }
 
             /* *** DELETE GAME *** */
@@ -95,8 +128,15 @@ int main(){
                 if (!compareString(command,"GAME")) {
                     OTHERCMD(); continue;
                 }
-
-                DELETEGAME(&GamesList,GamesQueue);
+                ADVCOMMAND();
+                if (EndWord == true) 
+                {
+                    DELETEGAME(&GamesList,GamesQueue);
+                }
+                else
+                {
+                    OTHERCMD(); 
+                } 
             }
 
             /* *** QUEUE GAME *** */
@@ -108,8 +148,15 @@ int main(){
                     OTHERCMD(); continue;
                 }
 
-                QUEUEGAME(&GamesQueue,GamesList);
-                // displayQueue(GamesQueue);
+                ADVCOMMAND();
+                if (EndWord == true) 
+                {
+                    QUEUEGAME(&GamesQueue,GamesList);
+                }
+                else
+                {
+                    OTHERCMD(); 
+                }
             }
             
             /* *** PLAY GAME *** */
@@ -121,7 +168,15 @@ int main(){
                     OTHERCMD(); continue;
                 }
 
-                PLAYGAME(&GamesQueue,GamesList,&GamesHistory);
+                ADVCOMMAND();
+                if (EndWord == true) 
+                {
+                    PLAYGAME(&GamesQueue,GamesList,&GamesHistory);
+                }
+                else
+                {
+                    OTHERCMD();
+                } 
             }
             
             /* *** SKIP GAME *** */
@@ -136,13 +191,30 @@ int main(){
                 ADVCOMMAND();
                 int nSkip = WordToInt(currentCMD);
 
-                SKIPGAME(&GamesQueue,GamesList,&GamesHistory,nSkip);
+                ADVCOMMAND();
+                printf("%d\n",EndWord);
+                if (EndWord == true) 
+                {
+                    SKIPGAME(&GamesQueue,GamesList,&GamesHistory,nSkip);
+                }
+                else
+                {
+                    OTHERCMD(); 
+                }  
             }
 
             /* *** HELP *** */
             else if (compareString(command,"HELP"))
             {
-                HELP();
+                ADVCOMMAND();
+                if (EndWord == true) 
+                {
+                    HELP();
+                }
+                else
+                {
+                    OTHERCMD(); 
+                }  
             }
 
             /* *** SAVE *** */
@@ -150,14 +222,31 @@ int main(){
             {
                 ADVCOMMAND();
                 char* filename = WordToString(currentCMD);
-                SAVEBNMO(&GamesList,filename);
+
+                ADVCOMMAND();
+                if (EndWord == true) 
+                {
+                    SAVEBNMO(&GamesList,filename);
+                }
+                else
+                {
+                    OTHERCMD(); 
+                }      
             }
 
             /* *** QUIT *** */
             else if (compareString(command,"QUIT"))
             {
-                QUIT(&GamesQueue);
-                EndProgram = true;
+                ADVCOMMAND();
+                if (EndWord == true) 
+                {
+                    QUIT(&GamesQueue);
+                    EndProgram = true;
+                }
+                else
+                {
+                    OTHERCMD(); 
+                }    
             }
 
             /* *** OTHER COMMAND *** */
@@ -167,7 +256,7 @@ int main(){
             }
             
             /* *** End Command *** */
-            while (!EndWord)
+            while (EndWord == false)
             {
                 ADVCOMMAND();
             }

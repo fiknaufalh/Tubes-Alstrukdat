@@ -73,7 +73,7 @@ void stringConcat(char *s1,char *s2,char *sout)
 void STARTBNMO(ArrayDin *GamesList)
 {
     STARTWORD("./data/config.txt");
-    
+    EndWord = true;
     int TotalGame = WordToInt(currentWord);
     int i = 1;
     ADVLine();
