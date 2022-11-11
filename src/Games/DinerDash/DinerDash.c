@@ -89,7 +89,7 @@ void DinerDash(){
                     printall(makan, durasi, tahan, harga, makan2, durasi2, makan3, tahan3, skor);
                 }
                 else{
-                    printf("Tidak ada pesanan M%d dalam Daftar Pesanan\n\n",n,n);
+                    printf("Tidak ada pesanan M%d dalam Daftar Pesanan\n\n",n);
                 }
             }
             else if(compareString(command,"SERVE")){
