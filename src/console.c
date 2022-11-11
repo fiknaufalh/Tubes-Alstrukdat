@@ -233,11 +233,11 @@ void PLAYGAME(Queue *q, ArrayDin GameList, Queue *history){
         
         // Menampilkan daftar game
         printf("Berikut adalah daftar Game-mu\n");
-        int i;
-        for(i = 0; i < length(*q); i++){
-            printf("%d. %s\n",(i+1),(*q).buffer[(i+(q->idxHead))%CAPACITY]);
+        int a;
+        for(a = 0; a < length(*q); a++){
+            printf("%d. %s\n",(a+1),(*q).buffer[(a+(q->idxHead))%CAPACITY]);
         }
-        
+        int i;
         i = 0;
         while(i < Length(GameList) && status){
             if ((HEAD(*q) == GameList.A[i])){
@@ -281,14 +281,14 @@ void SKIPGAME(Queue *q, ArrayDin GameList, Queue *history, int input){
     if (!isEmpty(*q)){
         ElType val;
         int i = 0;
-        if (input < length(*q) && input >= 0){
+        if (input+1 < length(*q) && input >= 0){
             while (i < input){
                 dequeue(q,&val);
                 enqueue(history, val);
                 i++;
             }
         }
-        else if (input > length(*q)){
+        else if (input+1 > length(*q)){
             int panjang = length(*q);
             while (i < panjang){
                 dequeue(q,&val);
@@ -312,7 +312,7 @@ void HELP(){
     printf("LIST GAME \t\t: Command yang digunakan untuk menampilkan daftar game yang disediakan oleh sistem.\n");
     printf("DELETE GAME \t\t: Command yang digunakan untuk menghapus sebuah game dari daftar game.\n");
     printf("QUEUE GAME \t\t: Command yang digunakan untuk mendaftarkan permainan ke dalam list.\n");
-    printf("PLAY GAME \t\t: COmmand yang digunakan untuk memainkan sebuah permainan.\n");
+    printf("PLAY GAME \t\t: Command yang digunakan untuk memainkan sebuah permainan.\n");
     printf("SKIP GAME <n> \t\t: Command yang digunakan untuk melewatkan permainan sebanyak n.\n");
     printf("HELP \t\t\t: Bantuan command command yang ada.\n");
     printf("QUIT \t\t\t: Command untuk keluar dari program.\n");

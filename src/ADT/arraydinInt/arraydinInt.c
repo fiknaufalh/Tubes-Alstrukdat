@@ -105,9 +105,9 @@ void PrintArrayDin_AInt(ArrayDinInt array)
         printf("[");
         for (i = 0; i < array.Neff - 1; i++)
         {
-            printf("%s, ", array.A[i]);
+            printf("%d, ", array.A[i]);
         }
-        printf("%s]\n", array.A[array.Neff - 1]);
+        printf("%d]\n", array.A[array.Neff - 1]);
     }
 }
 
