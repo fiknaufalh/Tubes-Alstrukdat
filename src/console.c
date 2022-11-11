@@ -298,7 +298,7 @@ void SKIPGAME(Queue *q, ArrayDin GameList, Queue *history, int input){
         }
         PLAYGAME(q,GameList,history);
     } else {
-        printf("Tidak ada game dalam antrian permainan Anda!\n");
+        printf("Tidak ada permainan lagi dalam daftar game-mu\n");
     }
 }
 
