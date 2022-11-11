@@ -156,6 +156,12 @@ int main(){
             {
                 OTHERCMD();
             }
+            
+            /* *** End Command *** */
+            while (!EndWord)
+            {
+                ADVCOMMAND();
+            }
         }
     }
 
