@@ -237,7 +237,7 @@ void PLAYGAME(Queue *q, ArrayDin GameList, Queue *history){
         for(a = 0; a < length(*q); a++){
             printf("%d. %s\n",(a+1),(*q).buffer[(a+(q->idxHead))%CAPACITY]);
         }
-        
+        int i;
         i = 0;
         while(i < Length(GameList) && status){
             if ((HEAD(*q) == GameList.A[i])){
@@ -312,7 +312,7 @@ void HELP(){
     printf("LIST GAME \t\t: Command yang digunakan untuk menampilkan daftar game yang disediakan oleh sistem.\n");
     printf("DELETE GAME \t\t: Command yang digunakan untuk menghapus sebuah game dari daftar game.\n");
     printf("QUEUE GAME \t\t: Command yang digunakan untuk mendaftarkan permainan ke dalam list.\n");
-    printf("PLAY GAME \t\t: COmmand yang digunakan untuk memainkan sebuah permainan.\n");
+    printf("PLAY GAME \t\t: Command yang digunakan untuk memainkan sebuah permainan.\n");
     printf("SKIP GAME <n> \t\t: Command yang digunakan untuk melewatkan permainan sebanyak n.\n");
     printf("HELP \t\t\t: Bantuan command command yang ada.\n");
     printf("QUIT \t\t\t: Command untuk keluar dari program.\n");
