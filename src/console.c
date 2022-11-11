@@ -281,14 +281,14 @@ void SKIPGAME(Queue *q, ArrayDin GameList, Queue *history, int input){
     if (!isEmpty(*q)){
         ElType val;
         int i = 0;
-        if (input < length(*q) && input >= 0){
+        if (input+1 < length(*q) && input >= 0){
             while (i < input){
                 dequeue(q,&val);
                 enqueue(history, val);
                 i++;
             }
         }
-        else if (input > length(*q)){
+        else if (input+1 > length(*q)){
             int panjang = length(*q);
             while (i < panjang){
                 dequeue(q,&val);
