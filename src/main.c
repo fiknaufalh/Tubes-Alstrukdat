@@ -36,10 +36,13 @@ int main(){
 
         if (IsEmpty(GamesList))
         {
+            /* *** START *** */
             if (compareString(command, "START"))
             {
                 STARTBNMO(&GamesList);
             }
+
+            /* *** LOAD *** */
             else if (compareString(command, "LOAD"))
             {
                 ADVCOMMAND();
@@ -50,6 +53,12 @@ int main(){
             {
                 printf("Belum ada konfigurasi games yang dimuat\n");
                 printf("Muat konfigurasi games terlebih dahulu dengan command LOAD <filename>\n");
+            }
+
+            /* *** End Command *** */
+            while (!EndWord)
+            {
+                ADVCOMMAND();
             }
         }
         else /* Games sudah terkonfigurasi */
