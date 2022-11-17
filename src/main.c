@@ -192,7 +192,6 @@ int main(){
                 int nSkip = WordToInt(currentCMD);
 
                 ADVCOMMAND();
-                printf("%d\n",EndWord);
                 if (EndWord == true) 
                 {
                     SKIPGAME(&GamesQueue,GamesList,&GamesHistory,nSkip);
