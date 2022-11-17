@@ -115,6 +115,7 @@ void LOADBNMO(ArrayDin* GamesList, char* filename)
         {
             printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
         }
+        EndWord = true;
     }
     else
     {
