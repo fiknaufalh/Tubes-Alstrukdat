@@ -217,18 +217,63 @@ void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename, Map* RNG
     }
 }
 
-void SAVEBNMO(ArrayDin* GamesList, char* filename)
+void SAVEBNMO(ArrayDin GamesList, char* filename, Queue GamesHistory, Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB)
 {
     FILE * fp;
     char path[50];
 
     stringConcat("./data/",filename,path);
     fp = fopen (path,"w+");
-    fprintf(fp,"%d",Length(*GamesList));
-    for(int i = 0; i < Length(*GamesList);i++)
+
+    // List Game
+    fprintf(fp,"%d",Length(GamesList));
+    for(int i = 0; i < Length(GamesList);i++)
     {
-        fprintf(fp,"\n%s",(*GamesList).A[i]);
+        fprintf(fp,"\n%s",(GamesList).A[i]);
     }
+
+    // History
+    fprintf(fp,"\n%d",length(GamesHistory));
+    for(int i = 0; i < length(GamesHistory);i++)
+    {
+        fprintf(fp,"\n%s",GamesHistory.buffer[i]);
+    }
+
+    // RNGSB
+    fprintf(fp,"\n%d",(RNGSB).Count);
+    for(int i = 0; i < (RNGSB).Count;i++)
+    {
+        fprintf(fp,"\n%s %d",(RNGSB).Elements[i].Key,(RNGSB).Elements[i].Value);
+    }
+
+    // DinerDash
+    fprintf(fp,"\n%d",(DinerSB).Count);
+    for(int i = 0; i < (DinerSB).Count;i++)
+    {
+        fprintf(fp,"\n%s %d",(DinerSB).Elements[i].Key,(DinerSB).Elements[i].Value);
+    }
+
+    // HANGMAN
+    fprintf(fp,"\n%d",(HangmanSB).Count);
+    for(int i = 0; i < (HangmanSB).Count;i++)
+    {
+        fprintf(fp,"\n%s %d",(HangmanSB).Elements[i].Key,(HangmanSB).Elements[i].Value);
+    }
+
+    // TOWER OF HANOI
+    fprintf(fp,"\n%d",(TowerSB).Count);
+    for(int i = 0; i < (TowerSB).Count;i++)
+    {
+        fprintf(fp,"\n%s %d",(TowerSB).Elements[i].Key,(TowerSB).Elements[i].Value);
+    }
+
+    // SNAKE ON METEOR
+    fprintf(fp,"\n%d",(SnakeSB).Count);
+    for(int i = 0; i < (SnakeSB).Count;i++)
+    {
+        fprintf(fp,"\n%s %d",(SnakeSB).Elements[i].Key,(SnakeSB).Elements[i].Value);
+    }
+
     if (fp != NULL)
     {
         printf("Save file berhasil disimpan.\n");

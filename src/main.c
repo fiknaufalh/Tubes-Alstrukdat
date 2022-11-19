@@ -237,7 +237,7 @@ int main(){
                 ADVCOMMAND();
                 if (EndWord == true) 
                 {
-                    SAVEBNMO(&GamesList,filename);
+                    SAVEBNMO(GamesList, filename, GamesHistory, RNGScore, DDScore, HangmanScore, TowerScore, SnakeScore);
                 }
                 else
                 {

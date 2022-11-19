@@ -13,7 +13,7 @@ void STARTBNMO(ArrayDin* GamesList);
 
 void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename, Map* RNGSB, Map* DinerSB, Map* HangmanSB, Map* TowerSB, Map* SnakeSB);
 
-void SAVEBNMO(ArrayDin* GamesList, char* filename);
+void SAVEBNMO(ArrayDin GamesList, char* filename, Queue GamesHistory, Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB);
 
 int stringLength(char* string);
 
