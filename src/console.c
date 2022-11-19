@@ -424,3 +424,22 @@ void QUIT(Queue *Q){
 void OTHERCMD(){
     printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
 }
+
+void SCOREBOARD(Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB)
+{
+    printf("**** SCOREBOARD GAME RNG ****\n");
+    PrintScoreBoard(RNGSB);
+    printf("\n");
+    printf("**** SCOREBOARD GAME Diner Dash ****\n");
+    PrintScoreBoard(DinerSB);
+    printf("\n");
+    printf("**** SCOREBOARD GAME Hangman ****\n");
+    PrintScoreBoard(HangmanSB);
+    printf("\n");
+    printf("**** SCOREBOARD GAME Tower Defense ****\n");
+    PrintScoreBoard(TowerSB);
+    printf("\n");
+    printf("**** SCOREBOARD GAME Snake ****\n");
+    PrintScoreBoard(SnakeSB);
+    printf("\n");
+}

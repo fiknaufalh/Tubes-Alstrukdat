@@ -260,6 +260,20 @@ int main(){
                 }    
             }
 
+            /* *** SCOREBOARD *** */
+            else if (compareString(command,"SCOREBOARD"))
+            {
+                ADVCOMMAND();
+                if (EndWord == true) 
+                {
+                    SCOREBOARD(RNGScore,DDScore,HangmanScore,TowerScore,SnakeScore);
+                }
+                else
+                {
+                    OTHERCMD(); 
+                }    
+            }
+
             /* *** OTHER COMMAND *** */
             else
             {

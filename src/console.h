@@ -62,4 +62,6 @@ void QUIT(Queue *Q);
 
 void OTHERCMD();
 
+void SCOREBOARD(Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB);
+
 #endif
