@@ -444,3 +444,239 @@ void SCOREBOARD(Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB)
     printf("\n");
 }
 
+void RESETSCOREBOARD(Map *RNGSB, Map *DinerSB, Map *HangmanSB, Map *TowerSB, Map *SnakeSB)
+{
+    printf("DAFTAR SCOREBOARD:\n");
+    printf("0. All\n");
+    printf("1. RNG\n");
+    printf("2. Diner DASH\n");
+    printf("3. HANGMAN\n");
+    printf("4. TOWER OF HANOI\n");
+    printf("5. SNAKE ON METEOR\n\n");
+    char* command;
+    printf("SCOREBOARD YANG INGIN DIHAPUS: ");
+    STARTCOMMAND();
+    int input = WordToInt(currentCMD);
+
+    switch(input)
+    {
+        case 0 :
+            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ALL (YA/TIDAK)? ");
+            STARTCOMMAND();
+            command = WordToString(currentCMD);
+            if (compareString(command,"YA"))
+            {
+                ADVCOMMAND();
+                if (EndWord == true)
+                {
+                    CreateScoreBoard(RNGSB);
+                    CreateScoreBoard(DinerSB);
+                    CreateScoreBoard(HangmanSB);
+                    CreateScoreBoard(TowerSB);
+                    CreateScoreBoard(SnakeSB);
+                    if (IsEmptySB(*RNGSB) && IsEmptySB(*DinerSB) && IsEmptySB(*HangmanSB) && IsEmptySB(*TowerSB) && IsEmptySB(*SnakeSB))
+                    {
+                        printf("\nScoreboard berhasil di-reset.\n");
+                    }
+                    else
+                    {
+                        printf("\nScoreboard gagal di-reset.\n");
+                    }
+                }
+                else
+                {
+                    OTHERCMD();
+                }
+            }
+            else if (compareString(command,"TIDAK"))
+            {
+                printf("\nReset SCOREBOARD ALL dibatalkan\n");
+            }
+            else
+            {
+                OTHERCMD();
+            }
+            break;
+
+        case 1 :
+            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD RNG (YA/TIDAK)? ");
+            STARTCOMMAND();
+            command = WordToString(currentCMD);
+            if (compareString(command,"YA"))
+            {
+                ADVCOMMAND();
+                if (EndWord == true)
+                {
+                    CreateScoreBoard(RNGSB);
+                    if (IsEmptySB(*RNGSB))
+                    {
+                        printf("\nScoreboard berhasil di-reset.\n");
+                    }
+                    else
+                    {
+                        printf("\nScoreboard gagal di-reset.\n");
+                    }
+                }
+                else
+                {
+                    OTHERCMD();
+                }
+            }
+            else if (compareString(command,"TIDAK"))
+            {
+                printf("\nReset SCOREBOARD RNG dibatalkan\n");
+            }
+            else
+            {
+                OTHERCMD();
+            }
+            break;
+
+        case 2 :
+            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD Diner DASH (YA/TIDAK)? ");
+            STARTCOMMAND();
+            command = WordToString(currentCMD);
+            if (compareString(command,"YA"))
+            {
+                ADVCOMMAND();
+                if (EndWord == true)
+                {
+                    CreateScoreBoard(DinerSB);
+                    if (IsEmptySB(*DinerSB))
+                    {
+                        printf("\nScoreboard berhasil di-reset.\n");
+                    }
+                    else
+                    {
+                        printf("\nScoreboard gagal di-reset.\n");
+                    }
+                }
+                else
+                {
+                    OTHERCMD();
+                }
+            }
+            else if (compareString(command,"TIDAK"))
+            {
+                printf("\nReset SCOREBOARD Diner DASH dibatalkan\n");
+            }
+            else
+            {
+                OTHERCMD();
+            }
+            break;
+
+        case 3 :
+            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD HANGMAN (YA/TIDAK)? ");
+            STARTCOMMAND();
+            command = WordToString(currentCMD);
+            if (compareString(command,"YA"))
+            {
+                ADVCOMMAND();
+                if (EndWord == true)
+                {
+                    CreateScoreBoard(HangmanSB);
+                    if (IsEmptySB(*HangmanSB))
+                    {
+                        printf("\nScoreboard berhasil di-reset.\n");
+                    }
+                    else
+                    {
+                        printf("\nScoreboard gagal di-reset.\n");
+                    }
+                }
+                else
+                {
+                    OTHERCMD();
+                }
+            }
+            else if (compareString(command,"TIDAK"))
+            {
+                printf("\nReset SCOREBOARD HANGMAN dibatalkan\n");
+            }
+            else
+            {
+                OTHERCMD();
+            }
+            break;
+
+        case 4 :
+            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD TOWER OF HANOI (YA/TIDAK)? ");
+            STARTCOMMAND();
+            command = WordToString(currentCMD);
+            if (compareString(command,"YA"))
+            {
+                ADVCOMMAND();
+                if (EndWord == true)
+                {
+                    CreateScoreBoard(TowerSB);
+                    if (IsEmptySB(*TowerSB))
+                    {
+                        printf("\nScoreboard berhasil di-reset.\n");
+                    }
+                    else
+                    {
+                        printf("\nScoreboard gagal di-reset.\n");
+                    }
+                }
+                else
+                {
+                    OTHERCMD();
+                }
+            }
+            else if (compareString(command,"TIDAK"))
+            {
+                printf("\nReset SCOREBOARD TOWER OF HANOI dibatalkan\n");
+            }
+            else
+            {
+                OTHERCMD();
+            }
+            break;
+
+        case 5 :
+            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD SNAKE ON METEOR (YA/TIDAK)? ");
+            STARTCOMMAND();
+            command = WordToString(currentCMD);
+            if (compareString(command,"YA"))
+            {
+                ADVCOMMAND();
+                if (EndWord == true)
+                {
+                    CreateScoreBoard(SnakeSB);
+                    if (IsEmptySB(*SnakeSB))
+                    {
+                        printf("\nScoreboard berhasil di-reset.\n");
+                    }
+                    else
+                    {
+                        printf("\nScoreboard gagal di-reset.\n");
+                    }
+                }
+                else
+                {
+                    OTHERCMD();
+                }
+            }
+            else if (compareString(command,"TIDAK"))
+            {
+                printf("\nReset SCOREBOARD SNAKE ON METEOR dibatalkan\n");
+            }
+            else
+            {
+                OTHERCMD();
+            }
+            break;
+
+        default :
+            printf("Input tidak dikenali.\n");
+            break;
+    }
+
+    /* *** End Command *** */
+    while (!EndWord)
+    {
+        ADVCOMMAND();
+    }
+}
+

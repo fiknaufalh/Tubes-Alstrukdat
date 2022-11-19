@@ -274,6 +274,26 @@ int main(){
                 }    
             }
 
+            /* *** RESET SCOREBOARD *** */
+            else if (compareString(command,"RESET"))
+            {
+                ADVCOMMAND();
+                command = WordToString(currentCMD);
+                if (!compareString(command,"SCOREBOARD")) {
+                    OTHERCMD(); continue;
+                }
+
+                ADVCOMMAND();
+                if (EndWord == true) 
+                {
+                    RESETSCOREBOARD(&RNGScore,&DDScore,&HangmanScore,&TowerScore,&SnakeScore);
+                }
+                else
+                {
+                    OTHERCMD(); 
+                }    
+            }
+
             /* *** OTHER COMMAND *** */
             else
             {
