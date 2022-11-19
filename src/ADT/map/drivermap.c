@@ -14,6 +14,7 @@ int main()
     InsertSB(&M, "Finn", 12);
     InsertSB(&M, "Jake", 58);
     InsertSB(&M, "ABCDEFGHJOFFFFFFjjjjjjjjjjjjjjjjjjjjjj", 40);
+    InsertSB(&M, "BNMO", 19);
     printf("**** SCOREBOARD GAME TEST****\n");
     PrintScoreBoard(M);
     return 0;

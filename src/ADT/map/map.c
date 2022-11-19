@@ -141,7 +141,7 @@ void PrintScoreBoard(Map M)
         for (int i = 0; i < M.Count; i++)
         {
             printf("| %s", M.Elements[i].Key);
-            for (int j = 0; j < maxnamelength - stringLength(M.Elements[i].Key); j++)
+            for (int j = 0; j < maxnamelength - strLength(M.Elements[i].Key); j++)
             {
                 printf(" ");
             }
@@ -152,7 +152,7 @@ void PrintScoreBoard(Map M)
 
 /* ********** Operator Lain ********* */
 
-int stringLength(char* string)
+int strLength(char* string)
 {
     int length = 0;
     while (*string != '\0')
@@ -168,9 +168,9 @@ int MaxNameLength(Map M)
     int i,max = 0;
     for(i = 0; i < M.Count; i++)
     {
-        if(stringLength(M.Elements[i].Key) > max)
+        if(strLength(M.Elements[i].Key) > max)
         {
-            max = stringLength(M.Elements[i].Key);
+            max = strLength(M.Elements[i].Key);
         }
     }
     return max;
