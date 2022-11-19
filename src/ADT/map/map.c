@@ -128,12 +128,12 @@ void PrintScoreBoard(Map M)
     else
     {
         printf("| NAMA");
-        for (int i = 0; i < maxnamelength; i++)
+        for (int i = 0; i < maxnamelength + 2 ; i++)
         {
             printf(" ");
         }
-        printf(" | %-8s |\n", "SCORE");
-        for (int i = 0; i < maxnamelength + 19; i++)
+        printf(" | %-10s |\n", "SCORE");
+        for (int i = 0; i < maxnamelength + 23; i++)
         {
             printf("-");
         }
@@ -141,11 +141,11 @@ void PrintScoreBoard(Map M)
         for (int i = 0; i < M.Count; i++)
         {
             printf("| %s", M.Elements[i].Key);
-            for (int j = 0; j < maxnamelength - (strLength(M.Elements[i].Key) - 4); j++)
+            for (int j = 0; j < maxnamelength - (strLength(M.Elements[i].Key) - 6); j++)
             {
                 printf(" ");
             }
-            printf(" | %-8d |\n", M.Elements[i].Value);
+            printf(" | %-10d |\n", M.Elements[i].Value);
         }
     }
 }

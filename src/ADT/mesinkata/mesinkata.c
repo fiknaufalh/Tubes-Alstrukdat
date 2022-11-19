@@ -42,14 +42,14 @@ void ADVWORD(){
 void CopyWord(){
     int i = 0;
     currentChar = GetCC();
-    while (currentChar != MARK && currentChar != BLANK && currentChar != ENTER){
+    while (currentChar != MARK && currentChar != BLANK && currentChar != ENTER && !feof(pita)){
         currentWord.TabWord[i] = currentChar;
         ADV();
         currentChar = GetCC();
         i++;
     }
     
-    currentWord.Length = i;
+    currentWord.Length = i-1;
 
     if (i >= NMax) currentWord.Length = NMax;
     else currentWord.Length = i;
