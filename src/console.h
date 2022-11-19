@@ -5,12 +5,13 @@
 #include "ADT/mesinkarakter/mesinkarakter.h"
 #include "ADT/mesinkata/mesinkata.h"
 #include "ADT/queue/queue.h"
+#include "ADT/map/map.h"
 
 boolean compareString(char* str1, char* str2);
 
 void STARTBNMO(ArrayDin* GamesList);
 
-void LOADBNMO(ArrayDin* GamesList, char* filename);
+void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename);
 
 void SAVEBNMO(ArrayDin* GamesList, char* filename);
 

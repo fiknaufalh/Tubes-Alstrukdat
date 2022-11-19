@@ -6,10 +6,21 @@ int main(){
     ArrayDin GamesList;
     Queue GamesQueue;
     Queue GamesHistory;
+    Map RNGScore;
+    Map DDScore;
+    Map HangmanScore;
+    Map TowerScore;
+    Map SnakeScore;
 
     GamesList = MakeArrayDin();
     CreateQueue(&GamesQueue);
     CreateQueue(&GamesHistory);
+    CreateScoreBoard(&RNGScore);
+    CreateScoreBoard(&DDScore);
+    CreateScoreBoard(&HangmanScore);
+    CreateScoreBoard(&TowerScore);
+    CreateScoreBoard(&SnakeScore);
+    
 
     boolean EndProgram = false;
     char* command;
@@ -59,7 +70,9 @@ int main(){
                 ADVCOMMAND();
                 if (EndWord == true) 
                 {
-                    LOADBNMO(&GamesList,filename);
+                    // LOADBNMO(&GamesList,filename);
+                    LOADBNMO(&GamesList,&GamesHistory,filename);
+                    displayQueue(GamesHistory);
                 }
                 else
                 {

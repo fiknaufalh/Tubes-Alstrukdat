@@ -91,7 +91,7 @@ void STARTBNMO(ArrayDin *GamesList)
     }
 }
 
-void LOADBNMO(ArrayDin* GamesList, char* filename)
+void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename)
 {
     char path[50];
     stringConcat("./data/",filename,path);
@@ -111,7 +111,24 @@ void LOADBNMO(ArrayDin* GamesList, char* filename)
             ADVLine();
             i++;
         }
-        if(!IsEmpty(*GamesList))
+        ADVLine();
+        int TotalHistory = WordToInt(currentWord);
+        i = 1;
+        ADVLine();
+        while(i <= TotalHistory)
+        {
+            char *line;
+            line = WordToString(currentWord);
+            enqueue(GamesHistory,line);
+            ADVLine();
+            i++;
+        }
+
+
+        if(!IsEmpty(*GamesList) && !isEmpty(*GamesHistory))
+        {
+            printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
+        }
         {
             printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
         }
