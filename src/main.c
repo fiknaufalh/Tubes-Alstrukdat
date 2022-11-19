@@ -71,8 +71,7 @@ int main(){
                 if (EndWord == true) 
                 {
                     // LOADBNMO(&GamesList,filename);
-                    LOADBNMO(&GamesList,&GamesHistory,filename);
-                    displayQueue(GamesHistory);
+                    LOADBNMO(&GamesList,&GamesHistory,filename,&RNGScore,&DDScore,&HangmanScore,&TowerScore,&SnakeScore);
                 }
                 else
                 {

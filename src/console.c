@@ -91,7 +91,7 @@ void STARTBNMO(ArrayDin *GamesList)
     }
 }
 
-void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename)
+void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename, Map* RNGSB, Map* DinerSB, Map* HangmanSB, Map* TowerSB, Map* SnakeSB)
 {
     char path[50];
     stringConcat("./data/",filename,path);
@@ -100,6 +100,7 @@ void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename)
     {
         fclose(fp);
         STARTWORD(path);
+        // List Game
         int TotalGame = WordToInt(currentWord);
         int i = 1;
         ADVLine();
@@ -111,7 +112,8 @@ void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename)
             ADVLine();
             i++;
         }
-        ADVLine();
+
+        // History
         int TotalHistory = WordToInt(currentWord);
         i = 1;
         ADVLine();
@@ -124,11 +126,85 @@ void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename)
             i++;
         }
 
-
-        if(!IsEmpty(*GamesList) && !isEmpty(*GamesHistory))
+        // RNGSB
+        int RNGScore = WordToInt(currentWord);
+        i = 1;
+        while (i <= RNGScore)
         {
-            printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
+            IgnoreEnter();
+            ADVWORD();
+            char *playername;
+            playername = WordToString(currentWord);
+            ADVWORD();
+            int score = WordToInt(currentWord);
+            InsertSB(RNGSB,playername,score);
+            i++;
         }
+
+        // DinerDash
+        ADVLine();
+        int DinerScore = WordToInt(currentWord);
+        i = 1;
+        while (i <= DinerScore)
+        {
+            IgnoreEnter();
+            ADVWORD();
+            char *playername;
+            playername = WordToString(currentWord);
+            ADVWORD();
+            int score = WordToInt(currentWord);
+            InsertSB(DinerSB,playername,score);
+            i++;
+        }
+
+        // HANGMAN
+        ADVLine();
+        int HangmanScore = WordToInt(currentWord);
+        i = 1;
+        while (i <= HangmanScore)
+        {
+            IgnoreEnter();
+            ADVWORD();
+            char *playername;
+            playername = WordToString(currentWord);
+            ADVWORD();
+            int score = WordToInt(currentWord);
+            InsertSB(HangmanSB,playername,score);
+            i++;
+        }
+
+        // TOWER OF HANOI
+        ADVLine();
+        int TowerScore = WordToInt(currentWord);
+        i = 1;
+        while (i <= TowerScore)
+        {
+            IgnoreEnter();
+            ADVWORD();
+            char *playername;
+            playername = WordToString(currentWord);
+            ADVWORD();
+            int score = WordToInt(currentWord);
+            InsertSB(TowerSB,playername,score);
+            i++;
+        }
+
+        // SNAKE ON METEOR
+        ADVLine();
+        int SnakeScore = WordToInt(currentWord);
+        i = 1;
+        while (i <= SnakeScore)
+        {
+            IgnoreEnter();
+            ADVWORD();
+            char *playername;
+            playername = WordToString(currentWord);
+            ADVWORD();
+            int score = WordToInt(currentWord);
+            InsertSB(SnakeSB,playername,score);
+            i++;
+        }
+        if(!IsEmpty(*GamesList) && !isEmpty(*GamesHistory) )
         {
             printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
         }

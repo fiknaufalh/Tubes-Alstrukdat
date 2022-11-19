@@ -11,7 +11,7 @@ boolean compareString(char* str1, char* str2);
 
 void STARTBNMO(ArrayDin* GamesList);
 
-void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename);
+void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename, Map* RNGSB, Map* DinerSB, Map* HangmanSB, Map* TowerSB, Map* SnakeSB);
 
 void SAVEBNMO(ArrayDin* GamesList, char* filename);
 
