@@ -20,10 +20,3 @@ Marcelline 30
 0
 1
 Marshall 77
-
-//HISTORY
-//RNG
-//Diner DASH
-//HANGMAN
-//TOWER OF HANOI
-//SNAKE ON METEOR
