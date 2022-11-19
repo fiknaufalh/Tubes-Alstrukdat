@@ -176,3 +176,21 @@ int MaxNameLength(Map M)
     return max;
 }
 
+Map SortSB(Map M)
+{
+    int i,j;
+    infotype temp;
+    for(i = 0; i < M.Count; i++)
+    {
+        for(j = 0; j < M.Count - 1; j++)
+        {
+            if(M.Elements[j].Value < M.Elements[j+1].Value)
+            {
+                temp = M.Elements[j];
+                M.Elements[j] = M.Elements[j+1];
+                M.Elements[j+1] = temp;
+            }
+        }
+    }
+    return M;
+}

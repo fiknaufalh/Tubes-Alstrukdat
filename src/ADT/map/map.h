@@ -75,5 +75,6 @@ int strLength(char* string);
 
 int MaxNameLength(Map M);
 
+Map SortSB(Map M);
 
 #endif

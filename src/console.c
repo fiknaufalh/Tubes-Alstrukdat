@@ -428,18 +428,19 @@ void OTHERCMD(){
 void SCOREBOARD(Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB)
 {
     printf("**** SCOREBOARD GAME RNG ****\n");
-    PrintScoreBoard(RNGSB);
+    PrintScoreBoard(SortSB(RNGSB));
     printf("\n");
     printf("**** SCOREBOARD GAME Diner Dash ****\n");
-    PrintScoreBoard(DinerSB);
+    PrintScoreBoard(SortSB(DinerSB));
     printf("\n");
-    printf("**** SCOREBOARD GAME Hangman ****\n");
-    PrintScoreBoard(HangmanSB);
+    printf("**** SCOREBOARD GAME HANGMAN ****\n");
+    PrintScoreBoard(SortSB(HangmanSB));
     printf("\n");
-    printf("**** SCOREBOARD GAME Tower Defense ****\n");
-    PrintScoreBoard(TowerSB);
+    printf("**** SCOREBOARD GAME Tower OF HANOI ****\n");
+    PrintScoreBoard(SortSB(TowerSB));
     printf("\n");
-    printf("**** SCOREBOARD GAME Snake ****\n");
-    PrintScoreBoard(SnakeSB);
+    printf("**** SCOREBOARD GAME SNAKE ON METEOR ****\n");
+    PrintScoreBoard(SortSB(SnakeSB));
     printf("\n");
 }
+
