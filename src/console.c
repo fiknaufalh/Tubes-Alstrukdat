@@ -726,7 +726,8 @@ void RESETHISTORY(Queue *GamesHistory)
     }
     else if (compareString(command,"TIDAK"))
     {
-        printf("\nReset HISTORY dibatalkan\n");
+        printf("\nHistory tidak jadi di-reset. ");
+        HISTORY(*GamesHistory,CAPACITY);
     }
     else
     {
