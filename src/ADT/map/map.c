@@ -1,5 +1,6 @@
 # include "map.h"
 # include <stdio.h>
+#include "../../console.h"
 
 /* ********* Prototype ********* */
 
@@ -141,7 +142,7 @@ void PrintScoreBoard(Map M)
         for (int i = 0; i < M.Count; i++)
         {
             printf("| %s", M.Elements[i].Key);
-            for (int j = 0; j < maxnamelength - (strLength(M.Elements[i].Key) - 6); j++)
+            for (int j = 0; j < maxnamelength - (stringLength(M.Elements[i].Key) - 6); j++)
             {
                 printf(" ");
             }
@@ -152,25 +153,14 @@ void PrintScoreBoard(Map M)
 
 /* ********** Operator Lain ********* */
 
-int strLength(char* string)
-{
-    int length = 0;
-    while (*string != '\0')
-    {
-        length++;
-        string++;
-    }
-    return length;
-}
-
 int MaxNameLength(Map M)
 {
     int i,max = 0;
     for(i = 0; i < M.Count; i++)
     {
-        if(strLength(M.Elements[i].Key) > max)
+        if(stringLength(M.Elements[i].Key) > max)
         {
-            max = strLength(M.Elements[i].Key);
+            max = stringLength(M.Elements[i].Key);
         }
     }
     return max;

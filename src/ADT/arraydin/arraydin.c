@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "arraydin.h"
+#include "../../console.h"
 
 ArrayDin MakeArrayDin()
 {
@@ -143,7 +144,7 @@ IdxType SearchArrayDin(ArrayDin array, ElType el)
     IdxType i;
     for (i = 0; i < array.Neff; i++)
     {
-        if (array.A[i] == el)
+        if (compareString(array.A[i], el))
         {
             return i;
         }

@@ -104,14 +104,14 @@ void STARTCOMMAND(){
     }
 }
 
-void STARTCOMMANDGAME(){
+void STARTCOMMANDLINE(){
     COMMAND();
     IgnoreBlanksCMD();
     if(currentChar == ENTER){
         EndWord = true;
     } else {
         EndWord = false;
-        CopyCommandGame();
+        CopyCommandLine();
     }
 }
 
@@ -136,7 +136,7 @@ void CopyCommand(){
     else currentCMD.Length = i;
 }
 
-void CopyCommandGame(){
+void CopyCommandLine(){
     int i = 0;
     while ((currentChar != ENTER) && i != NMax) {
         currentCMD.TabWord[i] = currentChar;

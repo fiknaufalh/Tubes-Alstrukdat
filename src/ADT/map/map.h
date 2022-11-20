@@ -71,8 +71,6 @@ boolean IsMemberSB(Map M, keytype k);
 
 void PrintScoreBoard(Map M);
 
-int strLength(char* string);
-
 int MaxNameLength(Map M);
 
 Map SortSB(Map M);

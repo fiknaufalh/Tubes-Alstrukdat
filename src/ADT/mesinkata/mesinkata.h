@@ -101,7 +101,7 @@ void CopyCommand();
          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
-void CopyCommandGame();
+void CopyCommandLine();
 /* Mengakuisisi baris, menyimpan dalam currentCMD
    I.S. : currentChar adalah karakter pertama dari baris
    F.S. : currentCMD berisi baris command yang sudah diakuisisi; 
@@ -109,7 +109,7 @@ void CopyCommandGame();
          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
-void STARTCOMMANDGAME();
+void STARTCOMMANDLINE();
 /* I.S. : currentChar sembarang 
    F.S. : EndKata = true, dan currentChar = ENTER; 
           currentCMD adalah kata yang sudah diakuisisi,
