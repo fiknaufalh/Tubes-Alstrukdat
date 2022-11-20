@@ -678,3 +678,58 @@ void RESETSCOREBOARD(Map *RNGSB, Map *DinerSB, Map *HangmanSB, Map *TowerSB, Map
             break;
     }
 }
+
+void HISTORY(Queue GamesHistory, int nHistory)
+{
+    printf("Berikut adalah daftar Game yang telah dimainkan\n");
+    if (isEmpty(GamesHistory))
+    {
+        printf("Belum ada game yang dimainkan.\n");
+    }
+    else
+    {
+        int i = 1;
+        int j = IDX_TAIL(GamesHistory);
+        int lengthq = length(GamesHistory);
+
+        if (nHistory > lengthq)
+        {
+            nHistory = lengthq;
+        }
+
+        while (i <= nHistory)
+        {
+            printf("%d. %s\n", i, GamesHistory.buffer[j]);
+            j--;
+            i++;
+        }
+    }
+}
+
+void RESETHISTORY(Queue *GamesHistory)
+{
+    printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET HISTORY? (YA/TIDAK) ");
+    STARTCOMMANDLINE();
+    char* command;
+    command = WordToString(currentCMD);
+    if (compareString(command,"YA"))
+    {
+        CreateQueue(GamesHistory);
+        if (isEmpty(*GamesHistory))
+        {
+            printf("\nHistory berhasil di-reset.\n");
+        }
+        else
+        {
+            printf("\nHistory gagal di-reset.\n");
+        }
+    }
+    else if (compareString(command,"TIDAK"))
+    {
+        printf("\nReset HISTORY dibatalkan\n");
+    }
+    else
+    {
+        OTHERCMD();
+    }
+}

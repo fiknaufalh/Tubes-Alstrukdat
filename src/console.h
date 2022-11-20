@@ -66,4 +66,8 @@ void SCOREBOARD(Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB)
 
 void RESETSCOREBOARD(Map *RNGSB, Map *DinerSB, Map *HangmanSB, Map *TowerSB, Map *SnakeSB);
 
+void HISTORY(Queue GamesHistory, int nHistory);
+
+void RESETHISTORY(Queue *GamesHistory);
+
 #endif

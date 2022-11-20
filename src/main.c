@@ -274,24 +274,56 @@ int main(){
                 }    
             }
 
-            /* *** RESET SCOREBOARD *** */
+            /* *** RESET SCOREBOARD & RESET HISTORY *** */
             else if (compareString(command,"RESET"))
             {
                 ADVCOMMAND();
                 command = WordToString(currentCMD);
-                if (!compareString(command,"SCOREBOARD")) {
-                    OTHERCMD(); continue;
+                if (compareString(command,"SCOREBOARD")) {
+                    ADVCOMMAND();
+                    if (EndWord == true) 
+                    {
+                        RESETSCOREBOARD(&RNGScore,&DDScore,&HangmanScore,&TowerScore,&SnakeScore);
+                    }
+                    else
+                    {
+                        OTHERCMD(); 
+                    }    
                 }
-
-                ADVCOMMAND();
-                if (EndWord == true) 
+                else if (compareString(command,"HISTORY"))
                 {
-                    RESETSCOREBOARD(&RNGScore,&DDScore,&HangmanScore,&TowerScore,&SnakeScore);
+                    ADVCOMMAND();
+                    if (EndWord == true) 
+                    {
+                        RESETHISTORY(&GamesHistory);
+                    }
+                    else
+                    {
+                        OTHERCMD(); 
+                    }    
                 }
                 else
                 {
                     OTHERCMD(); 
-                }    
+                }
+            }
+
+            /* *** HISTORY *** */
+            else if(compareString(command,"HISTORY"))
+            {
+                ADVCOMMAND();
+                int nHistory = WordToInt(currentCMD);
+
+                ADVCOMMAND();
+                if (EndWord == true)
+                {
+                    HISTORY(GamesHistory,nHistory);
+                }
+                else
+                {
+                    OTHERCMD();
+                }
+
             }
 
             /* *** OTHER COMMAND *** */
