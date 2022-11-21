@@ -74,6 +74,37 @@ void InsertSB(Map *M, keytype k, valuetype v)
     }
 }
 
+void InsertSortedDesc(Map *M, keytype k , valuetype v)
+{
+    
+    if(!IsMemberSB(*M,k))
+    {
+        int i = 0;
+        int j = (*M).Count;
+
+        while(i < (*M).Count && (*M).Elements[i].Value > v)
+        {
+            i++;
+        }
+        
+        while(j > i)
+        {
+            (*M).Elements[j].Key = (*M).Elements[j-1].Key;
+            (*M).Elements[j].Value = (*M).Elements[j-1].Value;
+            j--;
+        }
+        
+        (*M).Elements[i].Key = k;
+        (*M).Elements[i].Value = v;
+        (*M).Count++;
+    }
+    else
+    {
+        printf("Nama sudah ada, silahkan input nama baru.\n");
+    }
+}
+
+
 void DeleteSB(Map *M, keytype k)
 /* Menghapus Elmt dari Map M. */
 /* I.S. M tidak kosong

@@ -15,7 +15,14 @@ int main()
     InsertSB(&M, "Jake", 58);
     InsertSB(&M, "ABCDEFGHJOFFFFFFjjjjjjjjjjjjjjjjjjjjjj", 40);
     InsertSB(&M, "BNMO", 19);
+
+    Map sorted = SortSB(M);
     printf("**** SCOREBOARD GAME TEST****\n");
-    PrintScoreBoard(M);
+    PrintScoreBoard(sorted);
+
+    InsertSortedDesc(&sorted, "Sun", 100);
+    InsertSortedDesc(&sorted, "San", 30);
+    InsertSortedDesc(&sorted, "Sin", 50);
+    PrintScoreBoard(sorted);
     return 0;
 }

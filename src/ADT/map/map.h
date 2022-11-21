@@ -69,6 +69,8 @@ void DeleteSB(Map *M, keytype k);
 boolean IsMemberSB(Map M, keytype k);
 /* Mengembalikan true jika k adalah member dari M */
 
+void InsertSortedDesc(Map *M, keytype k , valuetype v);
+
 void PrintScoreBoard(Map M);
 
 int MaxNameLength(Map M);
