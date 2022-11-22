@@ -91,7 +91,7 @@ void STARTBNMO(ArrayDin *GamesList)
     }
 }
 
-void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename, Map* RNGSB, Map* DinerSB, Map* HangmanSB, Map* TowerSB, Map* SnakeSB)
+void LOADBNMO(ArrayDin* GamesList, Stack* GamesHistory, char* filename, Map* RNGSB, Map* DinerSB, Map* HangmanSB, Map* TowerSB, Map* SnakeSB)
 {
     char path[50];
     stringConcat("./data/",filename,path);
@@ -121,7 +121,7 @@ void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename, Map* RNG
         {
             char *line;
             line = WordToString(currentWord);
-            enqueue(GamesHistory,line);
+            Push(GamesHistory,line);
             ADVLine();
             i++;
         }
@@ -204,7 +204,7 @@ void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename, Map* RNG
             InsertSB(SnakeSB,playername,score);
             i++;
         }
-        if(!IsEmpty(*GamesList) && !isEmpty(*GamesHistory) )
+        if(!IsEmpty(*GamesList) && !IsStackEmpty(*GamesHistory) )
         {
             printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
         }
@@ -217,7 +217,7 @@ void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename, Map* RNG
     }
 }
 
-void SAVEBNMO(ArrayDin GamesList, char* filename, Queue GamesHistory, Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB)
+void SAVEBNMO(ArrayDin GamesList, char* filename, Stack GamesHistory, Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB)
 {
     FILE * fp;
     char path[50];
@@ -233,10 +233,14 @@ void SAVEBNMO(ArrayDin GamesList, char* filename, Queue GamesHistory, Map RNGSB,
     }
 
     // History
-    fprintf(fp,"\n%d",length(GamesHistory));
-    for(int i = 0; i < length(GamesHistory);i++)
+    int countHistory = Top(GamesHistory) + 1;
+    char* val;
+    ReverseStack(&GamesHistory);
+    fprintf(fp,"\n%d",countHistory);
+    for(int i = 0; i < countHistory;i++)
     {
-        fprintf(fp,"\n%s",GamesHistory.buffer[i]);
+        Pop(&GamesHistory,&val);
+        fprintf(fp,"\n%s",val);
     }
 
     // RNGSB
@@ -371,7 +375,7 @@ void QUEUEGAME (Queue *Q, ArrayDin GameList) {
     }
 }
 
-void PLAYGAME(Queue *q, ArrayDin GameList, Queue *history){
+void PLAYGAME(Queue *q, ArrayDin GameList, Stack *history){
     if(!isEmpty(*q)){
         time_t t;
         boolean status = true;
@@ -416,21 +420,21 @@ void PLAYGAME(Queue *q, ArrayDin GameList, Queue *history){
 
         ElType val;
         dequeue(q,&val);
-        enqueue(history,val);
+        Push(history,val);
     }
     else{
         printf("Tidak ada game dalam antrian permainan Anda!\n");
     } 
 }
 
-void SKIPGAME(Queue *q, ArrayDin GameList, Queue *history, int input){    
+void SKIPGAME(Queue *q, ArrayDin GameList, Stack *history, int input){    
     if (!isEmpty(*q)){
         ElType val;
         int i = 0;
         if (input+1 <= length(*q) && input >= 0){
             while (i < input){
                 dequeue(q,&val);
-                enqueue(history, val);
+                Push(history,val);
                 i++;
             }
         }
@@ -438,7 +442,7 @@ void SKIPGAME(Queue *q, ArrayDin GameList, Queue *history, int input){
             int panjang = length(*q);
             while (i < panjang){
                 dequeue(q,&val);
-                enqueue(history, val);
+                Push(history,val);
                 i++;
             }
         }
@@ -679,34 +683,31 @@ void RESETSCOREBOARD(Map *RNGSB, Map *DinerSB, Map *HangmanSB, Map *TowerSB, Map
     }
 }
 
-void HISTORY(Queue GamesHistory, int nHistory)
+void HISTORY(Stack GamesHistory, int nHistory)
 {
     printf("Berikut adalah daftar Game yang telah dimainkan\n");
-    if (isEmpty(GamesHistory))
+    if (IsStackEmpty(GamesHistory))
     {
         printf("Belum ada game yang dimainkan.\n");
     }
     else
     {
-        int i = 1;
-        int j = IDX_TAIL(GamesHistory);
-        int lengthq = length(GamesHistory);
+        int countHistory = Top(GamesHistory) + 1;
 
-        if (nHistory > lengthq)
+        if (nHistory > countHistory)
         {
-            nHistory = lengthq;
+            nHistory = countHistory;
         }
-
-        while (i <= nHistory)
+        char *val;
+        for (int i = 0; i < nHistory; i++)
         {
-            printf("%d. %s\n", i, GamesHistory.buffer[j]);
-            j--;
-            i++;
+            printf("%d. %s\n", i + 1, InfoTop(GamesHistory));
+            Pop(&GamesHistory,&val);
         }
     }
 }
 
-void RESETHISTORY(Queue *GamesHistory)
+void RESETHISTORY(Stack *GamesHistory)
 {
     printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET HISTORY? (YA/TIDAK) ");
     STARTCOMMANDLINE();
@@ -714,8 +715,8 @@ void RESETHISTORY(Queue *GamesHistory)
     command = WordToString(currentCMD);
     if (compareString(command,"YA"))
     {
-        CreateQueue(GamesHistory);
-        if (isEmpty(*GamesHistory))
+        CreateEmptyStack(GamesHistory);
+        if (IsStackEmpty(*GamesHistory))
         {
             printf("\nHistory berhasil di-reset.\n");
         }

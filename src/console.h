@@ -6,14 +6,15 @@
 #include "ADT/mesinkata/mesinkata.h"
 #include "ADT/queue/queue.h"
 #include "ADT/map/map.h"
+#include "ADT/stack/stack.h"
 
 boolean compareString(char* str1, char* str2);
 
 void STARTBNMO(ArrayDin* GamesList);
 
-void LOADBNMO(ArrayDin* GamesList, Queue* GamesHistory, char* filename, Map* RNGSB, Map* DinerSB, Map* HangmanSB, Map* TowerSB, Map* SnakeSB);
+void LOADBNMO(ArrayDin* GamesList, Stack* GamesHistory, char* filename, Map* RNGSB, Map* DinerSB, Map* HangmanSB, Map* TowerSB, Map* SnakeSB);
 
-void SAVEBNMO(ArrayDin GamesList, char* filename, Queue GamesHistory, Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB);
+void SAVEBNMO(ArrayDin GamesList, char* filename, Stack GamesHistory, Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB);
 
 int stringLength(char* string);
 
@@ -48,9 +49,9 @@ F.S Jika input valid (input tidak melebihi banyaknya nomor urutan game),
     game akan ditambahkan ke Q dan memberikan pesan berhasil.
     Jika input tidak valid, game tidak dapat ditambahkan dan memberikan pesan error. */
 
-void PLAYGAME(Queue *q, ArrayDin GameList, Queue* history);
+void PLAYGAME(Queue *q, ArrayDin GameList, Stack* history);
 
-void SKIPGAME(Queue *q, ArrayDin GameList, Queue *history, int input);
+void SKIPGAME(Queue *q, ArrayDin GameList, Stack* history, int input);
 
 int WordToInt(Word CWord);
 
@@ -66,8 +67,8 @@ void SCOREBOARD(Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB)
 
 void RESETSCOREBOARD(Map *RNGSB, Map *DinerSB, Map *HangmanSB, Map *TowerSB, Map *SnakeSB);
 
-void HISTORY(Queue GamesHistory, int nHistory);
+void HISTORY(Stack GamesHistory, int nHistory);
 
-void RESETHISTORY(Queue *GamesHistory);
+void RESETHISTORY(Stack *GamesHistory);
 
 #endif

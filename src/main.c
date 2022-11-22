@@ -5,7 +5,7 @@ int main(){
 
     ArrayDin GamesList;
     Queue GamesQueue;
-    Queue GamesHistory;
+    Stack GamesHistory;
     Map RNGScore;
     Map DDScore;
     Map HangmanScore;
@@ -14,7 +14,7 @@ int main(){
 
     GamesList = MakeArrayDin();
     CreateQueue(&GamesQueue);
-    CreateQueue(&GamesHistory);
+    CreateEmptyStack(&GamesHistory);
     CreateScoreBoard(&RNGScore);
     CreateScoreBoard(&DDScore);
     CreateScoreBoard(&HangmanScore);
