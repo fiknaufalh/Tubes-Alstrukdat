@@ -4,8 +4,7 @@
 #include <math.h>
 #include <time.h>
 #include "console.h"
-#include "Games/DinerDash/DinerDash.h"
-#include "Games/RNG/RNG.h"
+#include "Games/games.h"
 
 boolean compareString(char *str1, char *str2)
 {
