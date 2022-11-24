@@ -6,18 +6,85 @@
 #include "console.h"
 #include "Games/games.h"
 
-void STARTBNMO(ArrayDin *GamesList)
+boolean compareString(char *str1, char *str2)
+{
+    boolean IsSame = (*str1 == *str2);
+    while ((*str1 != '\0' && *str2 != '\0') && IsSame)
+    {
+        str1++; str2++;
+        IsSame = (*str1 == *str2);
+    }
+    return IsSame;
+}
+
+int WordToInt(Word CWord)
+{
+    int result = 0;
+    for(int i = 0; i < CWord.Length;i++)
+    {
+        result = result*10 + (CWord.TabWord[i] - '0');
+    }  
+    return result;
+}
+
+char *WordToString(Word CWord)
+{
+    char *string;
+
+    string = malloc(CWord.Length * sizeof(char));
+    int i = 0;
+    while (i < CWord.Length)
+    {
+        *(string + i) = CWord.TabWord[i];
+        i++;
+    }
+    string[i] = '\0';
+    return string;
+}
+
+int stringLength(char* string)
+{
+    int length = 0;
+    while (*string != '\0')
+    {
+        length++;
+        string++;
+    }
+    return length;
+}
+
+void stringConcat(char *s1,char *s2,char *sout)
+{
+    int len,i;
+
+    len=stringLength(s1);
+    for(i = 0; i < len;i++)
+    {
+        sout[i] = s1[i];
+    }
+    for(i = 0; i < stringLength(s2); i++)
+    {
+        sout[len+i]=s2[i];
+    }
+    sout[len+i]='\0';
+}
+
+void STARTBNMO(ArrayDin *GamesList, ArrMap* ScoreBoard)
 {
     STARTWORD("./data/config.txt");
     EndWord = true;
     int TotalGame = WordToInt(currentWord);
-    int i = 1;
+    int i = 0;
     ADVLine();
-    while(i <= TotalGame)
+    while(i < TotalGame)
     {
         char *line;
         line = WordToString(currentWord);
         InsertLast(GamesList,line);
+        Map SB;
+        CreateScoreBoard(&SB);
+        SB.MapName = line;
+        SetElArrMap(ScoreBoard,i,SB);
         ADVLine();
         i++;
     }
@@ -27,7 +94,7 @@ void STARTBNMO(ArrayDin *GamesList)
     }
 }
 
-void LOADBNMO(ArrayDin* GamesList, Stack* GamesHistory, char* filename, Map* RNGSB, Map* DinerSB, Map* HangmanSB, Map* TowerSB, Map* SnakeSB)
+void LOADBNMO(ArrayDin* GamesList, Stack* GamesHistory, char* filename, ArrMap* Scoreboard)
 {
     char path[50];
     stringConcat("./data/",filename,path);
@@ -62,85 +129,35 @@ void LOADBNMO(ArrayDin* GamesList, Stack* GamesHistory, char* filename, Map* RNG
             i++;
         }
 
-        // RNGSB
-        int RNGScore = WordToInt(currentWord);
-        i = 1;
-        while (i <= RNGScore)
+        // Scoreboard
+        i = 0;
+        while(i < TotalGame)
         {
-            IgnoreEnter();
-            ADVWORD();
-            char *playername;
-            playername = WordToString(currentWord);
-            ADVWORD();
-            int score = WordToInt(currentWord);
-            InsertSB(RNGSB,playername,score);
+            int TotalScore = WordToInt(currentWord);
+            int j = 1;
+            Map SB;
+            CreateScoreBoard(&SB);
+            while(j <= TotalScore)
+            {
+                char *playername;
+
+                IgnoreEnter();
+                ADVWORD();
+                playername = WordToString(currentWord);
+                ADVWORD();
+                int score = WordToInt(currentWord);
+                InsertSB(&SB,playername,score);
+                j++;
+            }
+            char *MapName;
+            MapName = Get(*GamesList,i);
+            SB.MapName = MapName;
+            SetElArrMap(Scoreboard,i,SB);
+            ADVLine();
             i++;
         }
 
-        // DinerDash
-        ADVLine();
-        int DinerScore = WordToInt(currentWord);
-        i = 1;
-        while (i <= DinerScore)
-        {
-            IgnoreEnter();
-            ADVWORD();
-            char *playername;
-            playername = WordToString(currentWord);
-            ADVWORD();
-            int score = WordToInt(currentWord);
-            InsertSB(DinerSB,playername,score);
-            i++;
-        }
-
-        // HANGMAN
-        ADVLine();
-        int HangmanScore = WordToInt(currentWord);
-        i = 1;
-        while (i <= HangmanScore)
-        {
-            IgnoreEnter();
-            ADVWORD();
-            char *playername;
-            playername = WordToString(currentWord);
-            ADVWORD();
-            int score = WordToInt(currentWord);
-            InsertSB(HangmanSB,playername,score);
-            i++;
-        }
-
-        // TOWER OF HANOI
-        ADVLine();
-        int TowerScore = WordToInt(currentWord);
-        i = 1;
-        while (i <= TowerScore)
-        {
-            IgnoreEnter();
-            ADVWORD();
-            char *playername;
-            playername = WordToString(currentWord);
-            ADVWORD();
-            int score = WordToInt(currentWord);
-            InsertSB(TowerSB,playername,score);
-            i++;
-        }
-
-        // SNAKE ON METEOR
-        ADVLine();
-        int SnakeScore = WordToInt(currentWord);
-        i = 1;
-        while (i <= SnakeScore)
-        {
-            IgnoreEnter();
-            ADVWORD();
-            char *playername;
-            playername = WordToString(currentWord);
-            ADVWORD();
-            int score = WordToInt(currentWord);
-            InsertSB(SnakeSB,playername,score);
-            i++;
-        }
-        if(!IsEmpty(*GamesList) && !IsStackEmpty(*GamesHistory) )
+        if(!IsEmpty(*GamesList) && !IsStackEmpty(*GamesHistory) && !IsEmptyArrMap(*Scoreboard))
         {
             printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
         }
@@ -153,7 +170,7 @@ void LOADBNMO(ArrayDin* GamesList, Stack* GamesHistory, char* filename, Map* RNG
     }
 }
 
-void SAVEBNMO(ArrayDin GamesList, char* filename, Stack GamesHistory, Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB)
+void SAVEBNMO(ArrayDin GamesList, char* filename, Stack GamesHistory, ArrMap Scoreboard)
 {
     FILE * fp;
     char path[50];
@@ -179,39 +196,16 @@ void SAVEBNMO(ArrayDin GamesList, char* filename, Stack GamesHistory, Map RNGSB,
         fprintf(fp,"\n%s",val);
     }
 
-    // RNGSB
-    fprintf(fp,"\n%d",(RNGSB).Count);
-    for(int i = 0; i < (RNGSB).Count;i++)
+    // Scoreboard
+    for(int i = 0; i < NbElmtArrMap(Scoreboard);i++)
     {
-        fprintf(fp,"\n%s %d",(RNGSB).Elements[i].Key,(RNGSB).Elements[i].Value);
-    }
-
-    // DinerDash
-    fprintf(fp,"\n%d",(DinerSB).Count);
-    for(int i = 0; i < (DinerSB).Count;i++)
-    {
-        fprintf(fp,"\n%s %d",(DinerSB).Elements[i].Key,(DinerSB).Elements[i].Value);
-    }
-
-    // HANGMAN
-    fprintf(fp,"\n%d",(HangmanSB).Count);
-    for(int i = 0; i < (HangmanSB).Count;i++)
-    {
-        fprintf(fp,"\n%s %d",(HangmanSB).Elements[i].Key,(HangmanSB).Elements[i].Value);
-    }
-
-    // TOWER OF HANOI
-    fprintf(fp,"\n%d",(TowerSB).Count);
-    for(int i = 0; i < (TowerSB).Count;i++)
-    {
-        fprintf(fp,"\n%s %d",(TowerSB).Elements[i].Key,(TowerSB).Elements[i].Value);
-    }
-
-    // SNAKE ON METEOR
-    fprintf(fp,"\n%d",(SnakeSB).Count);
-    for(int i = 0; i < (SnakeSB).Count;i++)
-    {
-        fprintf(fp,"\n%s %d",(SnakeSB).Elements[i].Key,(SnakeSB).Elements[i].Value);
+        Map SB = GetElmtArrMap(Scoreboard,i);
+        int maplength = SB.Count;
+        fprintf(fp,"\n%d", maplength);
+        for(int j = 0; j < maplength ;j++)
+        {
+            fprintf(fp,"\n%s %d",SB.Elements[j].Key, SB.Elements[j].Value);
+        }
     }
 
     if (fp != NULL)
@@ -221,7 +215,7 @@ void SAVEBNMO(ArrayDin GamesList, char* filename, Stack GamesHistory, Map RNGSB,
     }
 }
 
-void CREATEGAME(ArrayDin* GamesList)
+void CREATEGAME(ArrayDin* GamesList, ArrMap* ScoreBoard)
 {
     printf("Masukkan nama game yang akan ditambahkan: ");
     STARTCOMMANDLINE();
@@ -229,6 +223,10 @@ void CREATEGAME(ArrayDin* GamesList)
     if (SearchArrayDin(*GamesList,gameName) == -1)
     {
         InsertLast(GamesList, gameName);
+        Map SB;
+        CreateScoreBoard(&SB);
+        SB.MapName = gameName;
+        SetElArrMap(ScoreBoard, NbElmtArrMap(*ScoreBoard), SB);
         printf("Game %s berhasil ditambahkan.\n",gameName);
     }
     else
@@ -247,7 +245,7 @@ void LISTGAME (ArrayDin GameList) {
     printf("\n");
 }
 
-void DELETEGAME (ArrayDin *GameList, Queue Q) {
+void DELETEGAME (ArrayDin *GameList, Queue Q, ArrMap* ScoreBoard) {
     LISTGAME(*GameList);
     printf("\n");
     printf("Masukkan nomor game yang akan dihapus: ");
@@ -275,9 +273,12 @@ void DELETEGAME (ArrayDin *GameList, Queue Q) {
             i = input-1;
             while (i<(*GameList).Neff) {
                 (*GameList).A[i] = (*GameList).A[i+1];
+                (*ScoreBoard).TMap[i] = (*ScoreBoard).TMap[i+1];
                 i++;  
             } 
             (*GameList).Neff--;
+            (*ScoreBoard).Neff--;
+
             printf("Game berhasil dihapus");
         }
     }
@@ -417,205 +418,103 @@ void OTHERCMD(){
     printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
 }
 
-void SCOREBOARD(Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB)
+void SCOREBOARD(ArrMap ScoreBoard)
 {
-    printf("**** SCOREBOARD GAME RNG ****\n");
-    PrintScoreBoard(SortSB(RNGSB));
-    printf("\n");
-    printf("**** SCOREBOARD GAME Diner Dash ****\n");
-    PrintScoreBoard(SortSB(DinerSB));
-    printf("\n");
-    printf("**** SCOREBOARD GAME HANGMAN ****\n");
-    PrintScoreBoard(SortSB(HangmanSB));
-    printf("\n");
-    printf("**** SCOREBOARD GAME Tower OF HANOI ****\n");
-    PrintScoreBoard(SortSB(TowerSB));
-    printf("\n");
-    printf("**** SCOREBOARD GAME SNAKE ON METEOR ****\n");
-    PrintScoreBoard(SortSB(SnakeSB));
-    printf("\n");
+    int nbmap = NbElmtArrMap(ScoreBoard);
+    int i = 0;
+
+    while (i < nbmap)
+    {
+        Map SB;
+        CreateScoreBoard(&SB);
+        SB = GetElmtArrMap(ScoreBoard, i);
+        printf("\n**** SCOREBOARD GAME %s ****\n", SB.MapName);
+        PrintScoreBoard(SortSB(SB));
+        i++;
+    }
 }
 
-void RESETSCOREBOARD(Map *RNGSB, Map *DinerSB, Map *HangmanSB, Map *TowerSB, Map *SnakeSB)
+void RESETSCOREBOARD(ArrMap *ScoreBoard)
 {
+    int nbmap = NbElmtArrMap(*ScoreBoard);
     printf("DAFTAR SCOREBOARD:\n");
     printf("0. All\n");
-    printf("1. RNG\n");
-    printf("2. Diner DASH\n");
-    printf("3. HANGMAN\n");
-    printf("4. TOWER OF HANOI\n");
-    printf("5. SNAKE ON METEOR\n\n");
+    for (int i = 0; i < nbmap; i++)
+    {
+        printf("%d. %s\n", i + 1, GetElmtArrMap(*ScoreBoard, i).MapName);
+    }
+
     char* command;
     printf("SCOREBOARD YANG INGIN DIHAPUS: ");
     
     STARTCOMMANDLINE();
     int input = WordToInt(currentCMD);
 
-    switch(input)
+    while (input < 0 || input > nbmap)
     {
-        case 0 :
+        printf("Input tidak valid, silahkan masukkan input yang valid.\n\n");
+        printf("SCOREBOARD YANG INGIN DIHAPUS: ");
+        STARTCOMMANDLINE();
+        input = WordToInt(currentCMD);
+    }
+
+    if (input == 0)
+    {
+        printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ALL (YA/TIDAK)? ");
+        STARTCOMMANDLINE();
+        command = WordToString(currentCMD);
+        while (compareString(command, "YA") == false && compareString(command, "TIDAK") == false)
+        {
+            printf("Input tidak valid, silahkan masukkan input yang valid.\n");
             printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ALL (YA/TIDAK)? ");
             STARTCOMMANDLINE();
             command = WordToString(currentCMD);
-            if (compareString(command,"YA"))
-            { 
-                CreateScoreBoard(RNGSB);
-                CreateScoreBoard(DinerSB);
-                CreateScoreBoard(HangmanSB);
-                CreateScoreBoard(TowerSB);
-                CreateScoreBoard(SnakeSB);
-                if (IsEmptySB(*RNGSB) && IsEmptySB(*DinerSB) && IsEmptySB(*HangmanSB) && IsEmptySB(*TowerSB) && IsEmptySB(*SnakeSB))
-                {
-                    printf("\nScoreboard berhasil di-reset.\n");
-                }
-                else
-                {
-                    printf("\nScoreboard gagal di-reset.\n");
-                }
-            }
-            else if (compareString(command,"TIDAK"))
-            {
-                printf("\nReset SCOREBOARD ALL dibatalkan\n");
-            }
-            else
-            {
-                OTHERCMD();
-            }
-            break;
+        }
 
-        case 1 :
-            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD RNG (YA/TIDAK)? ");
+        if (compareString(command, "YA") == true)
+        {
+            int i = 0;
+            while (i < nbmap)
+            {
+                Map SB;
+                SB = GetElmtArrMap(*ScoreBoard, i);
+                CreateScoreBoard(&SB);
+                SetElArrMap(ScoreBoard, i, SB);
+                (*ScoreBoard).Neff--;
+                i++;
+            }
+            printf("\nScoreboard berhasil di-reset.\n");
+        }
+        else
+        {
+            printf("\nScoreboard gagal di-reset.\n");
+        }  
+    }
+    else
+    {
+        printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ALL (YA/TIDAK)? ");
+        STARTCOMMANDLINE();
+        command = WordToString(currentCMD);
+        while (compareString(command, "YA") == false && compareString(command, "TIDAK") == false)
+        {
+            printf("Input tidak valid, silahkan masukkan input yang valid.\n");
+            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ALL (YA/TIDAK)? ");
             STARTCOMMANDLINE();
             command = WordToString(currentCMD);
-            if (compareString(command,"YA"))
-            {
-                CreateScoreBoard(RNGSB);
-                if (IsEmptySB(*RNGSB))
-                {
-                    printf("\nScoreboard berhasil di-reset.\n");
-                }
-                else
-                {
-                    printf("\nScoreboard gagal di-reset.\n");
-                }
-            }
-            else if (compareString(command,"TIDAK"))
-            {
-                printf("\nReset SCOREBOARD RNG dibatalkan\n");
-            }
-            else
-            {
-                OTHERCMD();
-            }
-            break;
-
-        case 2 :
-            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD Diner DASH (YA/TIDAK)? ");
-            STARTCOMMANDLINE();
-            command = WordToString(currentCMD);
-            if (compareString(command,"YA"))
-            {
-                CreateScoreBoard(DinerSB);
-                if (IsEmptySB(*DinerSB))
-                {
-                    printf("\nScoreboard berhasil di-reset.\n");
-                }
-                else
-                {
-                    printf("\nScoreboard gagal di-reset.\n");
-                }
-            }
-            else if (compareString(command,"TIDAK"))
-            {
-                printf("\nReset SCOREBOARD Diner DASH dibatalkan\n");
-            }
-            else
-            {
-                OTHERCMD();
-            }
-            break;
-
-        case 3 :
-            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD HANGMAN (YA/TIDAK)? ");
-            STARTCOMMANDLINE();
-            command = WordToString(currentCMD);
-            if (compareString(command,"YA"))
-            { 
-                CreateScoreBoard(HangmanSB);
-                if (IsEmptySB(*HangmanSB))
-                {
-                    printf("\nScoreboard berhasil di-reset.\n");
-                }
-                else
-                {
-                    printf("\nScoreboard gagal di-reset.\n");
-                }
-            }
-            else if (compareString(command,"TIDAK"))
-            {
-                printf("\nReset SCOREBOARD HANGMAN dibatalkan\n");
-            }
-            else
-            {
-                OTHERCMD();
-            }
-            break;
-
-        case 4 :
-            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD TOWER OF HANOI (YA/TIDAK)? ");
-            STARTCOMMANDLINE();
-            command = WordToString(currentCMD);
-            if (compareString(command,"YA"))
-            {
-                CreateScoreBoard(TowerSB);
-                if (IsEmptySB(*TowerSB))
-                {
-                    printf("\nScoreboard berhasil di-reset.\n");
-                }
-                else
-                {
-                    printf("\nScoreboard gagal di-reset.\n");
-                }
-            }
-            else if (compareString(command,"TIDAK"))
-            {
-                printf("\nReset SCOREBOARD TOWER OF HANOI dibatalkan\n");
-            }
-            else
-            {
-                OTHERCMD();
-            }
-            break;
-
-        case 5 :
-            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD SNAKE ON METEOR (YA/TIDAK)? ");
-            STARTCOMMANDLINE();
-            command = WordToString(currentCMD);
-            if (compareString(command,"YA"))
-            {
-                CreateScoreBoard(SnakeSB);
-                if (IsEmptySB(*SnakeSB))
-                {
-                    printf("\nScoreboard berhasil di-reset.\n");
-                }
-                else
-                {
-                    printf("\nScoreboard gagal di-reset.\n");
-                }
-            }
-            else if (compareString(command,"TIDAK"))
-            {
-                printf("\nReset SCOREBOARD SNAKE ON METEOR dibatalkan\n");
-            }
-            else
-            {
-                OTHERCMD();
-            }
-            break;
-
-        default :
-            printf("Input tidak dikenali.\n");
-            break;
+        }
+        if (compareString(command, "YA") == true)
+        {
+            Map SB;
+            SB = GetElmtArrMap(*ScoreBoard, input-1);
+            CreateScoreBoard(&SB);
+            SetElArrMap(ScoreBoard, input-1, SB);
+            (*ScoreBoard).Neff--;
+            printf("\nScoreboard berhasil di-reset.\n");
+        }
+        else
+        {
+            printf("\nScoreboard gagal di-reset.\n");
+        }  
     }
 }
 

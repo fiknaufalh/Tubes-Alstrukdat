@@ -7,14 +7,21 @@
 #include "ADT/queue/queue.h"
 #include "ADT/map/map.h"
 #include "ADT/stack/stack.h"
+#include "ADT/arrayofmap/arrmap.h"
 
-void STARTBNMO(ArrayDin* GamesList);
+boolean compareString(char* str1, char* str2);
 
-void LOADBNMO(ArrayDin* GamesList, Stack* GamesHistory, char* filename, Map* RNGSB, Map* DinerSB, Map* HangmanSB, Map* TowerSB, Map* SnakeSB);
+void STARTBNMO(ArrayDin* GamesList, ArrMap* ScoreBoard);
 
-void SAVEBNMO(ArrayDin GamesList, char* filename, Stack GamesHistory, Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB);
+void LOADBNMO(ArrayDin* GamesList, Stack* GamesHistory, char* filename, ArrMap* Scoreboard);
 
-void CREATEGAME(ArrayDin* GamesList);
+void SAVEBNMO(ArrayDin GamesList, char* filename, Stack GamesHistory, ArrMap Scoreboard);
+
+int stringLength(char* string);
+
+void stringConcat(char *s1,char *s2,char *sout);
+
+void CREATEGAME(ArrayDin* GamesList, ArrMap* ScoreBoard);
 
 void LISTGAME (ArrayDin GameList);
 /* Prosedur untuk menampilkan daftar game yang disediakan oleh sistem. 
@@ -22,7 +29,7 @@ void LISTGAME (ArrayDin GameList);
 I.S GameList terdefinisi, GameList tidak kosong, dan GameList mungkin penuh. 
 F.S Output berupa daftar game yang tersedia. */
 
-void DELETEGAME (ArrayDin *GameList, Queue Q);
+void DELETEGAME (ArrayDin *GameList, Queue Q, ArrMap* ScoreBoard);
 /* Prosedur yang menghapus game dari daftar game. 
 GameList merupakan daftar game dan Q merupakan antrian game.
 
@@ -53,9 +60,9 @@ void QUIT(Queue *Q);
 
 void OTHERCMD();
 
-void SCOREBOARD(Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB);
+void SCOREBOARD(ArrMap ScoreBoard);
 
-void RESETSCOREBOARD(Map *RNGSB, Map *DinerSB, Map *HangmanSB, Map *TowerSB, Map *SnakeSB);
+void RESETSCOREBOARD(ArrMap *ScoreBoard);
 
 void HISTORY(Stack GamesHistory, int nHistory);
 

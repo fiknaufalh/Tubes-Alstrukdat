@@ -6,22 +6,13 @@ int main(){
     ArrayDin GamesList;
     Queue GamesQueue;
     Stack GamesHistory;
-    Map RNGScore;
-    Map DDScore;
-    Map HangmanScore;
-    Map TowerScore;
-    Map SnakeScore;
+    ArrMap ScoreBoard;
 
     GamesList = MakeArrayDin();
     CreateQueue(&GamesQueue);
     CreateEmptyStack(&GamesHistory);
-    CreateScoreBoard(&RNGScore);
-    CreateScoreBoard(&DDScore);
-    CreateScoreBoard(&HangmanScore);
-    CreateScoreBoard(&TowerScore);
-    CreateScoreBoard(&SnakeScore);
-    
-
+    MakeEmptyArrMap(&ScoreBoard);
+   
     boolean EndProgram = false;
     char* command;
 
@@ -53,7 +44,7 @@ int main(){
                 ADVCOMMAND();
                 if (EndWord == true) 
                 {
-                    STARTBNMO(&GamesList);
+                    STARTBNMO(&GamesList, &ScoreBoard);
                 }
                 else
                 {
@@ -71,7 +62,7 @@ int main(){
                 if (EndWord == true) 
                 {
                     // LOADBNMO(&GamesList,filename);
-                    LOADBNMO(&GamesList,&GamesHistory,filename,&RNGScore,&DDScore,&HangmanScore,&TowerScore,&SnakeScore);
+                    LOADBNMO(&GamesList,&GamesHistory,filename,&ScoreBoard);
                 }
                 else
                 {
@@ -104,7 +95,7 @@ int main(){
                 ADVCOMMAND();
                 if (EndWord == true) 
                 {
-                    CREATEGAME(&GamesList);
+                    CREATEGAME(&GamesList,&ScoreBoard);
                 }
                 else
                 {
@@ -143,7 +134,7 @@ int main(){
                 ADVCOMMAND();
                 if (EndWord == true) 
                 {
-                    DELETEGAME(&GamesList,GamesQueue);
+                    DELETEGAME(&GamesList,GamesQueue, &ScoreBoard);
                 }
                 else
                 {
@@ -237,7 +228,7 @@ int main(){
                 ADVCOMMAND();
                 if (EndWord == true) 
                 {
-                    SAVEBNMO(GamesList, filename, GamesHistory, RNGScore, DDScore, HangmanScore, TowerScore, SnakeScore);
+                    SAVEBNMO(GamesList, filename, GamesHistory, ScoreBoard);
                 }
                 else
                 {
@@ -266,7 +257,7 @@ int main(){
                 ADVCOMMAND();
                 if (EndWord == true) 
                 {
-                    SCOREBOARD(RNGScore,DDScore,HangmanScore,TowerScore,SnakeScore);
+                    SCOREBOARD(ScoreBoard);
                 }
                 else
                 {
@@ -283,7 +274,7 @@ int main(){
                     ADVCOMMAND();
                     if (EndWord == true) 
                     {
-                        RESETSCOREBOARD(&RNGScore,&DDScore,&HangmanScore,&TowerScore,&SnakeScore);
+                        RESETSCOREBOARD(&ScoreBoard);
                     }
                     else
                     {
