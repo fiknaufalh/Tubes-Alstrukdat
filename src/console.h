@@ -9,17 +9,11 @@
 #include "ADT/stack/stack.h"
 #include "ADT/arrayofmap/arrmap.h"
 
-boolean compareString(char* str1, char* str2);
-
 void STARTBNMO(ArrayDin* GamesList, ArrMap* ScoreBoard);
 
 void LOADBNMO(ArrayDin* GamesList, Stack* GamesHistory, char* filename, ArrMap* Scoreboard);
 
 void SAVEBNMO(ArrayDin GamesList, char* filename, Stack GamesHistory, ArrMap Scoreboard);
-
-int stringLength(char* string);
-
-void stringConcat(char *s1,char *s2,char *sout);
 
 void CREATEGAME(ArrayDin* GamesList, ArrMap* ScoreBoard);
 

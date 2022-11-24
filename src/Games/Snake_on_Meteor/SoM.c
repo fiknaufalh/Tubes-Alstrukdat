@@ -68,8 +68,8 @@ void addSnakeTail(List *Snake, int nExtraTail)
         CreatePoint(&extraTail, extraTailX, extraTailY);
         InsVLast(Snake, Length(*Snake), extraTail);
         i++;
-        printf("Panjang snake: %d\n", Length(*Snake));
-        PrintPoint(extraTail);
+        // printf("Panjang snake: %d\n", Length(*Snake));
+        // PrintPoint(extraTail);
     }
 }
 
@@ -126,7 +126,7 @@ void Move(List* Snake)
                     Pos(P) = Pos(Prev(P));
                     P = Prev(P);
                 }
-                OrdinatN(First(*Snake))--;
+                OrdinatN(First(*Snake)) = (OrdinatN(First(*Snake)) - 1 + 5) % 5;
             }
             else printf("Anda tidak dapat bergerak ke tubuh anda sendiri!\nSilahkan input command yang lain\n\n");
         }
@@ -140,7 +140,7 @@ void Move(List* Snake)
                     Pos(P) = Pos(Prev(P));
                     P = Prev(P);
                 }
-                AbsisN(First(*Snake))--;
+                AbsisN(First(*Snake)) = (AbsisN(First(*Snake)) - 1 + 5)% 5;
             }
             else printf("Anda tidak dapat bergerak ke tubuh anda sendiri!\nSilahkan input command yang lain\n\n");
         }
@@ -154,7 +154,7 @@ void Move(List* Snake)
                     Pos(P) = Pos(Prev(P));
                     P = Prev(P);
                 }
-                OrdinatN(First(*Snake))++;
+                OrdinatN(First(*Snake)) = (OrdinatN(First(*Snake)) + 1) % 5;
             }
             else printf("Anda tidak dapat bergerak ke tubuh anda sendiri!\nSilahkan input command yang lain\n\n");
         }
@@ -168,7 +168,7 @@ void Move(List* Snake)
                     Pos(P) = Pos(Prev(P));
                     P = Prev(P);
                 }
-                AbsisN(First(*Snake))++;
+                AbsisN(First(*Snake)) = (AbsisN(First(*Snake)) + 1) % 5;
             }
             else printf("Anda tidak dapat bergerak ke tubuh anda sendiri!\nSilahkan input command yang lain\n\n");
         }
@@ -177,8 +177,6 @@ void Move(List* Snake)
             printf("Command tidak valid! Silahkan input command menggunakan huruf w/a/s/d\n\n");
         }
     }
-
-
 }
 
 boolean isMoveHitBody(List Snake, char* cmd)
