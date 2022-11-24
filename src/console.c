@@ -477,7 +477,6 @@ void RESETSCOREBOARD(ArrMap *ScoreBoard)
             while (i < nbmap)
             {
                 Map SB;
-                CreateScoreBoard(&SB);
                 SB = GetElmtArrMap(*ScoreBoard, i);
                 CreateScoreBoard(&SB);
                 SetElArrMap(ScoreBoard, i, SB);
@@ -506,8 +505,8 @@ void RESETSCOREBOARD(ArrMap *ScoreBoard)
         if (compareString(command, "YA") == true)
         {
             Map SB;
+            SB = GetElmtArrMap(*ScoreBoard, input-1);
             CreateScoreBoard(&SB);
-            SB.MapName = GetElmtArrMap(*ScoreBoard, input-1).MapName;
             SetElArrMap(ScoreBoard, input-1, SB);
             (*ScoreBoard).Neff--;
             printf("\nScoreboard berhasil di-reset.\n");
