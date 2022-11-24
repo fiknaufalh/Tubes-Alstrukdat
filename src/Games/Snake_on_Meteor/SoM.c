@@ -86,8 +86,14 @@ void PrintMap(List Snake)
         {
             Point checkPos;
             CreatePoint(&checkPos,col,row);
+            /* checkPos sebagai variabel Point untuk pengecekan
+               setiap koordinat pada kotak 5x5 */
 
             address check = SearchPos(Snake,checkPos);
+            /* check adalah hasil pencarian apakah koordinat checkPos
+               terdapat pada Snake. Jika ada akan menghasilkan address
+               elemen/node yang sama koordinatnya dengan checkPos.
+               Jika tidak ada, maka menghasilkan Nil. */
 
             if (check != Nil)
             {
@@ -116,6 +122,7 @@ void Move(List* Snake)
     }
     else
     {
+        /* Pergerakan ke Atas */
         if (compareString(cmd,"w") || compareString(cmd,"W"))
         {
             if (!isMoveHitBody(*Snake,cmd))
@@ -130,6 +137,8 @@ void Move(List* Snake)
             }
             else printf("Anda tidak dapat bergerak ke tubuh anda sendiri!\nSilahkan input command yang lain\n\n");
         }
+
+        /* Pergerakan ke Kiri */
         else if (compareString(cmd,"a") || compareString(cmd,"A"))
         {
             if (!isMoveHitBody(*Snake,cmd))
@@ -144,6 +153,8 @@ void Move(List* Snake)
             }
             else printf("Anda tidak dapat bergerak ke tubuh anda sendiri!\nSilahkan input command yang lain\n\n");
         }
+
+        /* Pergerakan ke Bawah */
         else if (compareString(cmd,"s") || compareString(cmd,"S"))
         {
             if (!isMoveHitBody(*Snake,cmd))
@@ -158,6 +169,8 @@ void Move(List* Snake)
             }
             else printf("Anda tidak dapat bergerak ke tubuh anda sendiri!\nSilahkan input command yang lain\n\n");
         }
+
+        /* Pergerakan ke Kanan */
         else if (compareString(cmd,"d") || compareString(cmd,"D"))
         {
             if (!isMoveHitBody(*Snake,cmd))
@@ -199,7 +212,6 @@ boolean isMoveHitBody(List Snake, char* cmd)
 
     return (EQ(Head, FirstBody));
 }
-
 
 int main(){
 

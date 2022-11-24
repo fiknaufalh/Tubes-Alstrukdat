@@ -9,16 +9,28 @@
 
 #define minSize 0
 #define maxSize 4
+// Macro untuk batas ukuran/dimensi pada peta permainan
 
 #define AbsisN(Elmt) (Elmt)->position.X
 #define OrdinatN(Elmt) (Elmt)->position.Y
+// Macro untuk akses X dan Y dari suatu node (head/body/tail) dalam List Snake
 
 void SoM();
+// Program games utama Snake on Meteor
+
 Point generateHeadPosition();
+// Fungsi yang men-generate posisi Head berupa Point secara random
+
 void addSnakeTail(List *Snake, int nExtraTail);
+// Prosedur untuk menambahkan ekor sebanyak nExtraTail
+
 void PrintMap(List Snake);
+// Prosedur untuk mencetak map permainan
+
 void Move(List *Snake);
+// Prosedur untuk pergerakan Snake
+
 boolean isMoveHitBody(List Snake, char* cmd);
-// gcc ../../ADT/point/point.c ../../ADT/linkedlist/listdp.c ../../ADT/mesinkata/mesinkata.c ../../ADT/mesinkarakter/mesinkarakter.c SoM.c -o main
+// Fungsi yang menghasilkan true jika pergerakan mengenai badan (handler)
 
 #endif
