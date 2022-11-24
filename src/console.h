@@ -8,17 +8,11 @@
 #include "ADT/map/map.h"
 #include "ADT/stack/stack.h"
 
-boolean compareString(char* str1, char* str2);
-
 void STARTBNMO(ArrayDin* GamesList);
 
 void LOADBNMO(ArrayDin* GamesList, Stack* GamesHistory, char* filename, Map* RNGSB, Map* DinerSB, Map* HangmanSB, Map* TowerSB, Map* SnakeSB);
 
 void SAVEBNMO(ArrayDin GamesList, char* filename, Stack GamesHistory, Map RNGSB, Map DinerSB, Map HangmanSB, Map TowerSB, Map SnakeSB);
-
-int stringLength(char* string);
-
-void stringConcat(char *s1,char *s2,char *sout);
 
 void CREATEGAME(ArrayDin* GamesList);
 
@@ -52,10 +46,6 @@ F.S Jika input valid (input tidak melebihi banyaknya nomor urutan game),
 void PLAYGAME(Queue *q, ArrayDin GameList, Stack* history);
 
 void SKIPGAME(Queue *q, ArrayDin GameList, Stack* history, int input);
-
-int WordToInt(Word CWord);
-
-char *WordToString(Word CWord);
 
 void HELP();
 

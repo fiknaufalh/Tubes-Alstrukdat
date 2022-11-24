@@ -115,4 +115,16 @@ void STARTCOMMANDLINE();
           currentCMD adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
+/* Operasi String */
+boolean compareString(char* str1, char* str2);
+
+int WordToInt(Word CWord);
+
+char *WordToString(Word CWord);
+
+int stringLength(char* string);
+
+void stringConcat(char *s1,char *s2,char *sout);
+
+
 #endif

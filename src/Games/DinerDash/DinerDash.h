@@ -3,7 +3,7 @@
 
 #include "../../ADT/queueInt/queueInt.h"
 #include "../../ADT/arraydinInt/arraydinInt.h"
-#include "../../console.h"
+#include "../../ADT/mesinkata/mesinkata.h"
 
 void header1(QueueInt makan, QueueInt durasi, QueueInt tahan, QueueInt harga);
 

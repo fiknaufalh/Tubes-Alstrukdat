@@ -1,6 +1,8 @@
 #ifndef RNG_H
 #define RNG_H
 
+#include "../../ADT/mesinkata/mesinkata.h"
+
 int randomnumber();
 /*
 Fungsi yang mengenerate angka acak dan mengembalikan angka tersebut

@@ -6,69 +6,6 @@
 #include "console.h"
 #include "Games/games.h"
 
-boolean compareString(char *str1, char *str2)
-{
-    boolean IsSame = (*str1 == *str2);
-    while ((*str1 != '\0' && *str2 != '\0') && IsSame)
-    {
-        str1++; str2++;
-        IsSame = (*str1 == *str2);
-    }
-    return IsSame;
-}
-
-int WordToInt(Word CWord)
-{
-    int result = 0;
-    for(int i = 0; i < CWord.Length;i++)
-    {
-        result = result*10 + (CWord.TabWord[i] - '0');
-    }  
-    return result;
-}
-
-char *WordToString(Word CWord)
-{
-    char *string;
-
-    string = malloc(CWord.Length * sizeof(char));
-    int i = 0;
-    while (i < CWord.Length)
-    {
-        *(string + i) = CWord.TabWord[i];
-        i++;
-    }
-    string[i] = '\0';
-    return string;
-}
-
-int stringLength(char* string)
-{
-    int length = 0;
-    while (*string != '\0')
-    {
-        length++;
-        string++;
-    }
-    return length;
-}
-
-void stringConcat(char *s1,char *s2,char *sout)
-{
-    int len,i;
-
-    len=stringLength(s1);
-    for(i = 0; i < len;i++)
-    {
-        sout[i] = s1[i];
-    }
-    for(i = 0; i < stringLength(s2); i++)
-    {
-        sout[len+i]=s2[i];
-    }
-    sout[len+i]='\0';
-}
-
 void STARTBNMO(ArrayDin *GamesList)
 {
     STARTWORD("./data/config.txt");
