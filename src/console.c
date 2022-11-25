@@ -66,6 +66,7 @@ void LOADBNMO(ArrayDin* GamesList, Stack* GamesHistory, char* filename, ArrMap* 
             ADVLine();
             i++;
         }
+        ReverseStack(GamesHistory);
 
         // Scoreboard
         i = 0;
@@ -126,7 +127,6 @@ void SAVEBNMO(ArrayDin GamesList, char* filename, Stack GamesHistory, ArrMap Sco
     // History
     int countHistory = Top(GamesHistory) + 1;
     char* val;
-    ReverseStack(&GamesHistory);
     fprintf(fp,"\n%d",countHistory);
     for(int i = 0; i < countHistory;i++)
     {
@@ -183,7 +183,7 @@ void LISTGAME (ArrayDin GameList) {
     printf("\n");
 }
 
-void DELETEGAME (ArrayDin *GameList, Queue Q, ArrMap* ScoreBoard) {
+void DELETEGAME (ArrayDin *GameList, Queue Q, ArrMap* ScoreBoard, Stack* GamesHistory) {
     LISTGAME(*GameList);
     printf("\n");
     printf("Masukkan nomor game yang akan dihapus: ");
@@ -209,6 +209,25 @@ void DELETEGAME (ArrayDin *GameList, Queue Q, ArrMap* ScoreBoard) {
         } else {
             int i;
             i = input-1;
+
+            // Hapus game dari History
+            Stack temp;
+            CreateEmptyStack(&temp);
+            int stacklength = (*GamesHistory).TOP + 1;
+            for (int j = 0;j < stacklength;j++)
+            {
+                char *val;
+                
+                Pop(GamesHistory,&val);
+                if (!(compareString(val,(*GameList).A[i])))
+                {
+                    Push(&temp,val);
+                }
+            }
+            ReverseStack(&temp);
+            (*GamesHistory) = temp;
+
+            // Hapus game dari scoreboard & listgame
             while (i<(*GameList).Neff) {
                 (*GameList).A[i] = (*GameList).A[i+1];
                 (*ScoreBoard).TMap[i] = (*ScoreBoard).TMap[i+1];
@@ -216,7 +235,6 @@ void DELETEGAME (ArrayDin *GameList, Queue Q, ArrMap* ScoreBoard) {
             } 
             (*GameList).Neff--;
             (*ScoreBoard).Neff--;
-
             printf("Game berhasil dihapus");
         }
     }

@@ -134,7 +134,7 @@ int main(){
                 ADVCOMMAND();
                 if (EndWord == true) 
                 {
-                    DELETEGAME(&GamesList,GamesQueue, &ScoreBoard);
+                    DELETEGAME(&GamesList,GamesQueue, &ScoreBoard, &GamesHistory);
                 }
                 else
                 {
@@ -303,12 +303,19 @@ int main(){
             else if(compareString(command,"HISTORY"))
             {
                 ADVCOMMAND();
-                int nHistory = WordToInt(currentCMD);
-
-                ADVCOMMAND();
-                if (EndWord == true)
+                if (!EndWord)
                 {
-                    HISTORY(GamesHistory,nHistory);
+                    int nHistory = WordToInt(currentCMD);
+
+                    ADVCOMMAND();
+                    if (EndWord == true)
+                    {
+                        HISTORY(GamesHistory,nHistory);
+                    }
+                    else
+                    {
+                        OTHERCMD(); 
+                    }
                 }
                 else
                 {

@@ -23,7 +23,7 @@ void LISTGAME (ArrayDin GameList);
 I.S GameList terdefinisi, GameList tidak kosong, dan GameList mungkin penuh. 
 F.S Output berupa daftar game yang tersedia. */
 
-void DELETEGAME (ArrayDin *GameList, Queue Q, ArrMap* ScoreBoard);
+void DELETEGAME (ArrayDin *GameList, Queue Q, ArrMap* ScoreBoard, Stack* GamesHistory);
 /* Prosedur yang menghapus game dari daftar game. 
 GameList merupakan daftar game dan Q merupakan antrian game.
 
