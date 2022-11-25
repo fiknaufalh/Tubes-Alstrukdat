@@ -5,7 +5,7 @@
 
 void SoM()
 {
-    printf("Selamat Datang di Snake on Meteor!\n");
+    printf("\nSelamat Datang di Snake on Meteor!\n");
     printf("Men-generate peta, snake, dan makanan...\n");
     printf("Berhasil digenerate!\n\n");
 
@@ -83,8 +83,8 @@ void addSnakeTail(List *Snake, int nExtraTail)
         CreatePoint(&extraTail, extraTailX, extraTailY);
         InsVLast(Snake, Length(*Snake), extraTail);
         i++;
-        printf("Panjang snake: %d\n", Length(*Snake));
-        PrintPoint(extraTail);
+        // printf("Panjang snake: %d\n", Length(*Snake));
+        // PrintPoint(extraTail);
     }
 }
 
