@@ -24,6 +24,18 @@ Point generateHeadPosition();
 void addSnakeTail(List *Snake, int nExtraTail);
 // Prosedur untuk menambahkan ekor sebanyak nExtraTail
 
+boolean canAddLeft (List Snake);
+// Fungsi untuk mengecek apakah dapat dilakukan penambahan ekor ke kiri
+
+boolean canAddAbove (List Snake);
+// Fungsi untuk mengecek apakah dapat dilakukan penambahan ekor ke atas
+
+boolean canAddBelow (List Snake);
+// Fungsi untuk mengecek apakah dapat dilakukan penambahan ekor ke bawah
+
+boolean canAddRight (List Snake);
+// Fungsi untuk mengecek apakah dapat dilakukan penambahan ekor ke kanan
+
 void PrintMap(List Snake);
 // Prosedur untuk mencetak map permainan
 

@@ -50,27 +50,86 @@ void addSnakeTail(List *Snake, int nExtraTail)
 
         Point extraTail;
         int extraTailX, extraTailY;
-        if ((AbsisN(Last(*Snake)) == minSize && OrdinatN(Last(*Snake)) == minSize) || EQ(zero,Pos(First(*Snake))))
-        {
-            extraTailX = AbsisN(Last(*Snake));
-            extraTailY = OrdinatN(Last(*Snake)) + 1;
-        }
-        else if (AbsisN(Last(*Snake)) == minSize && (OrdinatN(Last(*Snake)) + 1 != OrdinatN(First(*Snake))))
-        {
-            extraTailX = AbsisN(Last(*Snake));
-            extraTailY = OrdinatN(Last(*Snake)) - 1;
-        }
-        else
+        
+        if (canAddLeft(*Snake))
         {
             extraTailX = AbsisN(Last(*Snake)) - 1;
             extraTailY = OrdinatN(Last(*Snake));
         }
+        else if (canAddAbove(*Snake))
+        {
+            extraTailX = AbsisN(Last(*Snake));
+            extraTailY = OrdinatN(Last(*Snake)) - 1;
+        }
+        else if (canAddBelow(*Snake))
+        {
+            extraTailX = AbsisN(Last(*Snake));
+            extraTailY = OrdinatN(Last(*Snake)) + 1;
+        }
+        else if (canAddRight(*Snake))
+        {
+            extraTailX = AbsisN(Last(*Snake)) + 1;
+            extraTailY = OrdinatN(Last(*Snake));
+        }
+        else
+        {
+            // Game kalah => implementasi pada kondisi game kalah
+            // implementasi di bawah cuma sementara, 
+            // ubah sesuai implementasi game kalah aja
+            printf("Game Over!\n");
+            break;
+        }
+
         CreatePoint(&extraTail, extraTailX, extraTailY);
         InsVLast(Snake, Length(*Snake), extraTail);
         i++;
-        // printf("Panjang snake: %d\n", Length(*Snake));
-        // PrintPoint(extraTail);
+        printf("Panjang snake: %d\n", Length(*Snake));
+        PrintPoint(extraTail);
     }
+}
+
+boolean canAddLeft (List Snake)
+{
+    Point Tail = Pos(Last(Snake));
+
+    Point LeftTail;
+    CreatePoint(&LeftTail, Tail.X - 1, Tail.Y);
+    address checkLeft = SearchPos(Snake, LeftTail);
+
+    return (checkLeft == Nil && Tail.X != minSize);
+}
+
+boolean canAddAbove (List Snake)
+{
+    Point Tail = Pos(Last(Snake));
+
+    Point AboveTail;
+    CreatePoint(&AboveTail, Tail.X, Tail.Y - 1);
+    address checkAbove = SearchPos(Snake, AboveTail);
+
+    return (checkAbove == Nil && Tail.Y != minSize);
+}
+
+boolean canAddBelow (List Snake)
+{
+    Point Tail = Pos(Last(Snake));
+
+    Point BelowTail;
+    CreatePoint(&BelowTail, Tail.X, Tail.Y + 1);
+    address checkBelow = SearchPos(Snake, BelowTail);
+
+    return (checkBelow == Nil && Tail.Y != maxSize);
+}
+
+boolean canAddRight (List Snake)
+{
+    Point Tail = Pos(Last(Snake));
+
+    Point RightTail;
+    CreatePoint(&RightTail, Tail.X + 1, Tail.Y);
+    address checkRight = SearchPos(Snake, RightTail);
+
+    return (checkRight == Nil && Tail.X != maxSize);
 }
 
 void PrintMap(List Snake)
