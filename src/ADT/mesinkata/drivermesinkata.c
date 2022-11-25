@@ -117,7 +117,7 @@ int main()
     /* *** Membaca CMD(Baris) *** */
     // START CMD
     printf("ENTER COMMAND LINE : ");
-    STARTCOMMANDGAME();
+    STARTCOMMANDLINE();
 
     // Check Command
     Word firstCMDLine = currentCMD;
@@ -129,6 +129,8 @@ int main()
     printf("EndWord: %d\n", EndWord);   // 0
     ADVCOMMAND();
     printf("EndWord: %d\n", EndWord);   // 1
+
+    printf("IsEqualName?(ALStruKdAT,alSTruKDaT) %d\n", IsEqualName("ALStruKdAT", "alSTruKDaT")); 
 
     return 0;
 }

@@ -126,5 +126,8 @@ int stringLength(char* string);
 
 void stringConcat(char *s1,char *s2,char *sout);
 
+char ToLower(char c);
+
+boolean IsEqualName(char *str1, char *str2);
 
 #endif

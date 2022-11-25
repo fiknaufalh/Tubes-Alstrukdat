@@ -14,7 +14,11 @@ int main()
     InsertSB(&M, "Finn", 12);
     InsertSB(&M, "Jake", 58);
     InsertSB(&M, "ABCDEFGHJOFFFFFFjjjjjjjjjjjjjjjjjjjjjj", 40);
+    printf("Test duplicate = ");
     InsertSB(&M, "BNMO", 19);
+    printf("\n");
+    printf("Test Lower Upper = ");
+    InsertSB(&M, "bnMo", 30);
 
     Map sorted = SortSB(M);
     printf("**** SCOREBOARD GAME TEST****\n");

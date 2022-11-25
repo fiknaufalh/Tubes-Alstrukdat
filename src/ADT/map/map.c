@@ -140,7 +140,7 @@ boolean IsMemberSB(Map M, keytype k)
     int i = 0;
     while(!found && i < M.Count)
     {
-        if(M.Elements[i].Key == k)
+        if(IsEqualName(M.Elements[i].Key,k))
         {
             found = true;
         }

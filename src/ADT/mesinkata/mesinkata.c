@@ -160,6 +160,23 @@ boolean compareString(char *str1, char *str2)
     return IsSame;
 }
 
+char ToLower(char c)
+{
+    return (int)(c) >= 65 && (int)(c) <= 90 ? (char)((int)(c) + 32) : c;
+}
+
+boolean IsEqualName(char *str1, char *str2)
+{
+    boolean IsSame = (ToLower(*str1) == ToLower(*str2));
+    while ((*str1 != '\0' && *str2 != '\0') && IsSame)
+    {
+        str1++; str2++;
+        IsSame = (ToLower(*str1) == ToLower(*str2));
+    }
+    return IsSame;
+    
+}
+
 int WordToInt(Word CWord)
 {
     int result = 0;
