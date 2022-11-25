@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "TowerOfHanoi.h"
+#include "ToH.h"
 
 int length(StackInt S){
     if (!IsEmpty_SInt(S)){
