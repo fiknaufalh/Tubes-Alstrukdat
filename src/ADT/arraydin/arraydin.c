@@ -144,7 +144,7 @@ IdxType SearchArrayDin(ArrayDin array, ElType el)
     IdxType i;
     for (i = 0; i < array.Neff; i++)
     {
-        if (compareString(array.A[i], el))
+        if (IsEqualName(array.A[i], el))
         {
             return i;
         }
