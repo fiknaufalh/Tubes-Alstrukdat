@@ -1,7 +1,10 @@
 #ifndef HANGMAN_H
 #define HANGMAN_H
 
-#include "../../console.h"
+#include "../../boolean.h"
+#include "../../ADT/mesinkata/mesinkata.h"
+#include "../../ADT/queue/queue.h"
+#include "../../ADT/map/map.h"
 
 char* randomstr(char* filename, int maxLength, int maxKata, char kata[maxKata][maxLength]);
 
