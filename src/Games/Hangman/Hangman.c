@@ -1,80 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "../../console.h"
 #include "Hangman.h"
-
-char* randomstr(char* filename, int maxLength, int maxKata, char kata[maxKata][maxLength]) {
-    srand(time(NULL));
-    char path[100];
-    char input[maxLength];
-    int totalKata;
-    totalKata = 0;
-    FILE *fp;
-    stringConcat("./data/", filename, path);
-    fp = fopen(path, "r");
-    if (fp==NULL) {
-        printf("File gagal dibuka!\n");
-    }
-    while (fgets(input, maxLength-1, fp)) {
-        sscanf(input, "%s", kata[totalKata]);
-        totalKata++;
-    }
-    int idx;
-    idx = rand()%totalKata;
-    fclose(fp);
-    return(kata[idx]);
-}
-
-void printQTebakan(Queue qTebakan) {
-    ElType temp;
-    int panjang = length(qTebakan);
-    if (panjang>0) {
-        printf("%s",HEAD(qTebakan));
-        dequeue(&qTebakan,&temp);
-        for (int i = 1;i<panjang;i++) {
-            printf("%s",HEAD(qTebakan));
-            dequeue(&qTebakan,&temp);
-        }
-    }
-}
-
-Queue deleteQTebakan (Queue qTebakan) {
-    ElType temp;
-    int panjang = length(qTebakan);
-    for (int i=0; i<panjang; i++) {
-        dequeue(&qTebakan, &temp);
-    }
-    return(qTebakan);
-}
-
-void addKata (char* filename, char* kataTambahan) {
-    FILE *fp;
-    char path[100];
-    stringConcat("./data/", filename, path);
-    fp = fopen(path, "a");
-    if (fp==NULL) {
-        printf("File gagal dibuka!\n");    
-    } else {
-        fprintf(fp,"\n");
-        fputs(kataTambahan, fp);
-        printf("Kata berhasil ditambahkan ke dalam list tebakan!\n");
-    }
-    fclose(fp);
-}
-
-boolean adaDuplikat (Queue qTebakan, char tebakan) {
-    boolean found;
-    char* temp;
-    found = false;
-    while (!isEmpty(qTebakan)) {
-        if (*HEAD(qTebakan)==tebakan) {
-            found = true;
-        }
-        dequeue(&qTebakan, &temp);
-    }
-    return found;
-}
 
 void HANGMAN() {
     int maxKata;
@@ -185,6 +112,76 @@ void HANGMAN() {
     printf("Bye.. Bye..");
 }
 
-int main() {
-    HANGMAN();
+char* randomstr(char* filename, int maxLength, int maxKata, char kata[maxKata][maxLength]) {
+    srand(time(NULL));
+    char path[100];
+    char input[maxLength];
+    int totalKata;
+    totalKata = 0;
+    FILE *fp;
+    // stringConcat("./data/", filename, path);
+    stringConcat("../../../data/", filename, path);
+    fp = fopen(path, "r");
+    if (fp==NULL) {
+        printf("File gagal dibuka!\n");
+    }
+    while (fgets(input, maxLength-1, fp)) {
+        sscanf(input, "%s", kata[totalKata]);
+        totalKata++;
+    }
+    int idx;
+    idx = rand()%totalKata;
+    fclose(fp);
+    return(kata[idx]);
 }
+
+void printQTebakan(Queue qTebakan) {
+    ElType temp;
+    int panjang = length(qTebakan);
+    if (panjang>0) {
+        printf("%s",HEAD(qTebakan));
+        dequeue(&qTebakan,&temp);
+        for (int i = 1;i<panjang;i++) {
+            printf("%s",HEAD(qTebakan));
+            dequeue(&qTebakan,&temp);
+        }
+    }
+}
+
+Queue deleteQTebakan (Queue qTebakan) {
+    ElType temp;
+    int panjang = length(qTebakan);
+    for (int i=0; i<panjang; i++) {
+        dequeue(&qTebakan, &temp);
+    }
+    return(qTebakan);
+}
+
+void addKata (char* filename, char* kataTambahan) {
+    FILE *fp;
+    char path[100];
+    stringConcat("./data/", filename, path);
+    fp = fopen(path, "a");
+    if (fp==NULL) {
+        printf("File gagal dibuka!\n");    
+    } else {
+        fprintf(fp,"\n");
+        fputs(kataTambahan, fp);
+        printf("Kata berhasil ditambahkan ke dalam list tebakan!\n");
+    }
+    fclose(fp);
+}
+
+boolean adaDuplikat (Queue qTebakan, char tebakan) {
+    boolean found;
+    char* temp;
+    found = false;
+    while (!isEmpty(qTebakan)) {
+        if (*HEAD(qTebakan)==tebakan) {
+            found = true;
+        }
+        dequeue(&qTebakan, &temp);
+    }
+    return found;
+}
+

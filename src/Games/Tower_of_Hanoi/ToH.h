@@ -4,7 +4,6 @@
 #include "../../ADT/stackInt/stackInt.h"
 #include "../../boolean.h"
 
-int length(StackInt S);
 void printTower(StackInt S, StackInt S2, StackInt S3);
 void tipe1();
 void tipe2();
@@ -14,8 +13,8 @@ void tipe5();
 void base();
 void pindah(StackInt *A, StackInt *B, StackInt *C, char *asal,char *tujuan,int *steps);
 boolean bisapindah(StackInt S1, StackInt S2);
-boolean endgame(StackInt C);
+boolean endgameToH(StackInt C);
 char *WordToString(Word CWord);
 
-void TowerOfHanoi();
+void ToH();
 #endif

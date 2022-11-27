@@ -2,14 +2,38 @@
 #include <stdlib.h>
 #include "ToH.h"
 
-int length(StackInt S){
-    if (!IsEmpty_SInt(S)){
-        return Top(S)+1;
+void ToH(){
+    StackInt A, B, C;
+    int steps = 0;
+    //int y = 7;
+    CreateEmpty_SInt(&A);
+    CreateEmpty_SInt(&B);
+    CreateEmpty_SInt(&C);
+    int x = 6;
+    Push_SInt(&B,x);
+    Push_SInt(&C,x);
+    for(int i=6;i>0;i--){
+        Push_SInt(&A,x);
+        x--;
     }
-    else{
-        return 0;
+    
+    while (!endgameToH(C)){
+        char *asal;
+        char *tujuan;
+        printTower(A,B,C);
+        printf("TIANG ASAL:");
+        STARTCOMMAND();
+        asal=WordToString(currentCMD);
+        printf("TIANG TUJUAN:");
+        STARTCOMMAND();
+        tujuan=WordToString(currentCMD);
+        pindah( &A,  &B,  &C,  asal, tujuan, &steps);
+        
     }
+    printTower(A,B,C);
+    printf("Skor anda: %d\n",310/steps);
 }
+
 void tipe0(){
     printf ("       |       ");
 }
@@ -42,7 +66,7 @@ void printTower(StackInt S, StackInt S2, StackInt S3){
     
     
     for (int i = 5; i>0;i--){
-        if (i<length(S)){
+        if (i<lengthSInt(S)){
             if (S.T[i]==1){
                 tipe1();
                 spasi();
@@ -68,7 +92,7 @@ void printTower(StackInt S, StackInt S2, StackInt S3){
             tipe0();
             spasi();
         }
-        if(i<length(S2)){
+        if(i<lengthSInt(S2)){
             if (S2.T[i]==1){
                 tipe1();
                 spasi();
@@ -94,7 +118,7 @@ void printTower(StackInt S, StackInt S2, StackInt S3){
             tipe0();
             spasi();
         }
-        if(i<length(S3)){
+        if(i<lengthSInt(S3)){
             if (S3.T[i]==1){
                 tipe1();
                 spasi();
@@ -140,37 +164,37 @@ boolean bisapindah(StackInt S1, StackInt S2){
 }
 void pindah(StackInt *A, StackInt *B, StackInt *C, char* asal,char* tujuan, int *steps){
     if (asal[0] =='A' && tujuan[0] =='B' && bisapindah(*A,*B)){
-        infotype x;
+        int x;
         Pop_SInt(A,&x);
         Push_SInt(B,x);
         *steps+=1;
     }
     else if (asal[0] == 'A' && tujuan[0] =='C'&& bisapindah(*A,*C)){
-        infotype x;
+        int x;
         Pop_SInt(A,&x);
         Push_SInt(C,x);
         *steps+=1;
     }
     else if (asal[0] == 'B' && tujuan[0] =='A'&& bisapindah(*B,*A)){
-        infotype x;
+        int x;
         Pop_SInt(B,&x);
         Push_SInt(A,x);
         *steps+=1;
     }
     else if (asal[0] == 'B' && tujuan[0] =='C'&& bisapindah(*B,*C)){
-        infotype x;
+        int x;
         Pop_SInt(B,&x);
         Push_SInt(C,x);
         *steps+=1;
     }
     else if (asal[0] == 'C' && tujuan[0] =='A'&& bisapindah(*C,*A)){
-        infotype x;
+        int x;
         Pop_SInt(C,&x);
         Push_SInt(A,x);
         *steps+=1;
     }
     else if (asal[0] == 'C' && tujuan[0] =='B'&& bisapindah(*C,*B)){
-        infotype x;
+        int x;
         Pop_SInt(C,&x);
         Push_SInt(B,x);
         *steps+=1;
@@ -180,7 +204,7 @@ void pindah(StackInt *A, StackInt *B, StackInt *C, char* asal,char* tujuan, int 
     }
 }
 
-boolean endgame(StackInt C){
+boolean endgameToH(StackInt C){
     int i;
     StackInt cek;
     CreateEmpty_SInt(&cek);
@@ -188,7 +212,7 @@ boolean endgame(StackInt C){
         Push_SInt(&cek,i);
     }
     boolean win = true;
-    infotype x;
+    int x;
     while(!IsEmpty_SInt(cek) && !IsEmpty_SInt(C)){
         if(InfoTop(C) != InfoTop(cek)){
             win = false;
@@ -202,47 +226,4 @@ boolean endgame(StackInt C){
     else{
         return false;
     }
-}
-
-void TowerOfHanoi(){
-    StackInt A, B, C;
-    int steps = 0;
-    //infotype y = 7;
-    CreateEmpty_SInt(&A);
-    CreateEmpty_SInt(&B);
-    CreateEmpty_SInt(&C);
-    infotype x = 6;
-    Push_SInt(&B,x);
-    Push_SInt(&C,x);
-    for(int i=6;i>0;i--){
-        Push_SInt(&A,x);
-        x--;
-    }
-    
-    while (!endgame(C)){
-        char *asal;
-        char *tujuan;
-        printTower(A,B,C);
-        printf("TIANG ASAL:");
-        STARTCOMMAND();
-        asal=WordToString(currentCMD);
-        printf("TIANG TUJUAN:");
-        STARTCOMMAND();
-        tujuan=WordToString(currentCMD);
-        pindah( &A,  &B,  &C,  asal, tujuan, &steps);
-        
-    }
-    printTower(A,B,C);
-    printf("Skor anda: %d\n",310/steps);
-}
-
-/*
-    pindah(&A,&B,&C,'A','C',&steps);
-    printTower(A,B,C);
-
-*/
-int main(){
-
-    TowerOfHanoi();
-    return 0;
 }

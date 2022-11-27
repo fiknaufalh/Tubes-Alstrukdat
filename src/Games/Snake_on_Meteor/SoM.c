@@ -10,10 +10,10 @@ void SoM()
     printf("Berhasil digenerate!\n\n");
 
     List Snake;
-    CreateEmpty(&Snake);
+    CreateEmpty_LDP(&Snake);
 
     Point headPos = generateHeadPosition();
-    InsVLast(&Snake, 'H', headPos);
+    InsVLast_LDP(&Snake, 'H', headPos);
 
     int initNBodyTail = 2;
     addSnakeTail(&Snake, initNBodyTail);
@@ -81,9 +81,9 @@ void addSnakeTail(List *Snake, int nExtraTail)
         }
 
         CreatePoint(&extraTail, extraTailX, extraTailY);
-        InsVLast(Snake, Length(*Snake), extraTail);
+        InsVLast_LDP(Snake, LengthList(*Snake), extraTail);
         i++;
-        // printf("Panjang snake: %d\n", Length(*Snake));
+        // printf("Panjang snake: %d\n", LengthList(*Snake));
         // PrintPoint(extraTail);
     }
 }
@@ -94,9 +94,9 @@ boolean canAddLeft (List Snake)
 
     Point LeftTail;
     CreatePoint(&LeftTail, Tail.X - 1, Tail.Y);
-    address checkLeft = SearchPos(Snake, LeftTail);
+    addressN checkLeft = SearchPos_LDP(Snake, LeftTail);
 
-    return (checkLeft == Nil && Tail.X != minSize);
+    return (checkLeft == NULL && Tail.X != minSize);
 }
 
 boolean canAddAbove (List Snake)
@@ -105,9 +105,9 @@ boolean canAddAbove (List Snake)
 
     Point AboveTail;
     CreatePoint(&AboveTail, Tail.X, Tail.Y - 1);
-    address checkAbove = SearchPos(Snake, AboveTail);
+    addressN checkAbove = SearchPos_LDP(Snake, AboveTail);
 
-    return (checkAbove == Nil && Tail.Y != minSize);
+    return (checkAbove == NULL && Tail.Y != minSize);
 }
 
 boolean canAddBelow (List Snake)
@@ -116,9 +116,9 @@ boolean canAddBelow (List Snake)
 
     Point BelowTail;
     CreatePoint(&BelowTail, Tail.X, Tail.Y + 1);
-    address checkBelow = SearchPos(Snake, BelowTail);
+    addressN checkBelow = SearchPos_LDP(Snake, BelowTail);
 
-    return (checkBelow == Nil && Tail.Y != maxSize);
+    return (checkBelow == NULL && Tail.Y != maxSize);
 }
 
 boolean canAddRight (List Snake)
@@ -127,15 +127,15 @@ boolean canAddRight (List Snake)
 
     Point RightTail;
     CreatePoint(&RightTail, Tail.X + 1, Tail.Y);
-    address checkRight = SearchPos(Snake, RightTail);
+    addressN checkRight = SearchPos_LDP(Snake, RightTail);
 
-    return (checkRight == Nil && Tail.X != maxSize);
+    return (checkRight == NULL && Tail.X != maxSize);
 }
 
 void PrintMap(List Snake)
 {
     int size = maxSize - minSize + 1;
-    address P = First(Snake);
+    addressN P = First(Snake);
 
     printf("+-----+-----+-----+-----+-----+\n");
     for (int row = 0; row < size; row++)
@@ -148,13 +148,13 @@ void PrintMap(List Snake)
             /* checkPos sebagai variabel Point untuk pengecekan
                setiap koordinat pada kotak 5x5 */
 
-            address check = SearchPos(Snake,checkPos);
+            addressN check = SearchPos_LDP(Snake,checkPos);
             /* check adalah hasil pencarian apakah koordinat checkPos
-               terdapat pada Snake. Jika ada akan menghasilkan address
+               terdapat pada Snake. Jika ada akan menghasilkan addressN
                elemen/node yang sama koordinatnya dengan checkPos.
-               Jika tidak ada, maka menghasilkan Nil. */
+               Jika tidak ada, maka menghasilkan NULL. */
 
-            if (check != Nil)
+            if (check != NULL)
             {
                 if (check == First(Snake)) printf("  H  |");
                 else printf("  %d  |", Info(check));
@@ -186,7 +186,7 @@ void Move(List* Snake)
         {
             if (!isMoveHitBody(*Snake,cmd))
             {
-                address P = Last(*Snake);
+                addressN P = Last(*Snake);
                 while (P != First(*Snake))
                 {
                     Pos(P) = Pos(Prev(P));
@@ -202,7 +202,7 @@ void Move(List* Snake)
         {
             if (!isMoveHitBody(*Snake,cmd))
             {
-                address P = Last(*Snake);
+                addressN P = Last(*Snake);
                 while (P != First(*Snake))
                 {
                     Pos(P) = Pos(Prev(P));
@@ -218,7 +218,7 @@ void Move(List* Snake)
         {
             if (!isMoveHitBody(*Snake,cmd))
             {
-                address P = Last(*Snake);
+                addressN P = Last(*Snake);
                 while (P != First(*Snake))
                 {
                     Pos(P) = Pos(Prev(P));
@@ -234,7 +234,7 @@ void Move(List* Snake)
         {
             if (!isMoveHitBody(*Snake,cmd))
             {
-                address P = Last(*Snake);
+                addressN P = Last(*Snake);
                 while (P != First(*Snake))
                 {
                     Pos(P) = Pos(Prev(P));
@@ -270,11 +270,4 @@ boolean isMoveHitBody(List Snake, char* cmd)
     }
 
     return (EQ(Head, FirstBody));
-}
-
-int main(){
-
-    SoM();
-
-    return 0;
 }
