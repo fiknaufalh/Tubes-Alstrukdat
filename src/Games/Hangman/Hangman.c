@@ -184,7 +184,3 @@ void HANGMAN() {
     printf("Terima kasih %s sudah bermain HANGMAN!\n", playerName);
     printf("Bye.. Bye..");
 }
-
-int main() {
-    HANGMAN();
-}

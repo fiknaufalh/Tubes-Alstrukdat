@@ -4,56 +4,56 @@
 
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
-boolean IsEmpty (List L)
+boolean IsEmpty_LDP (List L)
 {
-    return (First(L) == Nil && Last(L) == Nil && Length(L) == 0);
+    return (First(L) == NULL && Last(L) == NULL && LengthList(L) == 0);
 }
 /* Mengirim true jika list kosong. Lihat definisi di atas. */
 
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateEmpty (List *L)
+void CreateEmpty_LDP (List *L)
 {
-    First(*L) = Nil;
-    Last(*L) = Nil;
-    Length(*L) = 0;
+    First(*L) = NULL;
+    Last(*L) = NULL;
+    LengthList(*L) = 0;
 }
 /* I.S. L sembarang  */
 /* F.S. Terbentuk list kosong. Lihat definisi di atas. */
 
 /****************** Manajemen Memori ******************/
-address Alokasi (infotype X, Point Pos)
+addressN Alokasi_LDP (idxtype X, Point Pos)
 {
-    address P = (address) malloc (sizeof(ElmtList));
-    if (P != Nil)
+    addressN P = (addressN) malloc (sizeof(ElmtList));
+    if (P != NULL)
     {
         Info(P) = X;
         Pos(P) = Pos;
-        Next(P) = Nil;
-        Prev(P) = Nil;
+        Next(P) = NULL;
+        Prev(P) = NULL;
         return P;
     }
-    else return Nil;
+    else return NULL;
 }
-/* Mengirimkan address hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka address tidak nil. */
-/* Misalnya: menghasilkan P, maka Info(P)=X, Next(P)=Nil, Prev(P)=Nil */
-/* Jika alokasi gagal, mengirimkan Nil. */
-void Dealokasi (address P)
+/* Mengirimkan addressN hasil alokasi sebuah elemen */
+/* Jika alokasi berhasil, maka addressN tidak nil. */
+/* Misalnya: menghasilkan P, maka Info(P)=X, Next(P)=NULL, Prev(P)=NULL */
+/* Jika alokasi gagal, mengirimkan NULL. */
+void Dealokasi_LDP (addressN P)
 {
     free(P);
 }
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
-/* Melakukan dealokasi/pengembalian address P */
+/* Melakukan dealokasi/pengembalian addressN P */
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-address Search (List L, infotype X)
+addressN Search_LDP (List L, idxtype X)
 {
-    address check = Nil;
-    if (!IsEmpty(L))
+    addressN check = NULL;
+    if (!IsEmpty_LDP(L))
     {
-        address P = First(L);
-        while((Info(P) != X) && (Next(P) != Nil)){
+        addressN P = First(L);
+        while((Info(P) != X) && (Next(P) != NULL)){
             P = Next(P);
         }
         if(Info(P) == X) check = P;
@@ -61,16 +61,16 @@ address Search (List L, infotype X)
     return check;
 }
 /* Mencari apakah ada elemen list dengan Info(P)=X */
-/* Jika ada, mengirimkan address elemen tersebut. */
-/* Jika tidak ada, mengirimkan Nil */
+/* Jika ada, mengirimkan addressN elemen tersebut. */
+/* Jika tidak ada, mengirimkan NULL */
 
-address SearchPos (List L, Point Pos)
+addressN SearchPos_LDP (List L, Point Pos)
 {
-    address check = Nil;
-    if (!IsEmpty(L))
+    addressN check = NULL;
+    if (!IsEmpty_LDP(L))
     {
-        address P = First(L);
-        while((!EQ(Pos(P),Pos)) && (Next(P) != Nil)){
+        addressN P = First(L);
+        while((!EQ(Pos(P),Pos)) && (Next(P) != NULL)){
             P = Next(P);
         }
         if(EQ(Pos(P),Pos)) check = P;
@@ -78,26 +78,26 @@ address SearchPos (List L, Point Pos)
     return check;
 }
 /* Mencari apakah ada elemen list dengan Pos(P) = Pos */
-/* Jika ada, mengirimkan address elemen tersebut. */
-/* Jika tidak ada, mengirimkan Nil */
+/* Jika ada, mengirimkan addressN elemen tersebut. */
+/* Jika tidak ada, mengirimkan NULL */
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void InsVFirst (List *L, infotype X, Point Pos)
+void InsVFirst_LDP (List *L, idxtype X, Point Pos)
 {
-    address P = Alokasi(X, Pos);
-    if(P != Nil){
-        InsertFirst(L,P);
+    addressN P = Alokasi_LDP(X, Pos);
+    if(P != NULL){
+        InsertFirst_LDP(L,P);
     }
 }
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
-void InsVLast (List *L, infotype X, Point Pos)
+void InsVLast_LDP (List *L, idxtype X, Point Pos)
 {
-    address P = Alokasi(X, Pos);
-    if(P != Nil){
-        InsertLast(L,P);
+    addressN P = Alokasi_LDP(X, Pos);
+    if(P != NULL){
+        InsertLast_LDP(L,P);
     }
 }
 /* I.S. L mungkin kosong */
@@ -106,22 +106,22 @@ void InsVLast (List *L, infotype X, Point Pos)
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 
 /*** PENGHAPUSAN ELEMEN ***/
-void DelVFirst (List *L, infotype *X)
+void DelVFirst_LDP (List *L, idxtype *X)
 {
-    address P;
-    DelFirst(L,&P);
+    addressN P;
+    DelFirst_LDP(L,&P);
     *X = Info(P);
-    Dealokasi(P);
+    Dealokasi_LDP(P);
 }
 /* I.S. List L tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen pertama di-dealokasi */
-void DelVLast (List *L, infotype *X)
+void DelVLast_LDP (List *L, idxtype *X)
 {
-    address P;
-    DelLast(L,&P);
+    addressN P;
+    DelLast_LDP(L,&P);
     *X = Info(P);
-    Dealokasi(P);
+    Dealokasi_LDP(P);
 }
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
@@ -129,101 +129,101 @@ void DelVLast (List *L, infotype *X)
 
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
 /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
-void InsertFirst (List *L, address P)
+void InsertFirst_LDP (List *L, addressN P)
 {
-    if (IsEmpty(*L)) {
+    if (IsEmpty_LDP(*L)) {
         First(*L) = P;
         Last(*L) = P;
-        Length(*L)++;
+        LengthList(*L)++;
     } else {
-        InsertBefore(L,P,First(*L));
+        InsertBefore_LDP(L,P,First(*L));
     }
 }
 /* I.S. Sembarang, P sudah dialokasi  */
-/* F.S. Menambahkan elemen ber-address P sebagai elemen pertama */
-void InsertLast (List *L, address P)
+/* F.S. Menambahkan elemen ber-addressN P sebagai elemen pertama */
+void InsertLast_LDP (List *L, addressN P)
 {
-    if (IsEmpty(*L)) {
-        InsertFirst(L,P);
+    if (IsEmpty_LDP(*L)) {
+        InsertFirst_LDP(L,P);
     }
-    else InsertAfter(L,P,Last(*L));
+    else InsertAfter_LDP(L,P,Last(*L));
 }
 /* I.S. Sembarang, P sudah dialokasi  */
 /* F.S. P ditambahkan sebagai elemen terakhir yang baru */
-void InsertAfter (List *L, address P, address Prec)
+void InsertAfter_LDP (List *L, addressN P, addressN Prec)
 {
     Prev(P) = Prec;
     Next(P) = Next(Prec);
     Next(Prec) = P;
-    if (Next(P) == Nil) Last(*L) = P;
+    if (Next(P) == NULL) Last(*L) = P;
     else Prev(Next(P)) = P;
-    Length(*L)++;
+    LengthList(*L)++;
 }
 /* I.S. Prec pastilah elemen list; P sudah dialokasi  */
 /* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
-void InsertBefore (List *L, address P, address Succ)
+void InsertBefore_LDP (List *L, addressN P, addressN Succ)
 {
     Prev(P) = Prev(Succ);
     Next(P) = Succ;
     Prev(Succ) = P;
-    if(Prev(P) == Nil) First(*L) = P;
+    if(Prev(P) == NULL) First(*L) = P;
     else Next(Prev(P)) = P;
-    Length(*L)++;
+    LengthList(*L)++;
 }
 /* I.S. Succ pastilah elemen list; P sudah dialokasi  */
 /* F.S. Insert P sebagai elemen sebelum elemen beralamat Succ */
 
 /*** PENGHAPUSAN SEBUAH ELEMEN ***/
-void DelFirst (List *L, address *P)
+void DelFirst_LDP (List *L, addressN *P)
 {
     *P = First(*L);
     if(First(*L) == Last(*L)){
-        First(*L) = Nil;
-        Last(*L) = Nil;
+        First(*L) = NULL;
+        Last(*L) = NULL;
     }
     else{
         First(*L) = Next(First(*L));
-        Prev(First(*L)) = Nil;
+        Prev(First(*L)) = NULL;
     }
-    Next(*P) = Nil;
-    Prev(*P) = Nil;
-    Length(*L)--;
+    Next(*P) = NULL;
+    Prev(*P) = NULL;
+    LengthList(*L)--;
 }
 /* I.S. List tidak kosong */
 /* F.S. P adalah alamat elemen pertama list sebelum penghapusan */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
-void DelLast (List *L, address *P)
+void DelLast_LDP (List *L, addressN *P)
 {
     *P = Last(*L);
     if(First(*L) == Last(*L)){
-        First(*L) = Nil;
-        Last(*L) = Nil;
+        First(*L) = NULL;
+        Last(*L) = NULL;
     }
     else{
         Last(*L) = Prev(Last(*L));
-        Next(Last(*L)) = Nil;
+        Next(Last(*L)) = NULL;
     }
-    Next(*P) = Nil;
-    Prev(*P) = Nil;
-    Length(*L)--;
+    Next(*P) = NULL;
+    Prev(*P) = NULL;
+    LengthList(*L)--;
 }
 /* I.S. List tidak kosong */
 /* F.S. P adalah alamat elemen terakhir list sebelum penghapusan  */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* Last element baru adalah predesesor elemen pertama yg lama, jika ada */
-void DelP (List *L, infotype X)
+void DelP_LDP (List *L, idxtype X)
 {
-    address search = Search(*L,X);
-    if(search != Nil){
-        address P = First(*L);
-        address prec = Nil;
+    addressN search = Search_LDP(*L,X);
+    if(search != NULL){
+        addressN P = First(*L);
+        addressN prec = NULL;
         while (P != search){
             prec = P;
             P = Next(P);
         }
-        if(prec == Nil) DelFirst(L,&search);
-        else DelAfter(L,&search,prec);
+        if(prec == NULL) DelFirst_LDP(L,&search);
+        else DelAfter_LDP(L,&search,prec);
     }
 }
 /* I.S. Sembarang */
@@ -231,52 +231,52 @@ void DelP (List *L, infotype X)
 /* maka P dihapus dari list dan didealokasi */
 /* Jika tidak ada elemen list dengan Info(P)=X, maka list tetap */
 /* List mungkin menjadi kosong karena penghapusan */
-void DelAfter (List *L, address *Pdel, address Prec)
+void DelAfter_LDP (List *L, addressN *Pdel, addressN Prec)
 {
     *Pdel = Next(Prec);
-    if(Next(*Pdel) == Nil){
-        Next(Prec) = Nil;
+    if(Next(*Pdel) == NULL){
+        Next(Prec) = NULL;
         Last(*L) = Prec;
     }
     else{
         Next(Prec) = Next(*Pdel);
         Prev(Next(*Pdel)) = Prec;
     }
-    Prev(*Pdel) = Nil;
-    Next(*Pdel) = Nil;
-    Length(*L)--;
+    Prev(*Pdel) = NULL;
+    Next(*Pdel) = NULL;
+    LengthList(*L)--;
 }
 /* I.S. List tidak kosong. Prec adalah anggota list. */
 /* F.S. Menghapus Next(Prec): */
 /*      Pdel adalah alamat elemen list yang dihapus  */
-void DelBefore (List *L, address *Pdel, address Succ)
+void DelBefore_LDP (List *L, addressN *Pdel, addressN Succ)
 {
     *Pdel = Prev(Succ);
-    if(Prev(*Pdel) == Nil){
-        Prev(Succ) = Nil;
+    if(Prev(*Pdel) == NULL){
+        Prev(Succ) = NULL;
         First(*L) = Succ;
     }
     else{
         Prev(Succ) = Prev(*Pdel);
         Next(Prev(*Pdel)) = Succ;
     }
-    Prev(*Pdel) = Nil;
-    Next(*Pdel) = Nil;
-    Length(*L)--;
+    Prev(*Pdel) = NULL;
+    Next(*Pdel) = NULL;
+    LengthList(*L)--;
 }
 /* I.S. List tidak kosong. Succ adalah anggota list. */
 /* F.S. Menghapus Prev(Succ): */
 /*      Pdel adalah alamat elemen list yang dihapus  */
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-void PrintForward (List L)
+void PrintForward_LDP (List L)
 {
-    if (IsEmpty(L)) printf("[]");
+    if (IsEmpty_LDP(L)) printf("[]");
     else
     {
         printf("[");
-        address P = First(L);
-        while(P != Nil)
+        addressN P = First(L);
+        while(P != NULL)
         {
             if(P == Last(L)) printf("%d",Info(P));
             else printf("%d,",Info(P));
@@ -291,14 +291,14 @@ void PrintForward (List L)
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
-void PrintBackward (List L)
+void PrintBackward_LDP (List L)
 {
-    if (IsEmpty(L)) printf("[]");
+    if (IsEmpty_LDP(L)) printf("[]");
     else
     {
         printf("[");
-        address P = Last(L);
-        while(P != Nil)
+        addressN P = Last(L);
+        while(P != NULL)
         {
             if(P == First(L)) printf("%d",Info(P));
             else printf("%d,",Info(P));
