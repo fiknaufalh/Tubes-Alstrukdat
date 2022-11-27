@@ -2,6 +2,38 @@
 #include <stdlib.h>
 #include "ToH.h"
 
+void ToH(){
+    StackInt A, B, C;
+    int steps = 0;
+    //int y = 7;
+    CreateEmpty_SInt(&A);
+    CreateEmpty_SInt(&B);
+    CreateEmpty_SInt(&C);
+    int x = 6;
+    Push_SInt(&B,x);
+    Push_SInt(&C,x);
+    for(int i=6;i>0;i--){
+        Push_SInt(&A,x);
+        x--;
+    }
+    
+    while (!endgameToH(C)){
+        char *asal;
+        char *tujuan;
+        printTower(A,B,C);
+        printf("TIANG ASAL:");
+        STARTCOMMAND();
+        asal=WordToString(currentCMD);
+        printf("TIANG TUJUAN:");
+        STARTCOMMAND();
+        tujuan=WordToString(currentCMD);
+        pindah( &A,  &B,  &C,  asal, tujuan, &steps);
+        
+    }
+    printTower(A,B,C);
+    printf("Skor anda: %d\n",310/steps);
+}
+
 void tipe0(){
     printf ("       |       ");
 }
@@ -194,36 +226,4 @@ boolean endgameToH(StackInt C){
     else{
         return false;
     }
-}
-
-void TowerOfHanoi(){
-    StackInt A, B, C;
-    int steps = 0;
-    //int y = 7;
-    CreateEmpty_SInt(&A);
-    CreateEmpty_SInt(&B);
-    CreateEmpty_SInt(&C);
-    int x = 6;
-    Push_SInt(&B,x);
-    Push_SInt(&C,x);
-    for(int i=6;i>0;i--){
-        Push_SInt(&A,x);
-        x--;
-    }
-    
-    while (!endgameToH(C)){
-        char *asal;
-        char *tujuan;
-        printTower(A,B,C);
-        printf("TIANG ASAL:");
-        STARTCOMMAND();
-        asal=WordToString(currentCMD);
-        printf("TIANG TUJUAN:");
-        STARTCOMMAND();
-        tujuan=WordToString(currentCMD);
-        pindah( &A,  &B,  &C,  asal, tujuan, &steps);
-        
-    }
-    printTower(A,B,C);
-    printf("Skor anda: %d\n",310/steps);
 }

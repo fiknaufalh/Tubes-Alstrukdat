@@ -16,5 +16,5 @@ boolean bisapindah(StackInt S1, StackInt S2);
 boolean endgameToH(StackInt C);
 char *WordToString(Word CWord);
 
-void TowerOfHanoi();
+void ToH();
 #endif
