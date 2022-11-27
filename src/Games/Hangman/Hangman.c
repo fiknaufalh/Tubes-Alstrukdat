@@ -17,7 +17,6 @@ void HANGMAN() {
     int duplikat;
     Queue qTebakan;
     ElType temp;
-    Map SB;
     char tebak;
     int score;
     char* jawaban;
@@ -27,6 +26,28 @@ void HANGMAN() {
     maxLength = 30;
     i = 0;
     kesempatan = 10;
+    printf("Selamat datang dalam permainan HANGMAN!\n");
+    printf("\n");
+    do {
+        printf("  ------------------- MENU HANGMAN ---------------------\n");
+        printf(" / 1. Langsung bermain HANGMAN                         /\n");
+        printf("/ 2. Menambahkan kata ke dalam list tebakan           /\n");
+        printf("------------------------------------------------------ \n");
+        printf("\n");
+        printf("Pilihlah nomor yang ingin kamu lakukan (1/2): ");
+        STARTCOMMAND();
+        jawaban = WordToString(currentCMD);
+        printf("\n");
+        if (jawaban[0]=='2') {
+            printf("Masukkan kata yang ingin ditambahkan (Huruf kapital): ");
+            STARTCOMMAND();
+            kataTambahan = WordToString(currentCMD);
+            addKata("daftarkata.txt", kataTambahan);
+            printf("\n");
+        } 
+    } while (jawaban[0]=='2');
+    printf("Selamat bermain HANGMAN!\n");
+    printf("\n");
     CreateQueue(&qTebakan);
     while (kesempatan!=0) {
         tebakKata = randomstr("daftarkata.txt", maxLength, maxKata, kata);
@@ -94,16 +115,6 @@ void HANGMAN() {
         printf("\n");
     } 
     printf("Game HANGMAN sudah selesai.\n");
-    printf("Apakah Kamu ingin menambahkan kata ke dalam list tebakan (Y/N)? ");
-    STARTCOMMAND();
-    jawaban = WordToString(currentCMD);
-    if (jawaban[0]=='Y') {
-        printf("Masukkan kata yang ingin ditambahkan (Huruf kapital): ");
-        STARTCOMMAND();
-        kataTambahan = WordToString(currentCMD);
-        addKata("daftarkata.txt", kataTambahan);
-    } 
-    printf("\n");
     printf("Masukkan nama player: ");
     STARTCOMMAND();
     playerName = WordToString(currentCMD);
@@ -120,7 +131,7 @@ char* randomstr(char* filename, int maxLength, int maxKata, char kata[maxKata][m
     totalKata = 0;
     FILE *fp;
     // stringConcat("./data/", filename, path);
-    stringConcat("../../../data/", filename, path);
+    stringConcat("./data/", filename, path);
     fp = fopen(path, "r");
     if (fp==NULL) {
         printf("File gagal dibuka!\n");
