@@ -29,7 +29,7 @@ IdxType GetFirstIdxArrMap(ArrMap A)
 
 IdxType GetLastIdxArrMap(ArrMap A)
 {
-    return NbElmtArrMap(A);
+    return IsEmptyArrMap(A)? NbElmtArrMap(A) : NbElmtArrMap(A)-1;
 }
 
 ArrType GetElmtArrMap(ArrMap A, IdxType i)

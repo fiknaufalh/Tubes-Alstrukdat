@@ -52,7 +52,11 @@ void Pop(Stack * S, stackElmt* X)
     Top(*S) = Top(*S) - 1;
 }
 
+/* ***************** Reverse elemen Stack ***************** */
 void ReverseStack(Stack *S)
+/* Mereverse elmt dari Stack S. */
+/* I.S  S tidak kosong */
+/* F.S  Elmt dari S terbalik berurutan */
 {
     Stack S1;
     stackElmt X;
