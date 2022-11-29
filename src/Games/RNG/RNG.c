@@ -15,11 +15,12 @@ Fungsi yang mengenerate angka acak dan mengembalikan angka tersebut
 }
 
 
-void RNG (){
+int RNG (){
     int kesempatan;
     int angka;
     int tebakan;
     int ketebak;
+    int skor = 100;
     angka = randomnumber();
     ketebak = 0;
     kesempatan = 10;
@@ -32,12 +33,14 @@ void RNG (){
         if (tebakan < angka){
             printf("Lebih besar\n"); 
             ketebak = 0; 
-            kesempatan -= 1;      
+            kesempatan -= 1;
+            skor -= 10;
         }
         else if (tebakan > angka){
             printf("Lebih kecil\n");
             ketebak = 0;
             kesempatan -= 1;
+            skor -= 10;
         }
         else {
             ketebak = 1;
@@ -50,6 +53,7 @@ void RNG (){
         printf("Maaf kesempatan untuk menebak sudah habis.\n");
         printf("Jawaban yang benar adalah %d.\n", angka);
     }
+    return skor;
 }
 
 /*
