@@ -116,11 +116,14 @@ void DelVFirst_LDP (List *L, idxtype *X)
 /* I.S. List L tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen pertama di-dealokasi */
-void DelVLast_LDP (List *L, idxtype *X)
+void DelVLast_LDP (List *L, Point *Pos)
 {
     addressN P;
     DelLast_LDP(L,&P);
-    *X = Info(P);
+    // *Pos.X = Info(P).X;
+    (*Pos).X = Pos(P).X;
+    (*Pos).Y = Pos(P).Y;
+
     Dealokasi_LDP(P);
 }
 /* I.S. list tidak kosong */
@@ -212,18 +215,23 @@ void DelLast_LDP (List *L, addressN *P)
 /* F.S. P adalah alamat elemen terakhir list sebelum penghapusan  */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* Last element baru adalah predesesor elemen pertama yg lama, jika ada */
-void DelP_LDP (List *L, idxtype X)
+void DelP_LDP (List *L, idxtype X, Point Pos)
 {
-    addressN search = Search_LDP(*L,X);
+    addressN search = SearchPos_LDP(*L,Pos);
     if(search != NULL){
         addressN P = First(*L);
         addressN prec = NULL;
+
         while (P != search){
             prec = P;
-            P = Next(P);
+            P= Next(P);
         }
-        if(prec == NULL) DelFirst_LDP(L,&search);
-        else DelAfter_LDP(L,&search,prec);
+        if (prec == NULL){
+            DelFirst_LDP(L,&search);
+        }
+        else {
+            DelAfter_LDP(L,&search,prec);
+        }
     }
 }
 /* I.S. Sembarang */
@@ -241,10 +249,12 @@ void DelAfter_LDP (List *L, addressN *Pdel, addressN Prec)
     else{
         Next(Prec) = Next(*Pdel);
         Prev(Next(*Pdel)) = Prec;
+        Info(Prec) = Info(*Pdel);
     }
     Prev(*Pdel) = NULL;
     Next(*Pdel) = NULL;
     LengthList(*L)--;
+
 }
 /* I.S. List tidak kosong. Prec adalah anggota list. */
 /* F.S. Menghapus Next(Prec): */
