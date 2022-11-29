@@ -9,8 +9,19 @@ void SoM()
     printf("Men-generate peta, snake, dan makanan...\n");
     printf("Berhasil digenerate!\n\n");
 
+    int turn = 1;
+    boolean gameOver = false;
+    int beforegothit = 0;
+    Point hitmeteor;
+
     List Snake;
+    List Food;
+    List Meteor;
+    List Obstacle;
     CreateEmpty_LDP(&Snake);
+    CreateEmpty_LDP(&Food);
+    CreateEmpty_LDP (&Meteor);
+    CreateEmpty_LDP (&Obstacle);
 
     Point headPos = generateHeadPosition();
     InsVLast_LDP(&Snake, 'H', headPos);
@@ -18,13 +29,92 @@ void SoM()
     int initNBodyTail = 2;
     addSnakeTail(&Snake, initNBodyTail);
 
-    while (true)
+    Point foodposition;
+    foodposition = generateFood(Snake);
+    InsVLast_LDP(&Food,'o',foodposition);
+
+    Point meteorposition;
+    // meteorposition = generateMeteor(Snake,Food);
+    // InsVLast(&Meteor,'m',meteorposition);
+
+    Point obstacleposition;
+    obstacleposition = generateObstacle(Snake,Food);
+    InsVLast_LDP(&Obstacle,'x',obstacleposition);
+
+    while (!gameOver)
     {
         printf("Berikut merupakan peta permainan\n");
-        PrintMap(Snake);
+        if (foodEaten(Snake,&Food)){
+            addSnakeTail(&Snake,1);
+            CreateEmpty_LDP(&Food);
+            foodposition = generateFood(Snake);
+            InsVLast_LDP(&Food,'o',foodposition);   
+        }
+        PrintMap(Snake, Food, Meteor, Obstacle);
         Move(&Snake);
+        turn += 1;
+        if (turn > 1){
+            if (foodEaten(Snake,&Food)){
+                addSnakeTail(&Snake,1);
+                CreateEmpty_LDP(&Food);
+                foodposition = generateFood(Snake);
+                InsVLast_LDP(&Food,'o',foodposition);   
+            }
+            CreateEmpty_LDP(&Meteor);
+            meteorposition = generateMeteor(Snake,Food,Obstacle);
+            InsVLast_LDP(&Meteor,'m',meteorposition);
+
+
+            if (((AbsisN(First(Snake))) == (AbsisN(First(Meteor))) && (OrdinatN(First(Snake))) == (OrdinatN(First(Meteor))))){
+                idxtype x;
+                printf("Kepala terkena meteor. Game over\n");
+                PrintMap(Snake,Food,Meteor,Obstacle);
+                DelP_LDP(&Snake,x,meteorposition);
+                skorakhir(Snake);
+                gameOver = true;
+            }
+            else if (((AbsisN(First(Snake))) == (AbsisN(First(Obstacle))) && (OrdinatN(First(Snake))) == (OrdinatN(First(Obstacle))))){
+                idxtype x;
+                printf("Kepala terkena obstacle. Game over\n");
+                PrintMap(Snake,Food,Meteor,Obstacle);
+                DelP_LDP(&Snake,x,obstacleposition);
+                skorakhir(Snake);
+                gameOver = true;
+            }
+            else if (beforegothit == 999){
+                if (AbsisN(First(Snake)) == Absis(hitmeteor) && OrdinatN(First(Snake)) == Ordinat(hitmeteor)){
+                    printf("Meteor masih panas.\n");
+                    beforegothit = 0;
+                }
+            }
+
+            else if (SearchPos_LDP(Snake,meteorposition)){
+                idxtype x;
+                Absis(hitmeteor) = Absis(meteorposition);
+                Ordinat(hitmeteor) = Ordinat(meteorposition);
+                printf("Anda terkena meteor.\n");
+                DelP_LDP(&Snake,x,meteorposition);
+                beforegothit = 999; 
+
+            }
+
+
+            else {
+                printf("Anda beruntung tidak terkena meteor!\n");
+            }
+            
+            // else {
+            //     if (AbsisN(First(Snake)) == Absis(hitmeteor) && OrdinatN(First(Snake)) == Ordinat(hitmeteor)){
+            //         printf("Meteor masih panas.\n");
+            //         beforegothit = 0;
+            //     }
+            // }           
+        
+        }
     }
+
 }
+
 
 Point generateHeadPosition()
 {
@@ -132,10 +222,11 @@ boolean canAddRight (List Snake)
     return (checkRight == NULL && Tail.X != maxSize);
 }
 
-void PrintMap(List Snake)
+void PrintMap(List Snake, List Food, List Meteor, List Obstacle)
 {
     int size = maxSize - minSize + 1;
     addressN P = First(Snake);
+    Point meteor;
 
     printf("+-----+-----+-----+-----+-----+\n");
     for (int row = 0; row < size; row++)
@@ -153,12 +244,47 @@ void PrintMap(List Snake)
                terdapat pada Snake. Jika ada akan menghasilkan addressN
                elemen/node yang sama koordinatnya dengan checkPos.
                Jika tidak ada, maka menghasilkan NULL. */
+           addressN checkFood = SearchPos_LDP(Food,checkPos);
+            /* checkFood adalah hasil pencarian apakah koordinat checkPos terdapat 
+            Food. Jika ada menghasilkan address elemen/node yang sama koordinatnya dengan checkPos.
+            Jika tidak ada, menghasilkan Nil.
+            */
 
-            if (check != NULL)
+           addressN checkMeteor = SearchPos_LDP(Meteor,checkPos);
+           /*checkMeteor adalah hasil pencarian apakah koordinat checkPos terdapat
+           pada Meteor. Jika ada, menghasilkan address elemen/node yang sama koordinatnya dengan
+           checkpos.
+           Jika tidak ada, menghasilkan Nil.
+           */
+           
+           addressN checkObstacle = SearchPos_LDP(Obstacle,checkPos);
+           /*checkObstacle adalah hasil pencarian apakah koordinat checkPos terdapat
+           pada Obstacle. Jika ada, menghasilkan address elemen/node yang sama koordinatnya dengan
+           checkpos.
+           Jika tidak ada, menghasilkan Nil.
+           */
+
+            if (checkMeteor != NULL || SearchPos_LDP(Snake,meteor)){
+                if (checkMeteor == First(Meteor)){
+                    printf("  m  |");
+                }
+            }
+            else if (checkObstacle != NULL){
+                if (checkObstacle == First(Obstacle)){
+                    printf("  x  |");
+                }
+            }
+            else if (check != NULL)
             {
                 if (check == First(Snake)) printf("  H  |");
                 else printf("  %d  |", Info(check));
             }
+            else if (checkFood != NULL){
+                if (checkFood == First(Food)){
+                    printf("  o  |");
+                }
+            }
+
             else printf("     |");
         }
         printf("\n+-----+-----+-----+-----+-----+\n");
@@ -251,6 +377,8 @@ void Move(List* Snake)
     }
 }
 
+
+
 boolean isMoveHitBody(List Snake, char* cmd)
 {
     Point Head = Pos(First(Snake));
@@ -270,4 +398,53 @@ boolean isMoveHitBody(List Snake, char* cmd)
     }
 
     return (EQ(Head, FirstBody));
+}
+
+
+
+Point generateFood(List Snake){
+    srand(time(0));
+    Point food;
+    CreatePoint(&food,rand() % 5, rand() % 5);
+    while (SearchPos_LDP(Snake,food) != NULL){
+        CreatePoint(&food,rand() % 5, rand() % 5);
+    }
+    return food;
+}
+
+boolean foodEaten(List Snake, List *Food){
+    return ((AbsisN(First(*Food)) == AbsisN(First(Snake))) && (OrdinatN(First(*Food)) == OrdinatN(First(Snake))));
+}
+
+Point generateMeteor(List Snake,List Food,List Obstacle){
+    srand(time(0));
+    Point meteor;
+    CreatePoint(&meteor,rand() % 5, rand() % 5);
+    while (SearchPos_LDP(Food,meteor) != NULL || SearchPos_LDP(Obstacle,meteor) != NULL){
+        CreatePoint(&meteor,rand() % 5, rand() % 5);
+    }
+    PrintPoint(meteor);
+    printf("\n");
+    return meteor;
+}
+
+Point generateObstacle(List Snake,List Food){
+    srand(time(0));
+    Point obstacle;
+    CreatePoint(&obstacle,rand() % 5, rand() % 5);
+    while (SearchPos_LDP(Food,obstacle) != NULL || SearchPos_LDP(Snake,obstacle) != NULL){
+        CreatePoint(&obstacle,rand() % 5, rand() % 5);
+    }
+    return obstacle;
+}
+
+boolean isMeteorHitSnake(List Snake, Point meteor){
+    return SearchPos_LDP(Snake,meteor);
+}
+
+void skorakhir (List Snake){
+    int skor;
+    skor = (LengthList(Snake)) * 2;
+    printf("Skor : %d", skor);
+    printf("\n");
 }
