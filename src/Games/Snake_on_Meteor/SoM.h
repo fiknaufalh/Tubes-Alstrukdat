@@ -36,13 +36,32 @@ boolean canAddBelow (List Snake);
 boolean canAddRight (List Snake);
 // Fungsi untuk mengecek apakah dapat dilakukan penambahan ekor ke kanan
 
-void PrintMap(List Snake);
+void PrintMap(List Snake,List Food,List Meteor,List Obstacle);
 // Prosedur untuk mencetak map permainan
 
-void Move(List *Snake);
+void Move (List *Snake);
 // Prosedur untuk pergerakan Snake
 
 boolean isMoveHitBody(List Snake, char* cmd);
 // Fungsi yang menghasilkan true jika pergerakan mengenai badan (handler)
+
+
+Point generateFood(List Snake);
+//Fungsi yang men-generate makanan berupa point secara random
+
+boolean foodEaten(List Snake, List *Food);
+//Fungsi yang mengembalikan true jika makanan berhasil kemakan
+
+Point generateMeteor (List Snake, List Food,List Obstacle);
+//Fungsi yang men-generate meteor
+
+Point generateObstacle(List Snake,List Food);
+//Fungsi yang men-generate obstacle
+
+boolean isMeteorHitSnake(List Snake, Point meteor);
+//Fungsi yang menghasilkan true jika meteor mengenai snake
+
+void skorakhir (List Snake);
+//Fungsi yang mengembalikan skor akhir
 
 #endif
