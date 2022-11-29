@@ -92,7 +92,7 @@ void DelVFirst_LDP (List *L, idxtype *X);
 /* I.S. List L tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen pertama di-dealokasi */
-void DelVLast_LDP (List *L, idxtype *X);
+void DelVLast_LDP (List *L, Point *Pos);
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
@@ -123,7 +123,7 @@ void DelLast_LDP (List *L, addressN *P);
 /* F.S. P adalah alamat elemen terakhir list sebelum penghapusan  */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* Last element baru adalah predesesor elemen pertama yg lama, jika ada */
-void DelP_LDP (List *L, idxtype X);
+void DelP_LDP (List *L, idxtype X, Point Pos);
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P, dengan Info(P)=X  */
 /* maka P dihapus dari list dan didealokasi */
