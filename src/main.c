@@ -174,7 +174,7 @@ int main(){
                 ADVCOMMAND();
                 if (EndWord == true) 
                 {
-                    PLAYGAME(&GamesQueue,GamesList,&GamesHistory);
+                    PLAYGAME(&GamesQueue,GamesList,&GamesHistory,&ScoreBoard);
                 }
                 else
                 {
@@ -197,7 +197,7 @@ int main(){
                 ADVCOMMAND();
                 if (EndWord == true) 
                 {
-                    SKIPGAME(&GamesQueue,GamesList,&GamesHistory,nSkip);
+                    SKIPGAME(&GamesQueue,GamesList,&GamesHistory,nSkip,&ScoreBoard);
                 }
                 else
                 {

@@ -44,9 +44,9 @@ F.S Jika input valid (input tidak melebihi banyaknya nomor urutan game),
     game akan ditambahkan ke Q dan memberikan pesan berhasil.
     Jika input tidak valid, game tidak dapat ditambahkan dan memberikan pesan error. */
 
-void PLAYGAME(Queue *q, ArrayDin GameList, Stack* history);
+void PLAYGAME(Queue *q, ArrayDin GameList, Stack *history, ArrMap *arrSB);
 
-void SKIPGAME(Queue *q, ArrayDin GameList, Stack* history, int input);
+void SKIPGAME(Queue *q, ArrayDin GameList, Stack* history, int input, ArrMap *arrSB);
 
 void HELP();
 

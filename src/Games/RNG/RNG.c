@@ -53,6 +53,7 @@ int RNG (){
         printf("Maaf kesempatan untuk menebak sudah habis.\n");
         printf("Jawaban yang benar adalah %d.\n", angka);
     }
+    printf("Skor anda adalah %d\n",skor);
     return skor;
 }
 

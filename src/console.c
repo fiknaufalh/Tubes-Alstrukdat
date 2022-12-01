@@ -268,7 +268,7 @@ void QUEUEGAME (Queue *Q, ArrayDin GameList) {
     }
 }
 
-void PLAYGAME(Queue *q, ArrayDin GameList, Stack *history){
+void PLAYGAME(Queue *q, ArrayDin GameList, Stack *history, ArrMap *arrSB){
     if(!isEmpty(*q)){
         time_t t;
         boolean status = true;
@@ -282,6 +282,8 @@ void PLAYGAME(Queue *q, ArrayDin GameList, Stack *history){
         }
         int i;
         i = 0;
+        int score;
+        char* playername;
         while(i < Length(GameList) && status){
             if ((HEAD(*q) == GameList.A[i])){
                 if (i > 4){
@@ -299,7 +301,7 @@ void PLAYGAME(Queue *q, ArrayDin GameList, Stack *history){
                 }
                 else if (i == 0){
                     printf("\nLoading %s ...\n", HEAD(*q));
-                    RNG();
+                    score = RNG();
                     status = false;
                     // break;
                 } 
@@ -310,7 +312,24 @@ void PLAYGAME(Queue *q, ArrayDin GameList, Stack *history){
             }
             i++;
         }
+        Map SB;
+        SB = GetElmtArrMap(*arrSB, i-1);
+        printf("Masukan nama player : ");
+        STARTCOMMAND();
+        playername = WordToString(currentCMD);
+        ADVCOMMAND();
 
+        while (!EndWord || IsMemberSB(SB,playername))
+        {   printf("Nama tidak valid! Silahkan input ulang nama player.\n");
+            printf("Masukan nama player : ");
+            STARTCOMMAND();
+            playername = WordToString(currentCMD);
+            ADVCOMMAND();
+        }
+
+        InsertSortedDesc(&SB,playername,score);
+        SetElArrMap(arrSB, i-1, SB);
+        (*arrSB).Neff--;
         ElType val;
         dequeue(q,&val);
         Push(history,val);
@@ -320,7 +339,7 @@ void PLAYGAME(Queue *q, ArrayDin GameList, Stack *history){
     } 
 }
 
-void SKIPGAME(Queue *q, ArrayDin GameList, Stack *history, int input){    
+void SKIPGAME(Queue *q, ArrayDin GameList, Stack *history, int input, ArrMap *arrSB){    
     if (!isEmpty(*q)){
         ElType val;
         int i = 0;
@@ -339,7 +358,7 @@ void SKIPGAME(Queue *q, ArrayDin GameList, Stack *history, int input){
                 i++;
             }
         }
-        PLAYGAME(q,GameList,history);
+        PLAYGAME(q,GameList,history,arrSB);
     } else {
         printf("Tidak ada permainan lagi dalam daftar game-mu\n");
     }
@@ -377,6 +396,7 @@ void OTHERCMD(){
 void SCOREBOARD(ArrMap ScoreBoard)
 {
     int nbmap = NbElmtArrMap(ScoreBoard);
+    printf("%d\n",nbmap);
     int i = 0;
 
     while (i < nbmap)
