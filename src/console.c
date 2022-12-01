@@ -293,6 +293,12 @@ void PLAYGAME(Queue *q, ArrayDin GameList, Stack *history, ArrMap *arrSB){
                     status = false;
                     // break;
                 }
+                else if (i == 2){
+                    printf("\nLoading %s ...\n", HEAD(*q));
+                    score = HANGMAN();
+                    status = false;
+                    // break;
+                }
                 else if (i == 1){
                     printf("\nLoading %s ...\n", HEAD(*q));
                     DinerDash();

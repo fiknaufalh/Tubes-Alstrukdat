@@ -3,9 +3,9 @@
 #include <time.h>
 #include "Hangman.h"
 
-void HANGMAN() {
-    int maxKata;
-    int maxLength;
+int HANGMAN() {
+    int maxKata = 100;
+    int maxLength = 30;
     char kata[maxKata][maxLength];
     char* tebakKata;
     int i;
@@ -18,12 +18,12 @@ void HANGMAN() {
     Queue qTebakan;
     ElType temp;
     char tebak;
-    int score;
+    int score = 0;
     char* jawaban;
     char* kataTambahan;
     char* playerName;
-    maxKata = 100;
-    maxLength = 30;
+    // maxKata = 100;
+    // maxLength = 30;
     i = 0;
     kesempatan = 10;
     printf("Selamat datang dalam permainan HANGMAN!\n");
@@ -74,6 +74,12 @@ void HANGMAN() {
             printf("Kesempatan: %d\n", kesempatan);
             printf("Masukkan tebakan: ");
             STARTCOMMAND();
+            while (currentCMD.Length > 1)
+            {
+                printf("Input tidak valid. Masukan tebakan sebanyak 1 char.\n");
+                printf("Masukkan tebakan: ");
+                STARTCOMMAND();
+            }
             tebakan = WordToString(currentCMD);
             tebak = tebakan[0]-32;
             prevJumlahBenar = jumlahBenar;
@@ -113,14 +119,16 @@ void HANGMAN() {
         }
         qTebakan = deleteQTebakan(qTebakan);
         printf("\n");
-    } 
+    }
+    printf("Score anda adalah %d\n",score);
     printf("Game HANGMAN sudah selesai.\n");
-    printf("Masukkan nama player: ");
-    STARTCOMMAND();
-    playerName = WordToString(currentCMD);
+    // printf("Masukkan nama player: ");
+    // STARTCOMMAND();
+    // playerName = WordToString(currentCMD);
     printf("\n");
     printf("Terima kasih %s sudah bermain HANGMAN!\n", playerName);
     printf("Bye.. Bye..");
+    return score;
 }
 
 char* randomstr(char* filename, int maxLength, int maxKata, char kata[maxKata][maxLength]) {

@@ -16,6 +16,6 @@ void addKata (char* filename, char* kataTambahan);
 
 boolean adaDuplikat (Queue qTebakan, char tebakan);
 
-void HANGMAN();
+int HANGMAN();
 
 #endif
