@@ -35,15 +35,18 @@ int HANGMAN() {
         printf("Pilihlah nomor yang ingin kamu lakukan (1/2): ");
         STARTCOMMAND();
         jawaban = WordToString(currentCMD);
-        printf("\n");
         if (jawaban[0]=='2') {
+            printf("\n");
             printf("Masukkan kata yang ingin ditambahkan (Huruf kapital): ");
             STARTCOMMAND();
             kataTambahan = WordToString(currentCMD);
             addKata("daftarkata.txt", kataTambahan);
             printf("\n");
-        } 
-    } while (jawaban[0]=='2');
+        } else {
+            printf("Input tidak valid! Masukkan nomor 1 atau 2 sesuai MENU HANGMAN.\n");
+            printf("\n");
+        }
+    } while (jawaban[0]!='1');
     printf("Selamat bermain HANGMAN!\n");
     printf("\n");
     CreateQueue(&qTebakan);
@@ -119,11 +122,12 @@ int HANGMAN() {
         qTebakan = deleteQTebakan(qTebakan);
         printf("\n");
     }
-    printf("Score anda adalah %d\n",score);
     printf("Game HANGMAN sudah selesai.\n");
+    printf("Score kamu adalah %d.\n",score);
     printf("\n");
-    printf("Terima kasih %s sudah bermain HANGMAN!\n", playerName);
+    printf("Terima kasih sudah bermain HANGMAN!\n");
     printf("Bye.. Bye..\n");
+    printf("\n");
     return score;
 }
 
