@@ -374,7 +374,7 @@ void HELP(){
     printf("--------------------------------------------HELP--------------------------------------------");
     printf("\n");
     printf("START \t\t\t: Command yang membaca file konfigurasi untuk menjalankan BNMO.\n");
-    printf("LOAD <filename> \t: Command yang membaca save file <filename> yang berisi list game yang dapat dimainkan, histori, dan scoreboard game.\n");
+    printf("LOAD <filename> \t: Command yang membaca save file <filename> yang berisi list game yang dapat dimainkan, history, dan scoreboard game.\n");
     printf("SAVE <filename> \t: Command yang digunakan untuk menyimpan state game pemain saat ini ke dalam suatu file.\n");
     printf("CREATE GAME \t\t: Command yang digunakan untuk menambahkan game baru pada daftar game.\n");
     printf("LIST GAME \t\t: Command yang digunakan untuk menampilkan daftar game yang disediakan oleh sistem.\n");
@@ -382,7 +382,11 @@ void HELP(){
     printf("QUEUE GAME \t\t: Command yang digunakan untuk mendaftarkan permainan ke dalam list.\n");
     printf("PLAY GAME \t\t: Command yang digunakan untuk memainkan sebuah permainan.\n");
     printf("SKIP GAME <n> \t\t: Command yang digunakan untuk melewatkan permainan sebanyak n.\n");
-    printf("HELP \t\t\t: Bantuan command command yang ada.\n");
+    printf("SCOREBOARD \t\t: Command yang digunakan untuk menampilkan nama dan skor pemain untuk semua game.\n");
+    printf("RESET SCOREBOARD \t: Command yang digunakan untuk melakukan reset terhadap scoreboard game.\n");
+    printf("HISTORY <n>\t\t: Command yang digunakan untuk menampilkan sebanyak n permainan yang telah dimainkan.\n");
+    printf("RESET HISTORY \t\t: Command yang digunakan untuk menghapus semua history permainan yang dimainkan.\n");
+    printf("HELP \t\t\t: Bantuan command-command yang ada.\n");
     printf("QUIT \t\t\t: Command untuk keluar dari program.\n");
 }
 

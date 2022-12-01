@@ -22,8 +22,6 @@ int HANGMAN() {
     char* jawaban;
     char* kataTambahan;
     char* playerName;
-    // maxKata = 100;
-    // maxLength = 30;
     i = 0;
     kesempatan = 10;
     printf("Selamat datang dalam permainan HANGMAN!\n");
@@ -76,7 +74,8 @@ int HANGMAN() {
             STARTCOMMAND();
             while (currentCMD.Length > 1)
             {
-                printf("Input tidak valid. Masukan tebakan sebanyak 1 char.\n");
+                printf("Input tidak valid! Masukan tebakan sebanyak 1 char.\n");
+                printf("\n");
                 printf("Masukkan tebakan: ");
                 STARTCOMMAND();
             }
@@ -122,12 +121,9 @@ int HANGMAN() {
     }
     printf("Score anda adalah %d\n",score);
     printf("Game HANGMAN sudah selesai.\n");
-    // printf("Masukkan nama player: ");
-    // STARTCOMMAND();
-    // playerName = WordToString(currentCMD);
     printf("\n");
     printf("Terima kasih %s sudah bermain HANGMAN!\n", playerName);
-    printf("Bye.. Bye..");
+    printf("Bye.. Bye..\n");
     return score;
 }
 
@@ -138,7 +134,6 @@ char* randomstr(char* filename, int maxLength, int maxKata, char kata[maxKata][m
     int totalKata;
     totalKata = 0;
     FILE *fp;
-    // stringConcat("./data/", filename, path);
     stringConcat("./data/", filename, path);
     fp = fopen(path, "r");
     if (fp==NULL) {
