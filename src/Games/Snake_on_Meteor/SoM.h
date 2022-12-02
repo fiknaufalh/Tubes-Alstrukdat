@@ -18,6 +18,9 @@
 void SoM();
 // Program games utama Snake on Meteor
 
+boolean isCmdMoveValid (char* cmd);
+// Fungsi untuk mengecek apakah masukan command pergerakan valid
+
 Point generateHeadPosition();
 // Fungsi yang men-generate posisi Head berupa Point secara random
 
@@ -39,29 +42,36 @@ boolean canAddRight (List Snake);
 void PrintMap(List Snake,List Food,List Meteor,List Obstacle);
 // Prosedur untuk mencetak map permainan
 
-void Move (List *Snake);
+boolean Move (List *Snake, List Meteor, char* cmd, int turn);
 // Prosedur untuk pergerakan Snake
 
 boolean isMoveHitBody(List Snake, char* cmd);
 // Fungsi yang menghasilkan true jika pergerakan mengenai badan (handler)
 
+boolean isMoveHitMeteor(List Snake, List Meteor, char* cmd);
+// Fungsi yang menghasilkan true jika pergerakan mengenai meteor (handler)
 
-Point generateFood(List Snake);
-//Fungsi yang men-generate makanan berupa point secara random
+Point generateFood(List Snake, List Meteor, List Obstacle);
+// Fungsi yang men-generate makanan berupa point secara random
+// makanan yang di-generate tidak boleh berada pada komponan tubuh Snake
+// dan tidak boleh berada pada koordinat yang pernah meteor datangi
 
 boolean foodEaten(List Snake, List *Food);
-//Fungsi yang mengembalikan true jika makanan berhasil kemakan
+// Fungsi yang mengembalikan true jika makanan berhasil kemakan
 
 Point generateMeteor (List Snake, List Food,List Obstacle);
-//Fungsi yang men-generate meteor
+// Fungsi yang men-generate meteor
 
 Point generateObstacle(List Snake,List Food);
-//Fungsi yang men-generate obstacle
+// Fungsi yang men-generate obstacle
 
 boolean isMeteorHitSnake(List Snake, Point meteor);
-//Fungsi yang menghasilkan true jika meteor mengenai snake
+// Fungsi yang menghasilkan true jika meteor mengenai snake
 
-void skorakhir (List Snake);
-//Fungsi yang mengembalikan skor akhir
+void RefreshInfo(List* Snake);
+// Prosedur untuk me-refresh urutan info pada Snake
+
+int skorAkhir (List Snake);
+// Fungsi yang mengembalikan skor akhir
 
 #endif
