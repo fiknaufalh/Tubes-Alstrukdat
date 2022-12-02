@@ -49,20 +49,25 @@ int SoM()
             printf("Pilihan gerakan :\n");
             printf("Atas (w) | Kiri (a) | Bawah (s) | Kanan (d) \n\n");
             printf("Silahkan masukkan command anda: ");
-            STARTCOMMAND();
+            
+            ResetCMD(&currentCMD);
+            STARTCOMMAND();  
             char* cmd = WordToString(currentCMD);
             ADVCOMMAND();
+
             while (!isCmdMoveValid(cmd) || !EndWord)
             {
-                printf("Command tidak valid! Silahkan input command menggunakan huruf w/a/s/d.\n\n");
+                printf("Command tidak valid!\nSilahkan input command menggunakan huruf w/a/s/d.\n\n");
+                PrintMap(Snake,Food,Meteor,Obstacle);
                 printf("TURN %d\n",turn);
                 printf("Pilihan gerakan :\n");
                 printf("Atas (w) | Kiri (a) | Bawah (s) | Kanan (d) \n\n");
                 printf("Silahkan masukkan command anda: ");
-                STARTCOMMAND();
+                STARTCOMMAND(); 
                 cmd = WordToString(currentCMD);
                 ADVCOMMAND();
             }
+
             if (isDeadLock(Snake,Meteor,Obstacle))
             {
                 printf("Snake tidak dapat bergerak ke manapun. Game over!\n\n");
@@ -132,10 +137,6 @@ Point generateHeadPosition()
 
     Point headPos;
     CreatePoint(&headPos, rand() % 5, rand() % 5);
-    // CreatePoint(&headPos, 0,1);
-    // printf("Posisi head: ");
-    // PrintPoint(headPos);
-    // printf("\n");
     return headPos;
 }
 
