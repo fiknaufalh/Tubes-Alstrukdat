@@ -86,6 +86,7 @@ int SoM()
                 idxtype x;
                 printf("Kepala terkena meteor. Game over!\n\n");
                 PrintMap(Snake,Food,Meteor,Obstacle);
+                DelP_LDP(&Snake,x,meteorposition);
                 gameOver = true;
             }
             /* Kondisi Head Terkena Obstacle */
@@ -93,6 +94,7 @@ int SoM()
                 idxtype x;
                 printf("Kepala terkena obstacle. Game over!\n\n");
                 PrintMap(Snake,Food,Meteor,Obstacle);
+                DelP_LDP(&Snake,x,obstacleposition);
                 gameOver = true;
             }
             else if (SearchPos_LDP(Snake,meteorposition)){
