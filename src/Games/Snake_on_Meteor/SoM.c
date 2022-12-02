@@ -73,11 +73,14 @@ int SoM()
             {
                 printf("Snake tidak dapat bergerak ke manapun. Game over!\n\n");
                 gameOver = true;
+                canMove = false;
             } 
             else canMove = Move(&Snake, Meteor, cmd, turn);
             if (!canMove) PrintMap(Snake,Food,Meteor,Obstacle);
         }
         turn++;
+
+        if (gameOver) break;
 
         if (turn > 1){
             if (foodEaten(Snake,&Food)){
