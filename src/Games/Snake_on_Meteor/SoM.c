@@ -74,6 +74,7 @@ int SoM()
                 printf("Snake tidak dapat bergerak ke manapun. Game over!\n\n");
                 gameOver = true;
                 canMove = false;
+                break;
             } 
             else canMove = Move(&Snake, Meteor, cmd, turn);
             if (!canMove) PrintMap(Snake,Food,Meteor,Obstacle);
@@ -88,6 +89,7 @@ int SoM()
                 if (!canAddAbove(Snake) && !canAddBelow(Snake) && !canAddLeft(Snake) && !canAddRight(Snake)){
                     printf("Tail tidak dapat bertambah. Game over!\n\n");
                     gameOver = true;
+                    break;
                 } else addSnakeTail(&Snake,1);
                 CreateEmpty_LDP(&Food);
                 foodposition = generateFood(Snake,Meteor,Obstacle);
