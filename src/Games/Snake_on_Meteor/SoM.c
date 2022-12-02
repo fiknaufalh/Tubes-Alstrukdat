@@ -63,7 +63,12 @@ int SoM()
                 cmd = WordToString(currentCMD);
                 ADVCOMMAND();
             }
-            canMove = Move(&Snake, Meteor, cmd, turn);
+            if (isDeadLock(Snake,Meteor,Obstacle))
+            {
+                printf("Snake tidak dapat bergerak ke manapun. Game over!\n\n");
+                gameOver = true;
+            } 
+            else canMove = Move(&Snake, Meteor, cmd, turn);
             if (!canMove) PrintMap(Snake,Food,Meteor,Obstacle);
         }
         turn++;
@@ -71,6 +76,7 @@ int SoM()
         if (turn > 1){
             if (foodEaten(Snake,&Food)){
                 if (!canAddAbove(Snake) && !canAddBelow(Snake) && !canAddLeft(Snake) && !canAddRight(Snake)){
+                    printf("Tail tidak dapat bertambah. Game over!\n\n");
                     gameOver = true;
                 } else addSnakeTail(&Snake,1);
                 CreateEmpty_LDP(&Food);
@@ -450,10 +456,45 @@ boolean Move(List* Snake, List Meteor, char* cmd, int turn)
     }
 }
 
+boolean isDeadLock(List Snake, List Meteor, List Obstacle)
+{
+    Point Head = Pos(First(Snake));
+
+    Point AboveHead;
+    CreatePoint(&AboveHead,Head.X,Head.Y - 1);
+    boolean checkAboveSnack = (SearchPos_LDP(Snake,AboveHead) != NULL);
+    boolean checkAboveMeteor = (SearchPos_LDP(Meteor,AboveHead) != NULL);
+    boolean checkAboveObstacle = (SearchPos_LDP(Obstacle,AboveHead) != NULL);
+    boolean checkAbove = (checkAboveSnack || checkAboveMeteor || checkAboveObstacle);
+
+    Point BelowHead;
+    CreatePoint(&BelowHead,Head.X,Head.Y + 1);
+    boolean checkBelowSnack = (SearchPos_LDP(Snake,BelowHead) != NULL);
+    boolean checkBelowMeteor = (SearchPos_LDP(Meteor,BelowHead) != NULL);
+    boolean checkBelowObstacle = (SearchPos_LDP(Obstacle,BelowHead) != NULL);
+    boolean checkBelow = (checkBelowSnack || checkBelowMeteor || checkBelowObstacle);
+
+    Point LeftHead;
+    CreatePoint(&LeftHead,Head.X - 1,Head.Y);
+    boolean checkLeftSnack = (SearchPos_LDP(Snake,LeftHead) != NULL);
+    boolean checkLeftMeteor = (SearchPos_LDP(Meteor,LeftHead) != NULL);
+    boolean checkLeftObstacle = (SearchPos_LDP(Obstacle,LeftHead) != NULL);
+    boolean checkLeft = (checkLeftSnack || checkLeftMeteor || checkLeftObstacle);
+    
+    Point RightHead;
+    CreatePoint(&RightHead,Head.X + 1,Head.Y);
+    boolean checkRightSnack = (SearchPos_LDP(Snake,RightHead) != NULL);
+    boolean checkRightMeteor = (SearchPos_LDP(Snake,RightHead) != NULL);
+    boolean checkRightObstacle = (SearchPos_LDP(Snake,RightHead) != NULL);
+    boolean checkRight = (checkRightSnack || checkRightMeteor || checkRightObstacle);
+
+    return (checkAbove && checkBelow && checkLeft && checkRight);
+}
+
 boolean isMoveHitBody(List Snake, char* cmd)
 {
     Point Head = Pos(First(Snake));
-    Point FirstBody = Pos(Next(First(Snake)));
+    // Point FirstBody = Pos(Next(First(Snake)));
 
     if (compareString(cmd,"w") || compareString(cmd,"W")) {
         Ordinat(Head)--;
@@ -468,7 +509,8 @@ boolean isMoveHitBody(List Snake, char* cmd)
         Absis(Head)++;
     }
 
-    return (EQ(Head, FirstBody));
+    return (SearchPos_LDP(Snake,Head) != NULL);
+    // return (EQ(Head, FirstBody));
 }
 
 boolean isMoveHitMeteor(List Snake, List Meteor, char* cmd)

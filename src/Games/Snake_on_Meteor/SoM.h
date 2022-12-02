@@ -16,7 +16,7 @@
 // Macro untuk akses X dan Y dari suatu node (head/body/tail) dalam List Snake
 
 int SoM();
-// Program games utama Snake on Meteor
+// Program games utama Snake on Meteor dengan return skor akhir
 
 boolean isCmdMoveValid (char* cmd);
 // Fungsi untuk mengecek apakah masukan command pergerakan valid
@@ -43,7 +43,14 @@ void PrintMap(List Snake,List Food,List Meteor,List Obstacle);
 // Prosedur untuk mencetak map permainan
 
 boolean Move (List *Snake, List Meteor, char* cmd, int turn);
-// Prosedur untuk pergerakan Snake
+// Fungsi yang akan melakukan pergerakan Snake dan return true
+// jika pergerakan valid, serta kondisi tetap dan return false
+// jika pergerakan tidak valid
+
+boolean isDeadLock(List Snake, List Meteor, List Obstacle);
+// Fungsi yang menghasilkan true jika kondisi Snack tidak dapat bergerak
+// ke arah manapun (atau disebut deadlock) karena terhalang oleh
+// either badan Snake, meteor, atau obstacle
 
 boolean isMoveHitBody(List Snake, char* cmd);
 // Fungsi yang menghasilkan true jika pergerakan mengenai badan (handler)
