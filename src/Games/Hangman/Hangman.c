@@ -114,7 +114,7 @@ int HANGMAN() {
             printf("\n");
         }
         if (kesempatan==0) {
-            printf("Gagal menebak huruf %s!\n", tebakKata);
+            printf("Gagal menebak kata %s!\n", tebakKata);
         } else {
             printf("Berhasil menebak kata %s! Kamu mendapatkan %d poin!\n", tebakKata, panjangKata);
             score = score+panjangKata;

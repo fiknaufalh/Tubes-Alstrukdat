@@ -293,6 +293,12 @@ void PLAYGAME(Queue *q, ArrayDin GameList, Stack *history, ArrMap *arrSB){
                     status = false;
                     // break;
                 }
+                else if (i == 3){
+                    printf("\nLoading %s ...\n", HEAD(*q));
+                    score = ToH();
+                    status = false;
+                    // break;
+                }
                 else if (i == 2){
                     printf("\nLoading %s ...\n", HEAD(*q));
                     score = HANGMAN();
@@ -406,7 +412,6 @@ void OTHERCMD(){
 void SCOREBOARD(ArrMap ScoreBoard)
 {
     int nbmap = NbElmtArrMap(ScoreBoard);
-    printf("%d\n",nbmap);
     int i = 0;
 
     while (i < nbmap)

@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include "ToH.h"
 
-void ToH(){
+int ToH(){
     StackInt A, B, C;
     int steps = 0;
+    int score;
     //int y = 7;
     CreateEmpty_SInt(&A);
     CreateEmpty_SInt(&B);
@@ -21,17 +22,19 @@ void ToH(){
         char *asal;
         char *tujuan;
         printTower(A,B,C);
-        printf("TIANG ASAL:");
+        printf("TIANG ASAL: ");
         STARTCOMMAND();
         asal=WordToString(currentCMD);
-        printf("TIANG TUJUAN:");
+        printf("TIANG TUJUAN: ");
         STARTCOMMAND();
         tujuan=WordToString(currentCMD);
         pindah( &A,  &B,  &C,  asal, tujuan, &steps);
         
     }
     printTower(A,B,C);
-    printf("Skor anda: %d\n",310/steps);
+    score = 310/steps;
+    printf("Skor anda: %d\n", score);
+    return score;
 }
 
 void tipe0(){
