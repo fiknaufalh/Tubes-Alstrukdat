@@ -3,7 +3,7 @@
 #include <time.h>
 #include "DinerDash.h"
 
-void DinerDash(){
+int DinerDash(){
     time_t t;
     srand((unsigned) time(&t));
     QueueInt makan, durasi, tahan, harga; 
@@ -125,7 +125,10 @@ void DinerDash(){
 
     }
     printf("Game Over!\n");
-    totalskor(skor);
+    int score;
+    totalskor(skor,&score);
+    return score;
+
 }
 
 void header1(QueueInt makan, QueueInt durasi, QueueInt tahan, QueueInt harga){
@@ -207,7 +210,8 @@ boolean bisacook(QueueInt harga, QueueInt makan2, QueueInt makan, ArrayDinInt ma
 void printall(QueueInt makan, QueueInt durasi, QueueInt tahan, QueueInt harga, QueueInt makan2, QueueInt durasi2, ArrayDinInt makan3, ArrayDinInt tahan3, QueueInt skor){
     printf("=======================================================================================\n");
     printf("\n");
-    totalskor(skor);
+    int temp;
+    totalskor(skor,&temp);
     printf("\n");
     header1(makan,durasi,tahan,harga);
     printf("\n");
@@ -296,12 +300,13 @@ boolean bisaserve(QueueInt makan, ArrayDinInt makan3, ArrayDinInt tahan3, int n)
     return (found && HEAD(makan) == n);
 }
 
-void totalskor(QueueInt skor){
+void totalskor(QueueInt skor, int *score){
     int total = 0;
     for (int i=0; i<lengthQInt(skor);i++){
         total=total+ skor.buffer[i];
     }
     printf("Saldo: %d\n",total);
+    (*score) = total;
 }
 
 boolean endgame(QueueInt skor, QueueInt harga){

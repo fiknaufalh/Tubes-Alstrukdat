@@ -27,7 +27,7 @@ void serve(ArrayDinInt * makan3, ArrayDinInt * tahan3, ArrayDinInt * harga3, Que
 
 boolean bisaserve(QueueInt makan, ArrayDinInt makan3,ArrayDinInt tahan3, int n);
 
-void totalskor(QueueInt skor);
+void totalskor(QueueInt skor,int *score);
 
 boolean endgame(QueueInt skor, QueueInt harga);
 
@@ -35,6 +35,6 @@ boolean compareString(char* str1, char* str2);
 
 int stringLength(char* string);
 
-void DinerDash();
+int DinerDash();
 
 #endif

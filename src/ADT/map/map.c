@@ -82,7 +82,7 @@ void InsertSortedDesc(Map *M, keytype k , valuetype v)
         int i = 0;
         int j = (*M).Count;
 
-        while(i < (*M).Count && (*M).Elements[i].Value > v)
+        while(i < (*M).Count && (*M).Elements[i].Value >= v)
         {
             i++;
         }

@@ -289,10 +289,17 @@ void PLAYGAME(Queue *q, ArrayDin GameList, Stack *history, ArrMap *arrSB){
                 if (i > 4){
                     printf("\nLoading %s ...\n", HEAD(*q));
                     printf("Game over! \nFinal Score : ");
-                    printf("%d\n", rand());
+                    score  = rand();
+                    printf("%d\n", score);
                     status = false;
                     // break;
                 }
+                // else if (i == 4){
+                //     printf("\nLoading %s ...\n", HEAD(*q));
+                //     score = SoM();
+                //     status = false;
+                //     // break;
+                // }
                 else if (i == 3){
                     printf("\nLoading %s ...\n", HEAD(*q));
                     score = ToH();
@@ -307,7 +314,7 @@ void PLAYGAME(Queue *q, ArrayDin GameList, Stack *history, ArrMap *arrSB){
                 }
                 else if (i == 1){
                     printf("\nLoading %s ...\n", HEAD(*q));
-                    DinerDash();
+                    score = DinerDash();
                     status = false;
                     // break;
                 }
@@ -420,7 +427,7 @@ void SCOREBOARD(ArrMap ScoreBoard)
         CreateScoreBoard(&SB);
         SB = GetElmtArrMap(ScoreBoard, i);
         printf("\n**** SCOREBOARD GAME %s ****\n", SB.MapName);
-        PrintScoreBoard(SortSB(SB));
+        PrintScoreBoard(SB);
         i++;
     }
 }
