@@ -228,3 +228,9 @@ void stringConcat(char *s1,char *s2,char *sout)
     }
     sout[len+i]='\0';
 }
+
+void ResetCMD(Word* CMD)
+{
+    CMD->TabWord[0] = '\0';
+    CMD->Length = 0;
+}

@@ -130,4 +130,6 @@ char ToLower(char c);
 
 boolean IsEqualName(char *str1, char *str2);
 
+void ResetCMD(Word* CMD);
+
 #endif
