@@ -11,6 +11,7 @@
 * [Deskripsi Singkat Program](#deskripsi-singkat-program)
 * [Cara Kompilasi Program](#cara-kompilasi-program)
 * [Cara Menjalankan Program](#cara-menjalankan-program)
+* [Struktur Program](#struktur-program)
 
 ## Deskripsi Singkat Program
 Program merupakan permainan berbasis CLI *(command-line interface)* yang dibuat menggunakan struktur data yang sudah dipelajari di mata kuliah IF2111 Algoritma dan Struktur Data STI bernama BNMO. BNMO merupakan suatu robot game console yang dapat menjalankan permainan. BNMO memiliki beberapa fitur utama, yaitu:
@@ -31,3 +32,29 @@ Program merupakan permainan berbasis CLI *(command-line interface)* yang dibuat 
 1. Pastikan Anda telah melakukan kompilasi pada program dan path terminal berada pada directory Anda menyimpan/clone repository ini.
 2. Jalankan command `./main` atau `main.exe` untuk run program.
 3. Jika berhasil run, maka Anda akan tiba pada Main Menu program.
+
+## Struktur Program
+```
+├───data
+├───docs
+└───src
+    ├───ADT
+    │   ├───arraydin
+    │   ├───arraydinInt
+    │   ├───arrayofmap
+    │   ├───linkedlist
+    │   ├───map
+    │   ├───mesinkarakter
+    │   ├───mesinkata
+    │   ├───point
+    │   ├───queue
+    │   ├───queueInt
+    │   ├───stack
+    │   └───stackInt
+    └───Games
+        ├───DinerDash
+        ├───Hangman
+        ├───RNG
+        ├───Snake_on_Meteor
+        └───Tower_of_Hanoi
+```
