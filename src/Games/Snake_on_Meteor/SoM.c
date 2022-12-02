@@ -68,6 +68,7 @@ int SoM()
                 ADVCOMMAND();
             }
 
+            /* Kondisi Deadlock Ketika Snack Tidak Dapat Bergerak ke Manapun */
             if (isDeadLock(Snake,Meteor,Obstacle))
             {
                 printf("Snake tidak dapat bergerak ke manapun. Game over!\n\n");
@@ -80,6 +81,7 @@ int SoM()
 
         if (turn > 1){
             if (foodEaten(Snake,&Food)){
+                /* Kondisi Ketika Tail Tidak Dapat Bertambah ke Manapun */
                 if (!canAddAbove(Snake) && !canAddBelow(Snake) && !canAddLeft(Snake) && !canAddRight(Snake)){
                     printf("Tail tidak dapat bertambah. Game over!\n\n");
                     gameOver = true;
@@ -128,7 +130,6 @@ boolean isCmdMoveValid (char* cmd)
     boolean upperCase = (compareString(cmd,"W") || compareString(cmd,"A") || compareString(cmd,"S") || compareString(cmd,"D"));
     return (lowerCase || upperCase);
 }
-
 
 Point generateHeadPosition()
 {
@@ -495,7 +496,6 @@ boolean isDeadLock(List Snake, List Meteor, List Obstacle)
 boolean isMoveHitBody(List Snake, char* cmd)
 {
     Point Head = Pos(First(Snake));
-    // Point FirstBody = Pos(Next(First(Snake)));
 
     if (compareString(cmd,"w") || compareString(cmd,"W")) {
         Ordinat(Head)--;
@@ -511,7 +511,6 @@ boolean isMoveHitBody(List Snake, char* cmd)
     }
 
     return (SearchPos_LDP(Snake,Head) != NULL);
-    // return (EQ(Head, FirstBody));
 }
 
 boolean isMoveHitMeteor(List Snake, List Meteor, char* cmd)
