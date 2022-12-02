@@ -3,7 +3,7 @@
 #include <time.h>
 #include "SoM.h"
 
-void SoM()
+int SoM()
 {
     printf("\nSelamat Datang di Snake on Meteor!\n");
     printf("Men-generate peta, snake, dan makanan...\n");

@@ -15,7 +15,7 @@
 #define OrdinatN(Elmt) (Elmt)->position.Y
 // Macro untuk akses X dan Y dari suatu node (head/body/tail) dalam List Snake
 
-void SoM();
+int SoM();
 // Program games utama Snake on Meteor
 
 boolean isCmdMoveValid (char* cmd);

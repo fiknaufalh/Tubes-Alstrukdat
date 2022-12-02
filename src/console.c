@@ -294,12 +294,12 @@ void PLAYGAME(Queue *q, ArrayDin GameList, Stack *history, ArrMap *arrSB){
                     status = false;
                     // break;
                 }
-                // else if (i == 4){
-                //     printf("\nLoading %s ...\n", HEAD(*q));
-                //     score = SoM();
-                //     status = false;
-                //     // break;
-                // }
+                else if (i == 4){
+                    printf("\nLoading %s ...\n", HEAD(*q));
+                    score = SoM();
+                    status = false;
+                    // break;
+                }
                 else if (i == 3){
                     printf("\nLoading %s ...\n", HEAD(*q));
                     score = ToH();
