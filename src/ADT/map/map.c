@@ -68,10 +68,6 @@ void InsertSB(Map *M, keytype k, valuetype v)
         (*M).Elements[(*M).Count].Value = v; 
         (*M).Count++;
     }
-    else
-    {
-        printf("Nama sudah ada, silahkan input nama baru.\n");
-    }
 }
 
 void InsertSortedDesc(Map *M, keytype k , valuetype v)
@@ -97,10 +93,6 @@ void InsertSortedDesc(Map *M, keytype k , valuetype v)
         (*M).Elements[i].Key = k;
         (*M).Elements[i].Value = v;
         (*M).Count++;
-    }
-    else
-    {
-        printf("Nama sudah ada, silahkan input nama baru.\n");
     }
 }
 
