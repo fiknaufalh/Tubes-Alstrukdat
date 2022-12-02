@@ -503,16 +503,16 @@ boolean isMoveHitBody(List Snake, char* cmd)
     Point Head = Pos(First(Snake));
 
     if (compareString(cmd,"w") || compareString(cmd,"W")) {
-        Ordinat(Head)--;
+        Ordinat(Head) = (Ordinat(Head) - 1 + 5) % 5;
     }
     else if (compareString(cmd,"a") || compareString(cmd,"A")) {
-        Absis(Head)--;
+        Absis(Head) = (Absis(Head) - 1 + 5) % 5;
     }
     else if (compareString(cmd,"s") || compareString(cmd,"S")) {
-        Ordinat(Head)++;
+        Ordinat(Head) = (Ordinat(Head) + 1) % 5;
     }
     else if (compareString(cmd,"d") || compareString(cmd,"D")) {
-        Absis(Head)++;
+        Absis(Head) = (Absis(Head) + 1) % 5;
     }
 
     return (SearchPos_LDP(Snake,Head) != NULL);
@@ -523,16 +523,16 @@ boolean isMoveHitMeteor(List Snake, List Meteor, char* cmd)
     Point Head = Pos(First(Snake));
     
     if (compareString(cmd,"w") || compareString(cmd,"W")) {
-        Ordinat(Head)--;
+        Ordinat(Head) = (Ordinat(Head) - 1 + 5) % 5;
     }
     else if (compareString(cmd,"a") || compareString(cmd,"A")) {
-        Absis(Head)--;
+        Absis(Head) = (Absis(Head) - 1 + 5) % 5;
     }
     else if (compareString(cmd,"s") || compareString(cmd,"S")) {
-        Ordinat(Head)++;
+        Ordinat(Head) = (Ordinat(Head) + 1) % 5;
     }
     else if (compareString(cmd,"d") || compareString(cmd,"D")) {
-        Absis(Head)++;
+        Absis(Head) = (Absis(Head) + 1) % 5;
     }
     
     return (EQ(Head, Pos(First(Meteor))));
